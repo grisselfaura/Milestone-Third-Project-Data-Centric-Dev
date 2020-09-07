@@ -4,6 +4,7 @@ from flask import (
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env 
 
@@ -23,6 +24,10 @@ def get_recipes():
     recipes = mongo.db.recipes.find()
     return render_template("recipes.html", recipes=recipes)
 
+
+@app.route("/join_free", methods=["GET", "POST"])
+def join_free():
+    return render_template("join_free.html")
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
