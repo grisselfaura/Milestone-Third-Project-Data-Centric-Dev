@@ -13,7 +13,34 @@
 </head>
 <body>
 
-    <h1>I am part of the base template!</h1>
+    <header>
+    <!-- top navbar-->
+        <nav class="nav-extended text-shadow lime lighten-5">
+            <div class="nav-wrapper amber-text text-accent-3">
+            <a href="{{ url_for('get_recipes') }}" class="brand-logo amber-text text-accent-3"><i class="fas fa-book fa-2x">EasyChef</i></a> 
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger amber-text text-accent-3"><i class="fas fa-bars"></i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="{{ url_for('get_recipes') }}" class="amber-text text-accent-3">Home</a></li>
+                <li><a href=".html" class="amber-text text-accent-3">MyRecipes</a></li>
+                <li><a href=".html" class="amber-text text-accent-3">Recipe Search</a></li>
+                <li><a href=".html" class="amber-text text-accent-3">Ingredients index</a></li>
+                <li><a href=".html" class="amber-text text-accent-3">Join Free</a></li>
+                <li><a href=".html" class="amber-text text-accent-3">Sign In!</a></li>
+            </ul>
+            </div>
+        </nav>
+
+        <!-- mobile navbar-->
+        <ul class="sidenav" id="mobile-demo">
+            <li><a href="{{ url_for('get_recipes') }}" class="amber-text text-accent-3">Home</a></li>
+            <li><a href=".html" class="amber-text text-accent-3">MyRecipes</a></li>
+            <li><a href=".html" class="amber-text text-accent-3">Recipe Search</a></li>
+            <li><a href=".html" class="amber-text text-accent-3">Ingredients index</a></li>
+            <li><a href=".html" class="amber-text text-accent-3">Join Free</a></li>
+            <li><a href=".html" class="amber-text text-accent-3">Sign In!</a></li>
+        </ul>
+    </header>
+
     {% block content %}
     {% endblock %}
     
