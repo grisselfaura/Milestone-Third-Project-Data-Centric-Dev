@@ -37,23 +37,26 @@ def join_free():
             return redirect(url_for("join_free")) 
 
         # Checking confirmation password
-        #password1 = request.form.get("password")
-        #password2 = request.form.get("password2")
-        
-        #print(password1)
-        #print(password2)
+        password = request.form.get("password")
+        password2 = request.form.get("password2")        
 
-        #if password1 == password2:
-        join_free = {
+        if password == password2:
+            join_free = {
                 "username": request.form.get("username").lower(),
                 "email": request.form.get("email").lower(), 
                 "password": generate_password_hash(request.form.get("password"))
             }
-        mongo.db.users.insert_one(join_free)
+            mongo.db.users.insert_one(join_free)
 
-        # put the new user into "session" cookie
-        session["user"] = request.form.get("username").lower()
-        flash("Registration successful!")
+            # put the new user into "session" cookie
+            session["user"] = request.form.get("username").lower()
+            flash("Registration successful!")
+            return redirect(url_for("join_free"))
+
+        else: 
+            flash("Password does not match")
+            return redirect(url_for("join_free"))
+
     return render_template("join_free.html")
 
 
@@ -82,6 +85,14 @@ def sign_in():
             return redirect(url_for("sign_in"))
     
     return render_template("sign_in.html")
+
+
+@app.route("/myrecipes/<username>", methods=["GET", "POST"])
+def myrecipes(username):
+    # grab the session user's username from db
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+    return render_template("myrecipes.html", username=username)
 
 
 if __name__ == "__main__":
