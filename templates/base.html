@@ -24,7 +24,7 @@
                 <li><a href=".html" class="amber-text text-accent-3">MyRecipes</a></li>
                 <li><a href=".html" class="amber-text text-accent-3">Recipe Search</a></li>
                 <li><a href=".html" class="amber-text text-accent-3">Ingredients index</a></li>
-                <li><a href=".html" class="amber-text text-accent-3">Sign In!</a></li>
+                <li><a href="{{ url_for('sign_in') }}" class="amber-text text-accent-3">Sign In!</a></li>
                 <li><a href="{{ url_for('join_free') }}" class="amber-text text-accent-3">Join Free</a></li>
             </ul>
             </div>
@@ -36,7 +36,7 @@
             <li><a href=".html" class="amber-text text-accent-3">MyRecipes</a></li>
             <li><a href=".html" class="amber-text text-accent-3">Recipe Search</a></li>
             <li><a href=".html" class="amber-text text-accent-3">Ingredients index</a></li>
-            <li><a href=".html" class="amber-text text-accent-3">Sign In!</a></li>
+            <li><a href="{{ url_for('sign_in') }}" class="amber-text text-accent-3">Sign In!</a></li>
             <li><a href="{{ url_for('join_free') }}" class="amber-text text-accent-3">Join Free</a></li>
         </ul>
     </header>

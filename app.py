@@ -36,19 +36,53 @@ def join_free():
             flash("Username already exists")
             return redirect(url_for("join_free")) 
 
-        # pending to check email and second password check if this is correct
+        # Checking confirmation password
+        #password1 = request.form.get("password")
+        #password2 = request.form.get("password2")
+        
+        #print(password1)
+        #print(password2)
+
+        #if password1 == password2:
         join_free = {
-            "username": request.form.get("username").lower(),
-            "email": request.form.get("email").lower(),
-            "password": generate_password_hash(request.form.get("password"))
-            #"password": check_password_hash(request.form.get("password"))     
-        }
+                "username": request.form.get("username").lower(),
+                "email": request.form.get("email").lower(), 
+                "password": generate_password_hash(request.form.get("password"))
+            }
         mongo.db.users.insert_one(join_free)
 
         # put the new user into "session" cookie
         session["user"] = request.form.get("username").lower()
         flash("Registration successful!")
     return render_template("join_free.html")
+
+
+@app.route("/sign_in", methods=["GET", "POST"])
+def sign_in():
+    if request.method == "POST":
+        # check if username already exists in db
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+
+        if existing_user:
+            # ensure hashed password matches user input
+            if check_password_hash(
+                existing_user["password"], request.form.get("password")):
+                    session["user"] = request.form.get("username").lower()
+                    flash("Welcome, {}".format(request.form.get("username")))
+                    
+            else:
+                # invalid password match
+                flash("Incorrect Username and/or Password")
+                return redirect(url_for("sign_in"))
+
+        else:
+            # username doesnt exist
+            flash("Incorrect Username and/or Password")
+            return redirect(url_for("sign_in"))
+    
+    return render_template("sign_in.html")
+
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
