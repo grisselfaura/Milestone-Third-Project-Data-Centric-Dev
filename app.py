@@ -27,6 +27,27 @@ def get_recipes():
 
 @app.route("/join_free", methods=["GET", "POST"])
 def join_free():
+    if request.method == "POST":
+        # check if username already exists in db
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+    
+        if existing_user:
+            flash("Username already exists")
+            return redirect(url_for("join_free")) 
+
+        # pending to check email and second password check if this is correct
+        join_free = {
+            "username": request.form.get("username").lower(),
+            "email": request.form.get("email").lower(),
+            "password": generate_password_hash(request.form.get("password"))
+            #"password": check_password_hash(request.form.get("password"))     
+        }
+        mongo.db.users.insert_one(join_free)
+
+        # put the new user into "session" cookie
+        session["user"] = request.form.get("username").lower()
+        flash("Registration successful!")
     return render_template("join_free.html")
 
 if __name__ == "__main__":
