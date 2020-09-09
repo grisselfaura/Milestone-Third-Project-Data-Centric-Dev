@@ -6,11 +6,13 @@
     {% for recipe in recipes %}
         {{ recipe.name }}<br>
         {{ recipe.category_name }}<br>
+        <img src= "{{ recipe.image }}">
         {{ recipe.prep_time }}<br>
         {{ recipe.portions }}<br>
         {{ recipe.ingredients }}<br>
         {{ recipe.steps }}<br>
         {{ recipe.calories }}<br>
+        {{ recipe.url }}<br>
     {% endfor %}
 
 {% endblock %}
