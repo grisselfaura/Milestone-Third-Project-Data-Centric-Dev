@@ -51,7 +51,7 @@ def join_free():
             # put the new user into "session" cookie
             session["user"] = request.form.get("username").lower()
             flash("Registration successful!")
-            return redirect(url_for("join_free"))
+            return redirect(url_for("myrecipes", username=session["user"]))
 
         else: 
             flash("Password does not match")
@@ -72,7 +72,10 @@ def sign_in():
             if check_password_hash(
                 existing_user["password"], request.form.get("password")):
                     session["user"] = request.form.get("username").lower()
-                    flash("Welcome, {}".format(request.form.get("username")))
+                    flash("Welcome, {}".format(
+                        request.form.get("username")))
+                    return redirect(url_for(
+                        "myrecipes", username=session["user"]))
                     
             else:
                 # invalid password match
