@@ -3,31 +3,23 @@
     
     <h2></h2>
 
-    {% for recipe in recipes %}
-        {{ recipe.name }}<br>
-        {{ recipe.category_name }}<br>
-        <img src= "{{ recipe.image }}">
-        {{ recipe.prep_time }}<br>
-        {{ recipe.portions }}<br>
-        {{ recipe.ingredients }}<br>
-        {{ recipe.steps }}<br>
-        {{ recipe.calories }}<br>
-        {{ recipe.url }}<br>
-    {% endfor %}
-
-<ul class="collapsible">
+    <ul class="collapsible">
+        {% for recipe in recipes %}
         <li>
-        <div class="collapsible-header white-text orange lighten-2 text-shadow"><i class="far fa-caret-square-down"></i>First</div>
-        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+            <div class="collapsible-header white-text orange lighten-2 text-shadow">
+                <i class="far fa-caret-square-down"></i>
+                <strong>{{ recipe.name }}</strong> : {{ recipe.prep_time }} : {{ recipe.calories }}
+                <span><img src= "{{ recipe.image }}"></span>
+            </div>
+            <div class="collapsible-body">
+                <strong>{{ recipe.category_name }}</strong>
+                <p> {{ recipe.portions }}</p>
+                <p>{{ recipe.ingredients }}</p>
+                <p>{{ recipe.steps }}</p>
+                <p>{{ recipe.url }}</p>
+            </div>
         </li>
-        <li>
-        <div class="collapsible-header white-text orange lighten-2 text-shadow"><i class="far fa-caret-square-down"></i>Second</div>
-        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
-        <li>
-        <div class="collapsible-header white-text orange lighten-2 text-shadow"><i class="far fa-caret-square-down"></i>Third</div>
-        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
+        {% endfor %}
     </ul>    
 
 {% endblock %}
