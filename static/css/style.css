@@ -33,3 +33,7 @@ same-size {
     height:100%;
     align-items: center;
 }
+
+#margin {
+    margin-bottom: 0px;
+}
