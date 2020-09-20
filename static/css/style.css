@@ -37,3 +37,12 @@ same-size {
 #margin {
     margin-bottom: 0px;
 }
+
+#custom {
+    display: block;
+    margin: auto;
+    height: 20vh;
+    align-items: center;
+    -webkit-filter: sepia(30) hue-rotate(100deg);
+        filter:sepia(30) hue-rotate(100deg);
+}
