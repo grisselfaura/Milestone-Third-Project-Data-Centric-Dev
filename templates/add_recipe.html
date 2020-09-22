@@ -5,6 +5,20 @@
 
         <div class="row card-panel grey lighten-5">
             <form class="col s12" method="POST" action="">
+                <!-- Category name-->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-folder-open prefix light-blue-text"></i>
+                        <select id="category_name" name="category_name" class="validate" required>
+                            <option value="" disabled selected>Choose Category</option>
+                            {% for category in categories %}
+                            <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+                            {% endfor %}
+                        </select>
+                        <label>Category Name</label>
+                    </div>
+                </div>
+                <!-- Recipe name-->
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="fas fa-pencil-alt prefix light-blue-text"></i>
@@ -13,16 +27,45 @@
                         <label for="recipe_name">Recipe Name</label>
                     </div>
                 </div>
+                <!-- Description-->
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="fas fa-align-left prefix light-blue-text"></i>
-                        <textarea id="recipe_description" name="recipe_description" minlength="5"
-                            maxlenght="300" class="materialize-textarea validate" required></textarea>
+                        <textarea id="recipe_description" name="recipe_description" data-length="300" 
+                            class="materialize-textarea validate" required></textarea>
                         <label for="recipe_description">Description</label>
                     </div>
                 </div>
-                <div class="row">
+                <!-- Basic ingredients-->
+                 <div class="row">
                     <div class="input-field col s12">
+                        <i class="fas fa-shopping-basket prefix light-blue-text"></i>
+                        <textarea id="basic_ingredients" name="basic_ingredients" 
+                            data-length="300" class="materialize-textarea validate" required></textarea>
+                        <label for="basic_ingredients">Ingredients</label>
+                    </div>
+                </div>
+                <!-- Complementary ingredients-->
+                 <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-plus-square prefix light-blue-text"></i>
+                        <textarea id="complementary_ingredients" name="complementary_ingredients" 
+                            data-length="300" class="materialize-textarea validate" required></textarea>
+                        <label for="complementary_ingredients">Complement with </label>
+                    </div>
+                </div>
+                <!-- Steps-->
+                 <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-utensils prefix light-blue-text"></i>
+                        <textarea id="category_method" name="category_method" 
+                            data-length="1000" class="materialize-textarea validate" required></textarea>
+                        <label for="category_method">Steps </label>
+                    </div>
+                </div>
+                <!-- Share online checkbox-->
+                <div class="row">
+                    <div class="input-field col s6">
                         <div class="switch">
                             <i class="far fa-thumbs-up prefix light-blue-text"></i>
                             <label for="share_recipe">
@@ -30,6 +73,17 @@
                                 <span class="lever"></span>
                             Would you like to share this recipe with others?
                             </label>
+                        </div>
+                    </div>
+                
+                    <!-- Add image-->
+                    <div class="file-field input-field col s6">
+                        <div class="btn light-blue">
+                            <span>Add image</span>
+                            <input type="file">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
                         </div>
                     </div>
                 </div>
