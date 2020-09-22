@@ -53,16 +53,16 @@
                 <br><br>
             </div>
         </section>
-
+    <h3 class="center-align light-blue-text">All Recipes</h3>
+    <!--change this to card with images and the info below collapsible-->
     <ul class="collapsible">
         {% for recipe in recipes %}
-        
-        
+          
         <li>
             <div class="collapsible-header white-text orange lighten-2 text-shadow">
                 <i class="far fa-caret-square-down"></i>
-                <strong>{{ recipe.name }}</strong> : {{ recipe.prep_time }} : {{ recipe.calories }}
-                <span><img src= "{{ recipe.images }}"></span>
+                <strong>{{ recipe.recipe_name }}</strong>
+                <span><img src= "{{ recipe.recipe_images }}"></span>
             </div>
             <div class="collapsible-body">
                 <strong>{{ recipe.category_name }}</strong>
@@ -70,7 +70,7 @@
                 <p>{{ recipe.complementary_ingredients }}</p>
                 <p>{{ recipe.method }}</p>
                 <h5>{{ recipe.closing_line }}</h5>
-                
+                <p><em> by:{{ recipe.created_by }} </em></p>
             </div>
         </li>
         {% endfor %}
