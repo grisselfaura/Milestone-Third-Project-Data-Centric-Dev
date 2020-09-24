@@ -10,9 +10,13 @@
                     <div class="input-field col s12">
                         <i class="fas fa-folder-open prefix light-blue-text"></i>
                         <select id="category_name" name="category_name" class="validate" required>
-                            <option value="" disabled selected>Choose Category</option>
+                            <option value="" disabled>Choose Category</option>
                             {% for category in categories %}
-                            <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+                                {% if category.category_name == recipe.category_name %}
+                                    <option value="{{ category.category_name }}" selected>{{ category.category_name }}</option>
+                                {% else %}
+                                    <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+                                {% endif %}
                             {% endfor %}
                         </select>
                         <label for="category_name">Category Name</label>
@@ -22,8 +26,8 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="fas fa-pencil-alt prefix light-blue-text"></i>
-                        <input id="recipe_name" name="recipe_name" minlength="5"
-                            maxlenght="50" type="text" class="validate" required>
+                        <input id="recipe_name" name="recipe_name" minlength="5" maxlenght="50" 
+                            value = "{{ recipe.recipe_name }}" type="text" class="validate" required>
                         <label for="recipe_name">Recipe Name</label>
                     </div>
                 </div>
@@ -32,7 +36,9 @@
                     <div class="input-field col s12">
                         <i class="fas fa-align-left prefix light-blue-text"></i>
                         <textarea id="recipe_description" name="recipe_description" data-length="300" 
-                            class="materialize-textarea validate"></textarea>
+                            class="materialize-textarea validate">
+                        {{- recipe.recipe_description -}}    
+                        </textarea>
                         <label for="recipe_description">Description</label>
                     </div>
                 </div>
@@ -41,7 +47,9 @@
                     <div class="input-field col s12">
                         <i class="fas fa-shopping-basket prefix light-blue-text"></i>
                         <textarea id="basic_ingredients" name="basic_ingredients" 
-                            data-length="300" class="materialize-textarea validate" required></textarea>
+                            data-length="300" class="materialize-textarea validate" required>
+                            {{- recipe.basic_ingredients -}}    
+                        </textarea>
                         <label for="basic_ingredients">Ingredients please add them separated by a comma!</label>
                     </div>
                 </div>
@@ -50,7 +58,9 @@
                     <div class="input-field col s12">
                         <i class="fas fa-plus-square prefix light-blue-text"></i>
                         <textarea id="complementary_ingredients" name="complementary_ingredients" 
-                            data-length="300" class="materialize-textarea validate" ></textarea>
+                            data-length="300" class="materialize-textarea validate">
+                            {{- recipe.complementary_ingredients -}}  
+                        </textarea>
                         <label for="complementary_ingredients">Complement with: ingredients please add them separated by a comma! </label>
                     </div>
                 </div>
@@ -59,7 +69,9 @@
                     <div class="input-field col s12">
                         <i class="fas fa-utensils prefix light-blue-text"></i>
                         <textarea id="recipe_method" name="recipe_method" 
-                            data-length="1000" class="materialize-textarea validate" required></textarea>
+                            data-length="1000" class="materialize-textarea validate" required>
+                            {{- recipe.recipe_method -}}  
+                        </textarea>
                         <label for="recipe_method">Steps please step 1, step 2, step 3 </label>
                     </div>
                 </div>
@@ -68,7 +80,9 @@
                     <div class="input-field col s12">
                         <i class="fas fa-exclamation prefix light-blue-text"></i>
                         <textarea id="closing_line" name="closing_line" data-length="100" 
-                            class="materialize-textarea validate"></textarea>
+                            class="materialize-textarea validate">
+                            {{- recipe.closing_line -}} 
+                        </textarea>
                         <label for="closing_line">Remarks!</label>
                     </div>
                 </div>
@@ -78,14 +92,17 @@
                         <div class="switch">
                             <i class="far fa-thumbs-up prefix light-blue-text"></i>
                             <label for="share_recipe">
+                                {% if recipe.share_recipe == "on" %}
+                                <input type="checkbox" id="share_recipe" name="share_recipe" checked>
+                                {% else %}
                                 <input type="checkbox" id="share_recipe" name="share_recipe">
+                                {% endif %}
                                 <span class="lever"></span>
                                 Would you like to share this recipe with others?
                             </label>
                         </div>
                     </div>
-                    <!-- add textarea for closing line missing and make it not required??? -->
-                    <!-- Add image-->
+                    <!-- Added image-->
                     <div class="file-field input-field col s6">
                         <div class="btn-floating light-blue">
                             <i class="fas fa-camera right"></i>
@@ -93,7 +110,7 @@
                             <input type="file">
                         </div>
                         <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text">
+                            <input class="file-path validate" type="text" value="{{ recipe.recipe_images }}">
                             <label for="">Upload image</label>    
                         </div>
                     </div>
@@ -101,6 +118,10 @@
                 <!-- submit button -->
                 <div class="row">
                     <div class="col s12 left">
+                        <!-- cancel button -->
+                        <a href="{{ url_for('get_recipes') }}" class = "btn-large red text-shadow">
+                            Cancel <i class="fas fa-times-circle right"></i>
+                        </a>
                         <button type="submit" class="btn-large light-blue  text-shadow">
                             Edit Recipe <i class="fas fa-edit right"></i>
                         </button>
