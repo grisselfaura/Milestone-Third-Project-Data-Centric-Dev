@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h3 class="center-align light-blue-text">Edit Recipe</h3>
+
+        <div class="row card-panel grey lighten-5">
+            <form class="col s12" method="POST" action="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
+                <!-- Category selection-->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-folder-open prefix light-blue-text"></i>
+                        <select id="category_name" name="category_name" class="validate" required>
+                            <option value="" disabled selected>Choose Category</option>
+                            {% for category in categories %}
+                            <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+                            {% endfor %}
+                        </select>
+                        <label for="category_name">Category Name</label>
+                    </div>
+                </div>
+                <!-- Recipe name-->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-pencil-alt prefix light-blue-text"></i>
+                        <input id="recipe_name" name="recipe_name" minlength="5"
+                            maxlenght="50" type="text" class="validate" required>
+                        <label for="recipe_name">Recipe Name</label>
+                    </div>
+                </div>
+                <!-- Description-->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-align-left prefix light-blue-text"></i>
+                        <textarea id="recipe_description" name="recipe_description" data-length="300" 
+                            class="materialize-textarea validate"></textarea>
+                        <label for="recipe_description">Description</label>
+                    </div>
+                </div>
+                <!-- Basic ingredients-->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-shopping-basket prefix light-blue-text"></i>
+                        <textarea id="basic_ingredients" name="basic_ingredients" 
+                            data-length="300" class="materialize-textarea validate" required></textarea>
+                        <label for="basic_ingredients">Ingredients please add them separated by a comma!</label>
+                    </div>
+                </div>
+                <!-- Complementary ingredients-->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-plus-square prefix light-blue-text"></i>
+                        <textarea id="complementary_ingredients" name="complementary_ingredients" 
+                            data-length="300" class="materialize-textarea validate" ></textarea>
+                        <label for="complementary_ingredients">Complement with: ingredients please add them separated by a comma! </label>
+                    </div>
+                </div>
+                <!-- Steps--> <!-- DISCUSS FORMAT STEP1 AND STEP2 TO OBLY USER TO KEEP STANDARD FORMAT!-->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-utensils prefix light-blue-text"></i>
+                        <textarea id="recipe_method" name="recipe_method" 
+                            data-length="1000" class="materialize-textarea validate" required></textarea>
+                        <label for="recipe_method">Steps please step 1, step 2, step 3 </label>
+                    </div>
+                </div>
+                <!-- Closing line-->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-exclamation prefix light-blue-text"></i>
+                        <textarea id="closing_line" name="closing_line" data-length="100" 
+                            class="materialize-textarea validate"></textarea>
+                        <label for="closing_line">Remarks!</label>
+                    </div>
+                </div>
+                <div class="row">
+                <!-- Share online checkbox-->
+                    <div class="input-field col s6">
+                        <div class="switch">
+                            <i class="far fa-thumbs-up prefix light-blue-text"></i>
+                            <label for="share_recipe">
+                                <input type="checkbox" id="share_recipe" name="share_recipe">
+                                <span class="lever"></span>
+                                Would you like to share this recipe with others?
+                            </label>
+                        </div>
+                    </div>
+                    <!-- add textarea for closing line missing and make it not required??? -->
+                    <!-- Add image-->
+                    <div class="file-field input-field col s6">
+                        <div class="btn-floating light-blue">
+                            <i class="fas fa-camera right"></i>
+                            <span>Upload image</span>
+                            <input type="file">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                            <label for="">Upload image</label>    
+                        </div>
+                    </div>
+                </div>
+                <!-- submit button -->
+                <div class="row">
+                    <div class="col s12 left">
+                        <button type="submit" class="btn-large light-blue  text-shadow">
+                            Edit Recipe <i class="fas fa-edit right"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+
+{% endblock %}

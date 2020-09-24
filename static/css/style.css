@@ -51,6 +51,6 @@ same-size {
     margin: 5px;
 }
 
-#bullet {
+#bullet #bullet2  {
   list-style-type: circle;!
 }

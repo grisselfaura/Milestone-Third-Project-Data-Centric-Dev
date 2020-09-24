@@ -30,12 +30,12 @@
                                 </div>    
                             </li>
                             <!--ADD CONDITIONAL TO SHOW IF AVAILABLE-->
-                            {% if complementary_ingredients == [""] %}
+                            {% if complementary_ingredients|length > 0 %} 
                             <li>
                                 <div class="collapsible-header"><i class="far fa-caret-square-down"></i>Complement with: </div>
                                 <div class="collapsible-body">
                                     {% for complementary_ingredient in recipe.complementary_ingredients %}
-                                    <span id="bullet"> {{ complementary_ingredient }}</span>
+                                    <span id="bullet2"> {{ complementary_ingredient }}</span>
                                     {% endfor %}
                                 </div>
                             </li>
@@ -53,7 +53,7 @@
                             <li>
                                 <div class="collapsible-header"><i class="far fa-caret-square-down"></i>Method2: </div>
                                 <div class="collapsible-body">
-                                    {% for recipe_method in recipe.recipe_method  %}
+                                    {% for recipe_method in recipe.recipe_method2  %}
                                     <span> {{ recipe_method }}</span>
                                     {% endfor %}
                                 </div>    
@@ -64,7 +64,7 @@
                     </div>
                     <div class="card-action">
                         <a href="#" class="btn-small amber accent-4">Done</a>
-                        <a href="#" class="btn-small amber accent-4">Edit</a>
+                        <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="btn-small amber accent-4">Edit</a>
                     </div>
                     <!--WHEN WE SHARE RECIPE TO THE PUBLIC CREATED BY SHOULD BE REPLACE FOR BOTTOMS-->
                     <!--<div class="card-action">
