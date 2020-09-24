@@ -110,7 +110,12 @@
                             <input type="file">
                         </div>
                         <div class="file-path-wrapper">
+                            <!-- YINYA TEMPLATE NEEDS ATTENTION-->
+                            {% if recipe.recipe_images == recipe.recipe_images %}
+                            <input class="file-path validate" type="text" value="{{ recipe.recipe_images }}" selected>
+                            {% else %}
                             <input class="file-path validate" type="text" value="{{ recipe.recipe_images }}">
+                            {% endif %}
                             <label for="">Upload image</label>    
                         </div>
                     </div>

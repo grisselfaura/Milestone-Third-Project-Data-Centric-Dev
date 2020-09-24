@@ -63,8 +63,10 @@
                         </ul>
                     </div>
                     <div class="card-action">
-                        <a href="#" class="btn-small amber accent-4">Done</a>
-                        <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="btn-small amber accent-4">Edit</a>
+                        {% if session.user|lower == recipe.created_by|lower %}
+                            <a href="#" class="btn-small amber accent-4">Done</a>
+                            <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="btn-small amber accent-4">Edit</a>
+                        {% endif %}
                     </div>
                     <!--WHEN WE SHARE RECIPE TO THE PUBLIC CREATED BY SHOULD BE REPLACE FOR BOTTOMS-->
                     <!--<div class="card-action">
