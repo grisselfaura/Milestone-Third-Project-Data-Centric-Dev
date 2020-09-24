@@ -120,8 +120,8 @@ def add_recipe():
             "recipe_description": request.form.get("recipe_description"),
             "basic_ingredients": request.form.getlist("basic_ingredients"),
             #"complementary_ingredients": request.form.getlist("complementary_ingredients"),
-            "category_method": request.form.get("category_method"),
-            "category_images": request.form.get("category_images"),
+            "recipe_method": request.form.get("recipe_method"),
+            "recipe_images": request.form.get("recipe_images"),
             "closing_line": request.form.get("closing_line"),
             "share_recipe": "share_recipe",
             "created_by": session["user"]
