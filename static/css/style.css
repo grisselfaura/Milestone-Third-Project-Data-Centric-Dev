@@ -50,3 +50,7 @@ same-size {
 .btn-small {
     margin: 5px;
 }
+
+#bullet {
+  list-style-type: circle;!
+}

@@ -32,7 +32,7 @@
                     <div class="input-field col s12">
                         <i class="fas fa-align-left prefix light-blue-text"></i>
                         <textarea id="recipe_description" name="recipe_description" data-length="300" 
-                            class="materialize-textarea validate" required></textarea>
+                            class="materialize-textarea validate"></textarea>
                         <label for="recipe_description">Description</label>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                         <i class="fas fa-shopping-basket prefix light-blue-text"></i>
                         <textarea id="basic_ingredients" name="basic_ingredients" 
                             data-length="300" class="materialize-textarea validate" required></textarea>
-                        <label for="basic_ingredients">Ingredients</label>
+                        <label for="basic_ingredients">Ingredients please add them separated by a comma!</label>
                     </div>
                 </div>
                 <!-- Complementary ingredients-->
@@ -51,16 +51,25 @@
                         <i class="fas fa-plus-square prefix light-blue-text"></i>
                         <textarea id="complementary_ingredients" name="complementary_ingredients" 
                             data-length="300" class="materialize-textarea validate" ></textarea>
-                        <label for="complementary_ingredients">Complement with </label>
+                        <label for="complementary_ingredients">Complement with: ingredients please add them separated by a comma! </label>
                     </div>
                 </div>
-                <!-- Steps-->
+                <!-- Steps--> <!-- DISCUSS FORMAT STEP1 AND STEP2 TO OBLY USER TO KEEP STANDARD FORMAT!-->
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="fas fa-utensils prefix light-blue-text"></i>
                         <textarea id="recipe_method" name="recipe_method" 
                             data-length="1000" class="materialize-textarea validate" required></textarea>
-                        <label for="recipe_method">Steps </label>
+                        <label for="recipe_method">Steps please step 1, step 2, step 3 </label>
+                    </div>
+                </div>
+                <!-- Closing line-->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-exclamation prefix light-blue-text"></i>
+                        <textarea id="closing_line" name="closing_line" data-length="100" 
+                            class="materialize-textarea validate"></textarea>
+                        <label for="closing_line">Remarks!</label>
                     </div>
                 </div>
                 <div class="row">

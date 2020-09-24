@@ -17,20 +17,49 @@
                 <div class="card-stacked">
                     <div class="card-content">
                         <span class="card-title grey-text text-darken-4"><strong>{{ recipe.recipe_name }}</strong></span>
+                        <!--ADD CONDITIONAL TO SHOW IF AVAILABLE-->
                         <p>{{ recipe.recipe_description }}</p>
+                        <p>{{ recipe.category_name }}</p>
                         <ul class="collapsible">
                             <li>
-                                <div class="collapsible-header"><i class="far fa-caret-square-down"></i>{{ recipe.category_name }} </div>
+                                <div class="collapsible-header"><i class="far fa-caret-square-down"></i>Basic Ingredients: </div>
                                 <div class="collapsible-body">
                                     {% for basic_ingredient in recipe.basic_ingredients %}
-                                    <li>ingredient {{loop.index}} - {{ basic_ingredient }}</li>
-    
+                                    <span id="bullet"> {{ basic_ingredient }}</span>
                                     {% endfor %}
-                                    <p>{{ recipe.complementary_ingredients }}</p>
-                                    
-                                    <p>{{ recipe.method }}</p>
-                                    <h5>{{ recipe.closing_line }}</h5>
+                                </div>    
                             </li>
+                            <!--ADD CONDITIONAL TO SHOW IF AVAILABLE-->
+                            {% if complementary_ingredients == [""] %}
+                            <li>
+                                <div class="collapsible-header"><i class="far fa-caret-square-down"></i>Complement with: </div>
+                                <div class="collapsible-body">
+                                    {% for complementary_ingredient in recipe.complementary_ingredients %}
+                                    <span id="bullet"> {{ complementary_ingredient }}</span>
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            {% endif %}
+                            <!--unpacking not working because is an object-->
+                            <li>
+                                <div class="collapsible-header"><i class="far fa-caret-square-down"></i>Method: </div>
+                                <div class="collapsible-body">
+                                    {% for recipe_method in recipe.recipe_method  %}
+                                    <span> {{ recipe_method }}</span>
+                                    {% endfor %}
+                                </div>    
+                            </li>
+                            <!--ADD CONDITIONAL TO SHOW IF AVAILABLE-->
+                            <li>
+                                <div class="collapsible-header"><i class="far fa-caret-square-down"></i>Method2: </div>
+                                <div class="collapsible-body">
+                                    {% for recipe_method in recipe.recipe_method  %}
+                                    <span> {{ recipe_method }}</span>
+                                    {% endfor %}
+                                </div>    
+                            </li>
+                            <!--ADD CONDITIONAL TO SHOW IF AVAILABLE-->
+                            <h5 class="center-align">{{ recipe.closing_line }}</h5>
                         </ul>
                     </div>
                     <div class="card-action">
