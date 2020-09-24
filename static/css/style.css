@@ -46,3 +46,7 @@ same-size {
     -webkit-filter: sepia(30) hue-rotate(100deg);
         filter:sepia(30) hue-rotate(100deg);
 }
+
+.btn-small {
+    margin: 5px;
+}

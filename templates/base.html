@@ -72,6 +72,7 @@
     </section>
 
     <!--why vegan? DONDE PONERLO-->
+    {% if not session.user %}
     <section class= "blue-grey lighten-5"> 
         <div class="container">
             <div class="section">
@@ -118,6 +119,7 @@
         </div>
         <br><br>
     </section>
+    {% endif %}
 
     <!--carrousel categories NNED TO BE MOVE TO THE CATEGORY SECTION -->
     <section>
@@ -133,7 +135,6 @@
     </section>
 
     <!-- flash messages-->
-    {% if session.user %}
     <section>    
         {% with messages = get_flashed_messages() %}
             {% if messages %}
@@ -145,7 +146,7 @@
             {% endif %}
         {% endwith %}
     </section>
-    {% endif %}
+
     
     <main class="container">
         {% block content %}
