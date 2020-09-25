@@ -26,6 +26,9 @@
                 {% if session.user %}
                     <li><a href="{{ url_for('myrecipes', username=session['user']) }}" class="grey-text  text-darken-4">MyRecipes</a></li>
                     <li><a href="{{ url_for('add_recipe') }}" class="grey-text text-darken-4">Add a recipe</a></li>
+                    {% if session.user|lower == "admin"|lower %}
+                        <li><a href="{{ url_for('get_categories') }}" class="grey-text text-darken-4">Manage Recipe Categories</a></li>
+                    {% endif %}
                     <li><a href="{{ url_for('sign_out') }}" class="grey-text  text-darken-4">Sign Out!</a></li>
                 {% else %}
                     <li><a href="{{ url_for('sign_in') }}" class="grey-text  text-darken-4">Sign In!</a></li>
@@ -43,6 +46,9 @@
             {% if session.user %}
                 <li><a href="{{ url_for('myrecipes', username=session['user']) }}" class="grey-text text-darken-4">MyRecipes</a></li>
                 <li><a href="{{ url_for('add_recipe') }}" class="grey-text text-darken-4">Add a recipe</a></li>
+                {% if session.user|lower == "admin"|lower %}
+                    <li><a href="{{ url_for('get_categories') }}" class="grey-text text-darken-4">Manage Recipe Categories</a></li>
+                {% endif %}
                 <li><a href="{{ url_for('sign_out') }}" class="grey-text text-darken-4">Sign Out!</a></li>
             {% else %}
                 <li><a href="{{ url_for('sign_in') }}" class="grey-text text-darken-4">Sign In!</a></li>
@@ -71,7 +77,7 @@
         </div>
     </section>
 
-    <!--why vegan? DONDE PONERLO-->
+    <!--why vegan? THIS NEED TO DISSAPEAR WHEN IN SIGN IN TAB-->
     {% if not session.user %}
     <section class= "blue-grey lighten-5"> 
         <div class="container">
@@ -121,7 +127,8 @@
     </section>
     {% endif %}
 
-    <!--carrousel categories NNED TO BE MOVE TO THE CATEGORY SECTION -->
+    <!--carrousel categories THIS NEED TO DISSAPEAR WHEN IN SIGN IN TAB-->
+    {% if not session.user %}
     <section>
         <h3 class="center-align light-blue-text">Categories</h3>
         <div class="carousel">
@@ -133,6 +140,7 @@
             <a class="carousel-item" href="#dinner!"><img src="static/images/categories/dinner.PNG"></a>
         </div>
     </section>
+    {% endif %}
 
     <!-- flash messages-->
     <section>    

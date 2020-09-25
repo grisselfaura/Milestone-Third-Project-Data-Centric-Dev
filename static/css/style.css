@@ -28,7 +28,7 @@ text-shadow {
     height: 25vh;
 }
 
-same-size {
+.same-size {
     object-fit: contain;
     height:100%;
     align-items: center;
