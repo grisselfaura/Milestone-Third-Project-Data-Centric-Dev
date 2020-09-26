@@ -24,10 +24,11 @@
                 <li><a href=".html" class="grey-text text-darken-4">Recipe Search</a></li>
                 <li><a href=".html" class="grey-text text-darken-4">Ingredients index</a></li>
                 {% if session.user %}
-                    <li><a href="{{ url_for('myrecipes', username=session['user']) }}" class="grey-text  text-darken-4">MyRecipes</a></li>
+                    <li><a href="{{ url_for('myrecipes', username=session['user']) }}" class="grey-text text-darken-4">MyRecipes</a></li>
                     <li><a href="{{ url_for('add_recipe') }}" class="grey-text text-darken-4">Add a recipe</a></li>
                     {% if session.user|lower == "admin"|lower %}
-                        <li><a href="{{ url_for('get_categories') }}" class="grey-text text-darken-4">Manage Recipe Categories</a></li>
+                        <li><a href="{{ url_for('get_categories') }}" class="grey-text text-darken-4">Manage Recipe Categories
+                        <i class="fas fa-user-lock right"></i></a></li>
                     {% endif %}
                     <li><a href="{{ url_for('sign_out') }}" class="grey-text  text-darken-4">Sign Out!</a></li>
                 {% else %}
@@ -47,7 +48,8 @@
                 <li><a href="{{ url_for('myrecipes', username=session['user']) }}" class="grey-text text-darken-4">MyRecipes</a></li>
                 <li><a href="{{ url_for('add_recipe') }}" class="grey-text text-darken-4">Add a recipe</a></li>
                 {% if session.user|lower == "admin"|lower %}
-                    <li><a href="{{ url_for('get_categories') }}" class="grey-text text-darken-4">Manage Recipe Categories</a></li>
+                    <li><a href="{{ url_for('get_categories') }}" class="grey-text text-darken-4">Manage Recipe Categories
+                    <i class="fas fa-user-lock right"></i></a></li>
                 {% endif %}
                 <li><a href="{{ url_for('sign_out') }}" class="grey-text text-darken-4">Sign Out!</a></li>
             {% else %}
