@@ -66,13 +66,21 @@
                 <br>
                  <h1 class="header center-align grey-text text-lighten-5"> FOR FLEXITARIANS & BRAND NEW VEGANS! </h1>     
             </div>
-            <div class="container">
-                <form action= "" method="">
-                    <div class="card-panel grey lighten-5 z-depth-4 input-field" id="margin">
+            <div class="row card-panel">
+                <form action= "{{ url_for('search') }}" method="POST" class="col s12">
+                    <div class="row valign-wrapper center-align">
+                        <div class="input-field col s12 m8">
                         <!-- change to search box-->
-                        <input id="search" type="search" required>
-                        <label class="label-icon" for="search"><i class="fas fa-search"> Find a recipe !</i></label>
-                        <i class="material-icons">close</i>   
+                            <i class="fas fa-search left"><label for="query"> Find a recipe !</label></i> 
+                            <input type="text" name="query" id="query" minlength="3" class= "validate" required>
+                            
+                        </div>
+                        <div class="col s12 m4">
+                            <a href="{{ url_for('get_recipes') }}" class="red btn text-shadow">Reset</a>
+                            <button type="submit" class="light-blue darken-1 btn text-shadow">
+                                <i class= "fas fa-search left"></i>Search
+                            </button>
+                        </div>            
                     </div>
                 </form>
             </div>
