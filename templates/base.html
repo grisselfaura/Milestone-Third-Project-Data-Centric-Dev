@@ -3,24 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Font Awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" 
     integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" type="text/css">
+     <!--Materialize CSS-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css">
+    <!--Custom CSS-->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
     {% block styles %}
     {% endblock %}
-    <title>Recipes Manager</title>
+    <title> B A S E -  C O O K </title>
 </head>
-<body>
 
+<body>
+    <!--Header-->
     <header>
-    <!-- top navbar-->
+    <!--Top navbar-->
         <nav class="nav-extended text-shadow  blue-grey lighten-2">
             <div class="nav-wrapper">
-            <a href="{{ url_for('get_recipes') }}" class="brand-logo black-text"><i class="fas fa-book fa-1.5x"> B A S E </i></a> 
+            <a href="{{ url_for('home') }}" class="brand-logo black-text"><i class="fas fa-book fa-1.5x"> B A S E </i></a> 
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="{{ url_for('get_recipes') }}" class="grey-text text-darken-4">Home</a></li>
+                <li><a href="{{ url_for('home') }}" class="grey-text text-darken-4">Home</a></li>
+                <li><a href="{{ url_for('get_recipes') }}" class="grey-text text-darken-4">Recipes</a></li>
                 <li><a href=".html" class="grey-text text-darken-4">Recipe Search</a></li>
                 <li><a href=".html" class="grey-text text-darken-4">Ingredients index</a></li>
                 {% if session.user %}
@@ -39,9 +44,10 @@
             </div>
         </nav>
 
-        <!-- mobile navbar-->
+        <!-- Mobile Sidenavbar-->
         <ul class="sidenav" id="mobile-demo">
-            <li><a href="{{ url_for('get_recipes') }}" class="grey-text text-darken-4">Home</a></li>
+            <li><a href="{{ url_for('home') }}" class="grey-text text-darken-4">Home</a></li>
+            <li><a href="{{ url_for('get_recipes') }}" class="grey-text text-darken-4">Recipes</a></li>
             <li><a href=".html" class="grey-text text-darken-4">Recipe Search</a></li>
             <li><a href=".html" class="grey-text text-darken-4">Ingredients index</a></li>
             {% if session.user %}
@@ -58,99 +64,11 @@
             {% endif %}
         </ul>
     </header>
-
-    <!--banner + search box -->
-    <section class= "blue-grey lighten-5">
-        <div class="blue-grey lighten-5">
-            <div class="bg-header">
-                <br>
-                 <h1 class="header center-align grey-text text-lighten-5"> FOR FLEXITARIANS & BRAND NEW VEGANS! </h1>     
-            </div>
-            <div class="row card-panel">
-                <form action= "{{ url_for('search') }}" method="POST" class="col s12">
-                    <div class="row valign-wrapper center-align">
-                        <div class="input-field col s12 m8">
-                        <!-- change to search box-->
-                            <i class="fas fa-search left"><label for="query"> Find a recipe !</label></i> 
-                            <input type="text" name="query" id="query" minlength="3" class= "validate" required>
-                            
-                        </div>
-                        <div class="col s12 m4">
-                            <a href="{{ url_for('get_recipes') }}" class="red btn text-shadow">Reset</a>
-                            <button type="submit" class="light-blue darken-1 btn text-shadow">
-                                <i class= "fas fa-search left"></i>Search
-                            </button>
-                        </div>            
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!--why vegan? THIS NEED TO DISSAPEAR WHEN IN SIGN IN TAB-->
-    {% if not session.user %}
-    <section class= "blue-grey lighten-5"> 
-        <div class="container">
-            <div class="section">
-                <h2 class="center light-blue-text">Why vegan?</h2>
-            </div>
-            <!--   Icon Section   -->
-            <div class="row">
-                <div class="col s12 m4">
-                    <div class="icon-block">
-                        <img src="static/images/icons/animal_welfare.png" alt="" class="circle responsive-img" id= "custom">
-                        <h5 class="center">Animal welfare</h5>
-                        <p class="light flow-text">In the Netherlands alone 1.8 million animals die every day for the food industry ... 
-                        DAILY! Worldwide there are more than 60 billion animals kept for the food industry, on an unprecedented 
-                        scale which will only continue to increase by one still growing world population.</p>
-                    </div>
-                </div>
-                <div class="col s12 m4">
-                    <div class="icon-block">
-                        <img src="static/images/icons/climate_change.png" alt="" class="circle responsive-img" id= "custom">
-                        <h5 class="center">The impact of the animal food industry on the environment</h5>
-                        <p class="light flow-text">In the Netherlands 40% of the total climate load is caused by the animal food industry.
-                        Worldwide this is about 20% which makes this a greater polluter than the whole transport sector with all
-                        its aircraft and oil tankers. It is simply bizarre how much water and food must be produced to feed a cow 
-                        to ultimately achieve 1 kg of meat. Many meat eaters say the soybean industry is so bad for the environment, 
-                        and yes that's right. However, more needs to be done when 75% of all soy nutrition goes to the animal industry. 
-                        The result is one enormous attack on nature, acidification from farmland by the huge amounts of manure and 
-                        massive deforestation.</p>
-                    </div>
-                </div>
-                <div class="col s12 m4">
-                    <div class="icon-block">
-                        <img src="static/images/icons/health_icon.jpg" alt="" class="responsive-img" id= "custom">
-                        <h5 class="center">Your own health</h5>
-                        <p class="light flow-text">Everything seems to indicate that one plant-based diet is many times healthier for us than an 
-                        animal-based diet with proteins and fats. What a recognized fact is that processed meat like ham, salami, 
-                        burgers and sausages, is carcinogenic and in the same WHO category such as smoking and asbestos. Also eating a 
-                        lot of meat ensures more fat deposits in the blood vessels (cholesterol) which later in life can lead to various
-                        heart and vascular disease. I think that many of us are ready are for the next step. I like the concept of 
-                        flexitarian whereas at least three vegan days a week must be completed. So no meat, no fish and no dairy, from 
-                        breakfast until dinner, a completely vegetable day. </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br><br>
-    </section>
-    {% endif %}
-
-    <!--carrousel categories THIS NEED TO DISSAPEAR WHEN IN SIGN IN TABstatic/images/categories/breakfast.PNG-->
-    {% if not session.user %}
-    <section>
-        <h3 class="center-align light-blue-text">Categories</h3>
-        <div class="carousel">
-            <a class="carousel-item" href="#breakfast!"><img src="https://i.postimg.cc/Jtcxbrkz/breakfast.png"></a>
-            <a class="carousel-item" href="#lunch!"><img src="https://i.postimg.cc/hz0m7G5F/Lunch.png"></a>
-            <a class="carousel-item" href="#salads!"><img src="https://i.postimg.cc/t7TJzD1n/Salads.png"></a>
-            <a class="carousel-item" href="#borrel!"><img src="https://i.postimg.cc/fJzKCGcj/borrel.png"></a>
-            <a class="carousel-item" href="#soup!"><img src="https://i.postimg.cc/BjWv40m2/Soups.png"></a>
-            <a class="carousel-item" href="#dinner!"><img src="https://i.postimg.cc/FY1x50nY/dinner.png"></a>
-        </div>
-    </section>
-    {% endif %}
+    
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
 
     <!-- flash messages-->
     <section>    
@@ -165,38 +83,27 @@
         {% endwith %}
     </section>
 
-    
-    <main class="container">
-        {% block content %}
-        {% endblock %}
-    </main>
-    
-
-    
+    <!--Footer-->
     <footer class="page-footer blue-grey lighten-2">
-          <div class="container">
+        <div class="container">
             <div class="row">
               <div class="col l6 s12">
-                <h5 class="orange-text text-lighten-5">Footer Content</h5>
-                <p class="orange-text text-lighten-5">You can use rows and columns here to organize your footer content.</p>
+                <h6 class="orange-text text-lighten-5">&copy; 2020 Copyright Grissel Faura Tellez</h6>
               </div>
               <div class="col l4 offset-l2 s12">
-                <h5 class="amber-text text-accent-3">Links</h5>
-                <ul>
-                  <li><a class="orange-text text-lighten-5" href="#!">Link 1</a></li>
-                  <li><a class="orange-text text-lighten-5" href="#!">Link 2</a></li>
-                  <li><a class="orange-text text-lighten-5" href="#!">Link 3</a></li>
-                  <li><a class="orange-text text-lighten-5" href="#!">Link 4</a></li>
-                </ul>
+                <a class="orange-text text-lighten-5 hoverable" href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook social-icon"></i></a>
+                <a class="orange-text text-lighten-5 hoverable" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram social-icon"></i></a>
+                <a class="orange-text text-lighten-5 hoverable" href="https://www.twitter.com/" target="_blank"><i class="fab fa-twitter social-icon"></i></a>
+                <a class="orange-text text-lighten-5 hoverable" href="https://github.com/stephyraju" target="_blank"><i class="fab fa-github social-icon"></i></a>
               </div>
             </div>
           </div>
           <div class="footer-copyright">
             <div class="container orange-text text-lighten-5">
-            © 2020 Copyright Text
+            
             </div>
-          </div>
-        </footer>
+        </div>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

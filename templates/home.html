@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <!--banner + search box -->
+    <section class= "blue-grey lighten-5">
+        <div class="blue-grey lighten-5">
+            <div class="bg-header">
+                <br>
+                 <h1 class="header center-align grey-text text-lighten-5"> FOR FLEXITARIANS & BRAND NEW VEGANS! </h1>     
+            </div>
+            <div class="row card-panel">
+                <form action= "{{ url_for('search') }}" method="POST" class="col s12">
+                    <div class="row valign-wrapper center-align">
+                        <div class="input-field col s12 m8">
+                        <!-- change to search box-->
+                            <i class="fas fa-search left"><label for="query"> Find a recipe !</label></i> 
+                            <input type="text" name="query" id="query" minlength="3" class= "validate" required>
+                            
+                        </div>
+                        <div class="col s12 m4">
+                            <a href="{{ url_for('get_recipes') }}" class="red btn text-shadow">Reset</a>
+                            <button type="submit" class="light-blue darken-1 btn text-shadow">
+                                <i class= "fas fa-search left"></i>Search
+                            </button>
+                        </div>            
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!--why vegan? THIS NEED TO DISSAPEAR WHEN IN SIGN IN TAB-->
+    {% if not session.user %}
+    <section class= "blue-grey lighten-5"> 
+        <div class="container">
+            <div class="section">
+                <h2 class="center light-blue-text">Why vegan?</h2>
+            </div>
+            <!--   Icon Section   -->
+            <div class="row">
+                <div class="col s12 m4">
+                    <div class="icon-block">
+                        <img src="static/images/icons/animal_welfare.png" alt="" class="circle responsive-img" id= "custom">
+                        <h5 class="center">Animal welfare</h5>
+                        <p class="light flow-text">In the Netherlands alone 1.8 million animals die every day for the food industry ... 
+                        DAILY! Worldwide there are more than 60 billion animals kept for the food industry, on an unprecedented 
+                        scale which will only continue to increase by one still growing world population.</p>
+                    </div>
+                </div>
+                <div class="col s12 m4">
+                    <div class="icon-block">
+                        <img src="static/images/icons/climate_change.png" alt="" class="circle responsive-img" id= "custom">
+                        <h5 class="center">The impact of the animal food industry on the environment</h5>
+                        <p class="light flow-text">In the Netherlands 40% of the total climate load is caused by the animal food industry.
+                        Worldwide this is about 20% which makes this a greater polluter than the whole transport sector with all
+                        its aircraft and oil tankers. It is simply bizarre how much water and food must be produced to feed a cow 
+                        to ultimately achieve 1 kg of meat. Many meat eaters say the soybean industry is so bad for the environment, 
+                        and yes that's right. However, more needs to be done when 75% of all soy nutrition goes to the animal industry. 
+                        The result is one enormous attack on nature, acidification from farmland by the huge amounts of manure and 
+                        massive deforestation.</p>
+                    </div>
+                </div>
+                <div class="col s12 m4">
+                    <div class="icon-block">
+                        <img src="static/images/icons/health_icon.jpg" alt="" class="responsive-img" id= "custom">
+                        <h5 class="center">Your own health</h5>
+                        <p class="light flow-text">Everything seems to indicate that one plant-based diet is many times healthier for us than an 
+                        animal-based diet with proteins and fats. What a recognized fact is that processed meat like ham, salami, 
+                        burgers and sausages, is carcinogenic and in the same WHO category such as smoking and asbestos. Also eating a 
+                        lot of meat ensures more fat deposits in the blood vessels (cholesterol) which later in life can lead to various
+                        heart and vascular disease. I think that many of us are ready are for the next step. I like the concept of 
+                        flexitarian whereas at least three vegan days a week must be completed. So no meat, no fish and no dairy, from 
+                        breakfast until dinner, a completely vegetable day. </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+    </section>
+    {% endif %}
+
+    <!--carrousel categories THIS NEED TO DISSAPEAR WHEN IN SIGN IN TABstatic/images/categories/breakfast.PNG-->
+    {% if not session.user %}
+    <section>
+        <h3 class="center-align light-blue-text">Categories</h3>
+        <div class="carousel">
+            <a class="carousel-item" href="#breakfast!"><img src="https://i.postimg.cc/Jtcxbrkz/breakfast.png"></a>
+            <a class="carousel-item" href="#lunch!"><img src="https://i.postimg.cc/hz0m7G5F/Lunch.png"></a>
+            <a class="carousel-item" href="#salads!"><img src="https://i.postimg.cc/t7TJzD1n/Salads.png"></a>
+            <a class="carousel-item" href="#borrel!"><img src="https://i.postimg.cc/fJzKCGcj/borrel.png"></a>
+            <a class="carousel-item" href="#soup!"><img src="https://i.postimg.cc/BjWv40m2/Soups.png"></a>
+            <a class="carousel-item" href="#dinner!"><img src="https://i.postimg.cc/FY1x50nY/dinner.png"></a>
+        </div>
+    </section>
+    {% endif %}
+
+{% endblock %}
