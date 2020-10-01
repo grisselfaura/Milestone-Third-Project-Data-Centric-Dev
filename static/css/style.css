@@ -54,3 +54,13 @@ text-shadow {
 #bullet #bullet2  {
   list-style-type: circle;!
 }
+
+.social-icon {
+    margin: 10px;
+    color: white;
+    font-size: 1.7rem;
+}
+
+.social-icon:hover {
+    color: black;
+}
