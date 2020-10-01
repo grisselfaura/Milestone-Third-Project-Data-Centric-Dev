@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Font Awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" 
     integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" type="text/css">
@@ -21,7 +23,7 @@
     <!--Top navbar-->
         <nav class="nav-extended text-shadow  blue-grey lighten-2">
             <div class="nav-wrapper">
-            <a href="{{ url_for('home') }}" class="brand-logo black-text"><i class="fas fa-book fa-1.5x"> B A S E </i></a> 
+            <a href="{{ url_for('home') }}" class="brand-logo black-text"><img class="hide-on-med-and-down" src="{{ url_for('static', filename='images/logo_nav.png') }}"></a> 
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="{{ url_for('home') }}" class="grey-text text-darken-4">Home</a></li>
@@ -46,22 +48,23 @@
 
         <!-- Mobile Sidenavbar-->
         <ul class="sidenav" id="mobile-demo">
-            <li><a href="{{ url_for('home') }}" class="grey-text text-darken-4">Home</a></li>
-            <li><a href="{{ url_for('get_recipes') }}" class="grey-text text-darken-4">Recipes</a></li>
-            <li><a href=".html" class="grey-text text-darken-4">Recipe Search</a></li>
-            <li><a href=".html" class="grey-text text-darken-4">Ingredients index</a></li>
-            {% if session.user %}
-                <li><a href="{{ url_for('myrecipes', username=session['user']) }}" class="grey-text text-darken-4">MyRecipes</a></li>
-                <li><a href="{{ url_for('add_recipe') }}" class="grey-text text-darken-4">Add a recipe</a></li>
-                {% if session.user|lower == "admin"|lower %}
-                    <li><a href="{{ url_for('get_categories') }}" class="grey-text text-darken-4">Manage Recipe Categories
-                    <i class="fas fa-user-lock right"></i></a></li>
+            <img class="responsive-img" src="{{ url_for('static', filename='images/logo_nav.png') }}" alt="logo-image">
+                <li><a href="{{ url_for('home') }}" class="grey-text text-darken-4"><i class="material-icons">home</i>Home</a></li>
+                <li><a href="{{ url_for('get_recipes') }}" class="grey-text text-darken-4"><i class="material-icons">search</i>Recipes</a></li>
+                <li><a href=".html" class="grey-text text-darken-4">Recipe Search</a></li>
+                <li><a href=".html" class="grey-text text-darken-4">Ingredients index</a></li>
+                {% if session.user %}
+                    <li><a href="{{ url_for('myrecipes', username=session['user']) }}" class="grey-text text-darken-4"><i class="material-icons">person</i>MyRecipes</a></li>
+                    <li><a href="{{ url_for('add_recipe') }}" class="grey-text text-darken-4"><i class="material-icons">add_circle</i>Add a recipe</a></li>
+                    {% if session.user|lower == "admin"|lower %}
+                        <li><a href="{{ url_for('get_categories') }}" class="grey-text text-darken-4"><i class="material-icons">supervisor_account</i>Manage Recipe Categories
+                        <i class="fas fa-user-lock right"></i></a></li>
+                    {% endif %}
+                    <li><a href="{{ url_for('sign_out') }}" class="grey-text text-darken-4"><i class="material-icons">person_outline</i>Sign Out!</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('sign_in') }}" class="grey-text text-darken-4"><i class="material-icons">person_pin</i>Sign In!</a></li>
+                    <li><a href="{{ url_for('join_free') }}" class="grey-text text-darken-4"><i class="material-icons">person_add</i>Join Free</a></li>
                 {% endif %}
-                <li><a href="{{ url_for('sign_out') }}" class="grey-text text-darken-4">Sign Out!</a></li>
-            {% else %}
-                <li><a href="{{ url_for('sign_in') }}" class="grey-text text-darken-4">Sign In!</a></li>
-                <li><a href="{{ url_for('join_free') }}" class="grey-text text-darken-4">Join Free</a></li>
-            {% endif %}
         </ul>
     </header>
     
