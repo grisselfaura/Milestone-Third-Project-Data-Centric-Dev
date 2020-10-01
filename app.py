@@ -1,3 +1,4 @@
+# Imported modules
 import os
 from flask import (
     Flask, flash, render_template, 
@@ -9,8 +10,10 @@ if os.path.exists("env.py"):
     import env 
 
 
+# Declaring app name
 app = Flask(__name__)
 
+# Config environmental variables
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
@@ -18,18 +21,22 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
+# HOME
 @app.route("/")
 @app.route("/home")
 def home():
     return render_template("home.html")
 
 
+# READ
+# Page to view all recipes
 @app.route("/get_recipes")
 def get_recipes():
     recipes = list(mongo.db.recipes.find())
     return render_template("recipes.html", recipes=recipes)
 
 
+# Search
 @app.route("/search", methods=["GET", "POST"])
 def search():
     query = request.form.get("query")
@@ -37,6 +44,7 @@ def search():
     return render_template("recipes.html", recipes=recipes)
 
 
+# Register
 @app.route("/join_free", methods=["GET", "POST"])
 def join_free():
     if request.method == "POST":
@@ -72,6 +80,7 @@ def join_free():
     return render_template("join_free.html")
 
 
+# Sign In
 @app.route("/sign_in", methods=["GET", "POST"])
 def sign_in():
     if request.method == "POST":
@@ -114,6 +123,7 @@ def myrecipes(username):
     return redirect(url_for("sign_in"))
 
 
+# Sign Out
 @app.route("/sign_out")
 def sign_out():
     # remove user from session cookies
@@ -122,6 +132,7 @@ def sign_out():
     return redirect(url_for("sign_in"))
 
 
+# CREATE
 @app.route("/add_recipe",  methods=["GET", "POST"])
 def add_recipe():
     if request.method == "POST":
@@ -146,6 +157,7 @@ def add_recipe():
     return render_template("add_recipe.html", categories=categories)
 
 
+# UPDATE
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
     if request.method == "POST":
@@ -170,6 +182,7 @@ def edit_recipe(recipe_id):
     return render_template("edit_recipe.html", recipe=recipe, categories=categories)
 
 
+# DELETE
 @app.route("/delete_recipe/<recipe_id>")
 def delete_recipe(recipe_id):
     mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
@@ -208,6 +221,7 @@ def edit_category(category_id):
         
     category = mongo.db.categories.find_one({"_id": ObjectId(category_id)})
     return render_template("edit_category.html", category=category)
+
 
 
 # add defensive programming so the user can confirm deletion
