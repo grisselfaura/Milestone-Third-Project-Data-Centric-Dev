@@ -68,12 +68,13 @@
         </ul>
     </header>
     
+    <!--Templates-->
     <main class="container">
         {% block content %}
         {% endblock %}
     </main>
 
-    <!-- flash messages-->
+    <!--Flash messages-->
     <section>    
         {% with messages = get_flashed_messages() %}
             {% if messages %}
@@ -90,11 +91,15 @@
     <footer class="page-footer blue-grey lighten-2">
         <div class="footer-copyright">
             <div class="container">
-                <strong>&copy; 2020 B a s e - C o o k  Copyright </strong>
-                <a class="grey-text text-lighten-4" href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook social-icon right"></i></a>
-                <a class="grey-text text-lighten-4" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram social-icon right"></i></a>
-                <a class="grey-text text-lighten-4" href="https://www.twitter.com/" target="_blank"><i class="fab fa-twitter social-icon right"></i></a>
-                <a class="grey-text text-lighten-4" href="https://github.com/grisselfaura/Milestone-Third-Project-Data-Centric-Dev" target="_blank"><i class="fab fa-github social-icon right"></i></a>    
+                <div class="grid-example col s12 m6">
+                    <strong>&copy; 2020 B a s e - C o o k  Copyright </strong>
+                <div>
+                <div class="grid-example col s12 m6">
+                    <a class="grey-text text-lighten-4" href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook social-icon right"></i></a>
+                    <a class="grey-text text-lighten-4" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram social-icon right"></i></a>
+                    <a class="grey-text text-lighten-4" href="https://www.twitter.com/" target="_blank"><i class="fab fa-twitter social-icon right"></i></a>
+                    <a class="grey-text text-lighten-4" href="https://github.com/grisselfaura/Milestone-Third-Project-Data-Centric-Dev" target="_blank"><i class="fab fa-github social-icon right"></i></a>    
+                <div>
             </div>
         </div>
     </footer>

@@ -38,14 +38,24 @@ text-shadow {
     margin-bottom: 0px;
 }
 
-#custom {
+.sepia {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    height: 20vh !important;
+    align-items: center;
+    -webkit-filter: sepia(30) hue-rotate(100deg);
+        filter:sepia(30) hue-rotate(100deg);
+}
+
+/* #custom {
     display: block;
     margin: auto;
     height: 20vh;
     align-items: center;
     -webkit-filter: sepia(30) hue-rotate(100deg);
         filter:sepia(30) hue-rotate(100deg);
-}
+} */
 
 .btn-small {
     margin: 5px;
