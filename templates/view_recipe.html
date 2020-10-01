@@ -10,7 +10,8 @@
 			<form action="{{ url_for('search') }}" method="POST" class="col s12">
 				<div class="row valign-wrapper center-align">
 					<div class="input-field col s12 m8">
-						<input type="text" name="query" id="query" minlength="3" class= "validate" required>
+						<!-- <i class="fas fa-search left"></i>  -->
+	                    <input type="text" name="query" id="query" minlength="3" class= "validate" required>
                         <label for="query"> Find a recipe !</label>
 	                </div>
 	                <div class="col s12 m4">
@@ -24,7 +25,7 @@
 	    </div> 
 	</section>
 
-    <!--PENDING to reduce information... edit bottom only if user cretaed -->
+    <!--PENDING HOW TO MAKE THEM DISPLAY SIDE BY SIZE-->
     <div class="row"> 
         {% for recipe in recipes %}
         <div class="col s12 m6  l4">
@@ -39,10 +40,51 @@
                             <p>{{ recipe.recipe_description }}</p>
                         {% endif %}
                         <p>{{ recipe.category_name }}</p>
+                        <ul class="collapsible">
+                            <li>
+                                <div class="collapsible-header"><i class="far fa-caret-square-down"></i>Basic Ingredients: </div>
+                                <div class="collapsible-body">
+                                    {% for basic_ingredient in recipe.basic_ingredients %}
+                                    <span id="bullet"> {{ basic_ingredient }}</span>
+                                    {% endfor %}
+                                </div>    
+                            </li>
+                            {% if recipe.complementary_ingredients|length > 0 %} 
+                            <li>
+                                <div class="collapsible-header"><i class="far fa-caret-square-down"></i>Complement with: </div>
+                                <div class="collapsible-body">
+                                    {% for complementary_ingredient in recipe.complementary_ingredients %}
+                                    <span id="bullet2"> {{ complementary_ingredient }}</span>
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            {% endif %}
+                            <!--unpacking not working because is an object-->
+                            <li>
+                                <div class="collapsible-header"><i class="far fa-caret-square-down"></i>Method: </div>
+                                <div class="collapsible-body">
+                                    {% for recipe_method in recipe.recipe_method  %}
+                                    <span> {{ recipe_method }}</span>
+                                    {% endfor %}
+                                </div>    
+                            </li>
+                            {% if recipe.recipe_method2|length > 0 %}
+                            <li>
+                                <div class="collapsible-header"><i class="far fa-caret-square-down"></i>Method2: </div>
+                                <div class="collapsible-body">
+                                    {% for recipe_method in recipe.recipe_method2  %}
+                                    <span> {{ recipe_method }}</span>
+                                    {% endfor %}
+                                </div>    
+                            </li>
+                            {% endif %}
+                            {% if recipe.closing_line|length > 0 %}
+                            <h6 class="center-align">{{ recipe.closing_line }}</h5>
+                            {% endif %}
+                        </ul>
                     </div>
                     <div class="card-action">
-                        {% if session.user %}
-                                <!-- only show to the user who created this {% if session.user|lower == recipe.created_by|lower %} -->
+                        {% if session.user|lower == recipe.created_by|lower %}
                             <!--ADD delete DEFENSIVE PROGRAMING USER MUST CONFIRM IF THEY WANT TO REALLY DELETE TASK-->
                             <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="btn-small amber accent-4">Done</a>
                             <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="btn-small amber accent-4">Edit</a>
@@ -58,7 +100,7 @@
         {% endfor %}
     </div>
 
-    <!--PENDING to connect pagination-->
+    <!--PENDING to make pagination-->
     <ul class="pagination center">
         <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
         <li class="active"><a href="#!">1</a></li>

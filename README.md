@@ -1,4 +1,4 @@
-# B A S E COOK - RECIPE MANAGER (Milestone Project 3) * to be updated
+# B a s e - F o o d - RECIPE MANAGER (Milestone Project 3) * to be updated
 
 Welcome to my Stream Two Project: Interactive Frontend Development - Code Institute!
 

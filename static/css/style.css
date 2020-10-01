@@ -38,6 +38,10 @@ text-shadow {
     margin-bottom: 0px;
 }
 
+.shadow {
+    background-color: rgb(202 149 149 / 39%)
+}
+    
 .sepia {
     display: block;
     margin: auto;
