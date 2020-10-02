@@ -2,10 +2,52 @@ text-shadow {
     text-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
+
+
+.same-size {
+    object-fit: contain;
+    height:100%;
+    align-items: center;
+}
+
+#margin {
+    margin-bottom: 0px;
+}
+
+
+/* #custom {
+    display: block;
+    margin: auto;
+    height: 20vh;
+    align-items: center;
+    -webkit-filter: sepia(30) hue-rotate(100deg);
+        filter:sepia(30) hue-rotate(100deg);
+} */
+
+.btn-small {
+    margin: 5px;
+}
+
+#bullet #bullet2  {
+  list-style-type: circle;!
+}
+
+/*base.html*/
 .flashes h4 {
     line-height: 2;
 }
 
+.social-icon {
+    margin: 10px;
+    color: white;
+    font-size: 1.7rem;
+}
+
+.social-icon:hover {
+    color: black;
+}
+
+/*home.html*/
 .bg-header {
     background-image: url("../images/cookbook_background.jpg");
     background-position: 50% 30%; 
@@ -28,16 +70,6 @@ text-shadow {
     height: 25vh;
 }
 
-.same-size {
-    object-fit: contain;
-    height:100%;
-    align-items: center;
-}
-
-#margin {
-    margin-bottom: 0px;
-}
-
 .shadow {
     background-color: rgb(202 149 149 / 39%)
 }
@@ -52,29 +84,7 @@ text-shadow {
         filter:sepia(30) hue-rotate(100deg);
 }
 
-/* #custom {
-    display: block;
-    margin: auto;
-    height: 20vh;
-    align-items: center;
-    -webkit-filter: sepia(30) hue-rotate(100deg);
-        filter:sepia(30) hue-rotate(100deg);
-} */
-
-.btn-small {
-    margin: 5px;
-}
-
-#bullet #bullet2  {
-  list-style-type: circle;!
-}
-
-.social-icon {
-    margin: 10px;
-    color: white;
-    font-size: 1.7rem;
-}
-
-.social-icon:hover {
-    color: black;
+/*recipes.html*/
+.fit-size {
+    max-height: 100vh;
 }
