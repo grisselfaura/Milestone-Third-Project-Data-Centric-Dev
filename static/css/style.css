@@ -2,8 +2,6 @@ text-shadow {
     text-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
-
-
 .same-size {
     object-fit: contain;
     height:100%;
@@ -47,6 +45,18 @@ text-shadow {
     color: black;
 }
 
+/*sticky footer*/
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+        flex: 1 0 auto;
+  }
+    
+
 /*home.html*/
 .bg-header {
     background-image: url("../images/cookbook_background.jpg");
@@ -86,5 +96,19 @@ text-shadow {
 
 /*recipes.html*/
 .fit-size {
-    max-height: 100vh;
+    height: 100vh;
+} 
+
+.card .card-image {
+    height: 800px;
 }
+
+.card .card-content {
+    height: 150px;
+}
+
+/*view_recipes.html*/
+.padding {
+    padding: 1px!important;
+}
+

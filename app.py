@@ -13,11 +13,13 @@ if os.path.exists("env.py"):
 # Declaring app name
 app = Flask(__name__)
 
-# Config environmental variables
+# Config environmental variables saved on the env.py
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
+# secret key needed to create session cookies
 app.secret_key = os.environ.get("SECRET_KEY")
 
+# Creating an instance of Mongo
 mongo = PyMongo(app)
 
 
@@ -33,7 +35,15 @@ def home():
 @app.route("/get_recipes")
 def get_recipes():
     recipes = list(mongo.db.recipes.find())
+    #recipes = list(mongo.db.recipes.find({category_name: 1})) CHECK HOW TO CONNECT THIS TO FILTER
     return render_template("recipes.html", recipes=recipes)
+
+
+# Page to view one recipes
+@app.route("/view_recipe/<recipe_id>")
+def view_recipe(recipe_id):
+    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    return render_template("view_recipe.html", recipe=recipe)
 
 
 # Search

@@ -3,8 +3,8 @@
     
 
     <h3 class="center-align light-blue-text">All Recipes</h3>
-    <!--change this to card with images and the info below collapsible-->
     
+    <!--SEARCH -->
 	<section class="container">
 		<div class="row card-panel">
 			<form action="{{ url_for('search') }}" method="POST" class="col s12">
@@ -13,6 +13,7 @@
 						<input type="text" name="query" id="query" minlength="3" class= "validate" required>
                         <label for="query"> Find a recipe !</label>
 	                </div>
+                    <!--PENDING TO ADD FILTERS FOR CATEGORY AND INGREDIENTS -->
 	                <div class="col s12 m4">
 	                    <a href="{{ url_for('get_recipes') }}" class="red btn text-shadow">Reset</a>
 	                    <button type="submit" class="light-blue darken-1 btn text-shadow">
@@ -24,9 +25,9 @@
 	    </div> 
 	</section>
 
-    <!--OPTION1 -->
     <!--PENDING only to share recipes that are allowed to be shared (check toggle) -->
     <div class="row"> 
+    <!--IF share_recipes ON (check toggle) -->
         {% for recipe in recipes %}
             <div class="col s12 m6 l4">
                 <div class="card">
@@ -34,7 +35,8 @@
                         <img class="activator responsive-img fit-size" src="{{ recipe.recipe_images }}">
                     </div>
                     <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">{{ recipe.recipe_name }}<i class="material-icons right">more_vert</i></span>
+                        <span class="card-title activator grey-text text-darken-4"><a href="{{ url_for('view_recipe',recipe_id=recipe._id) }}">{{ recipe.recipe_name }}</a>
+                        <i class="material-icons right">more_vert</i></span>
                         <p><a href="#">{{ recipe.category_name }}</a></p> <!--PENDING to hook to the corresponding category search) -->
                         <p class="right-align"><em> by : {{ recipe.created_by }} </em></p> 
                     </div>
@@ -51,33 +53,6 @@
         {% endfor %}
     </div>
     
-    <!--OPTION2 -->
-    <!--PENDING only to share recipes that are allowed to be shared (check toggle) -->
-    <div class="row"> 
-        {% for recipe in recipes %}
-            <div class="col s12 m6  l4">
-                <div class="card horizontal large">
-                    <div class="card-image">
-                        <img class="responsive-img" src="{{ recipe.recipe_images }}">
-                    </div>
-                    <div class="card-stacked">
-                        <div class="card-content">
-                            <span class="card-title grey-text text-darken-4"><strong>{{ recipe.recipe_name }}</strong></span>
-                            <p><a href="#">{{ recipe.category_name }}</a></p> <!--PENDING to hook to the corresponding category search) -->
-                            <br>
-                            {% if recipe.recipe_description|length > 0 %} 
-                                <p class="light">{{ recipe.recipe_description }}</p>
-                            {% endif %}
-                        </div>
-                        <div class="card-action">
-                            <p class="right-align"><em> by:{{ recipe.created_by }} </em></p>
-                        </div>
-                    </div>
-                </div>
-            </div>   
-        {% endfor %}
-    </div>
-
     <!--PENDING to connect pagination-->
     <ul class="pagination center">
         <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
