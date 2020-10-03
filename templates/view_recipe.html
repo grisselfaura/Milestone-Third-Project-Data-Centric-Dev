@@ -33,11 +33,19 @@
 					</div>
                     <div class="card-action">
                     {% if session["user"]|lower == recipe.created_by|lower %}
-                        <!--ADD delete DEFENSIVE PROGRAMING USER MUST CONFIRM IF THEY WANT TO REALLY DELETE TASK-->
-                        <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="btn-small amber accent-4">DELETE</a>
-                        <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="btn-small amber accent-4">EDITt</a>
+                        <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }} " class="btn-small amber accent-4">EDIT</a>
+                        <!--Defensive Programming for User to reconfirm DELETE action (Similar approach from other students and materialize)-->
+                        <a href="#delete_recipe" class="btn-small amber accent-4 modal-trigger">DELETE</a>
+                        <div id="delete_recipe" class="modal">
+                            <div class="modal-content center-align">
+                                <h5>Do you want to delete this recipe?</h5>
+                                <br>
+                                <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="btn btn-small red modal-close">Delete</a>
+                                <a href="#" class="btn btn-small black modal-close">Cancel</a>
+                            </div>
+                        </div>
                     {% else %}
-                        <a class="btn grey darken-2 tooltipped" data-position="bottom" data-tooltip="Is this you recipe?">EDIT</a>
+                        <a class="btn-small grey darken-2 tooltipped" data-position="bottom" data-tooltip="Is this you recipe?">EDIT</a>
                         <a class="btn grey darken-2 tooltipped" data-position="bottom" data-tooltip="Is this you recipe?">DELETE</a>
                     {% endif %}
                     </div>

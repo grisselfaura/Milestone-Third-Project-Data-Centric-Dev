@@ -4,6 +4,7 @@ $(document).ready(function(){
     $(".carousel").carousel();
     $("select").formSelect();
     $(".tooltipped").tooltip();
+    $(".modal").modal();
     $("input#input_text, textarea#textarea2, textarea#recipe_description, textarea#basic_ingredients, textarea#complementary_ingredients, textarea#category_method"
 ).characterCounter();
     
