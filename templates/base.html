@@ -26,11 +26,10 @@
             <a href="{{ url_for('home') }}" class="brand-logo black-text"><img class="hide-on-med-and-down" src="{{ url_for('static', filename='images/logo_nav.png') }}"></a> 
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="{{ url_for('home') }}" class="grey-text text-darken-4">HOME</a></li>
-                <li><a href="{{ url_for('get_recipes') }}" class="grey-text text-darken-4">RECIPES</a></li>
-                <li><a href=".html" class="grey-text text-darken-4">Recipe Search</a></li>
-                <li><a href=".html" class="grey-text text-darken-4">Ingredients index</a></li>
+                <!-- <li><a href=".html" class="grey-text text-darken-4">Recipe Search</a></li>
+                <li><a href=".html" class="grey-text text-darken-4">Ingredients index</a></li> -->
                 {% if session.user %}
+                    <li><a href="{{ url_for('home') }}" class="grey-text text-darken-4">HOME</a></li>
                     <li><a href="{{ url_for('myrecipes', username=session['user']) }}" class="grey-text text-darken-4">MyRecipes</a></li>
                     <li><a href="{{ url_for('add_recipe') }}" class="grey-text text-darken-4">Add a recipe</a></li>
                     {% if session.user|lower == "admin"|lower %}
@@ -39,6 +38,8 @@
                     {% endif %}
                     <li><a href="{{ url_for('sign_out') }}" class="grey-text  text-darken-4">Sign Out!</a></li>
                 {% else %}
+                    <li><a href="{{ url_for('home') }}" class="grey-text text-darken-4">HOME</a></li>
+                    <li><a href="{{ url_for('get_recipes') }}" class="grey-text text-darken-4">RECIPES</a></li>
                     <li><a href="{{ url_for('sign_in') }}" class="grey-text  text-darken-4">Sign In!</a></li>
                     <li><a href="{{ url_for('join_free') }}" class="grey-text  text-darken-4">Join Free</a></li>
                 {% endif %}
@@ -49,11 +50,10 @@
         <!-- Mobile Sidenavbar-->
         <ul class="sidenav" id="mobile-demo">
             <img class="responsive-img" src="{{ url_for('static', filename='images/logo_nav.png') }}" alt="logo-image">
-                <li><a href="{{ url_for('home') }}" class="grey-text text-darken-4"><i class="material-icons">home</i>Home</a></li>
-                <li><a href="{{ url_for('get_recipes') }}" class="grey-text text-darken-4"><i class="material-icons">search</i>Recipes</a></li>
-                <li><a href=".html" class="grey-text text-darken-4">Recipe Search</a></li>
-                <li><a href=".html" class="grey-text text-darken-4">Ingredients index</a></li>
+                <!-- <li><a href=".html" class="grey-text text-darken-4">Recipe Search</a></li>
+                <li><a href=".html" class="grey-text text-darken-4">Ingredients index</a></li> -->
                 {% if session.user %}
+                    <li><a href="{{ url_for('home') }}" class="grey-text text-darken-4"><i class="material-icons">home</i>Home</a></li>
                     <li><a href="{{ url_for('myrecipes', username=session['user']) }}" class="grey-text text-darken-4"><i class="material-icons">person</i>MyRecipes</a></li>
                     <li><a href="{{ url_for('add_recipe') }}" class="grey-text text-darken-4"><i class="material-icons">add_circle</i>Add a recipe</a></li>
                     {% if session.user|lower == "admin"|lower %}
@@ -62,6 +62,8 @@
                     {% endif %}
                     <li><a href="{{ url_for('sign_out') }}" class="grey-text text-darken-4"><i class="material-icons">person_outline</i>Sign Out!</a></li>
                 {% else %}
+                    <li><a href="{{ url_for('home') }}" class="grey-text text-darken-4"><i class="material-icons">home</i>Home</a></li>
+                    <li><a href="{{ url_for('get_recipes') }}" class="grey-text text-darken-4"><i class="material-icons">search</i>Recipes</a></li>
                     <li><a href="{{ url_for('sign_in') }}" class="grey-text text-darken-4"><i class="material-icons">person_pin</i>Sign In!</a></li>
                     <li><a href="{{ url_for('join_free') }}" class="grey-text text-darken-4"><i class="material-icons">person_add</i>Join Free</a></li>
                 {% endif %}

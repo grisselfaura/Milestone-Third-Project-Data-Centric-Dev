@@ -12,7 +12,6 @@
     </section>
 
     <!--Materialize Carrousel to display categories (LINKS TO EACH CATEGORY PENDING TO DEVELOP)-->
-    {% if not session.user %}
     <section>
         <h3 class="center-align light-blue-text">Categories</h3>
         <div class="carousel">
@@ -24,10 +23,8 @@
             <a class="carousel-item" href="#dinner!"><img src="https://i.postimg.cc/FY1x50nY/dinner.png"></a>
         </div>
     </section>
-    {% endif %}
 
     <!--Why vegan-->
-    {% if not session.user %}
     <section class= "blue-grey lighten-5"> 
         <div class="container">
             <div class="section">
@@ -74,7 +71,6 @@
         </div>
         <br><br>
     </section>
-    {% endif %}
 
 
 {% endblock %}
