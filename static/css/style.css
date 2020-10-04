@@ -112,3 +112,7 @@ main {
     padding: 1px!important;
 }
 
+/*categories.html*/
+.reduce-size {
+    height: 70px;
+}
