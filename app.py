@@ -46,11 +46,15 @@ def view_recipe(recipe_id):
     return render_template("view_recipe.html", recipe=recipe)
 
 
-# Search
+# Search functionality in the recipe page
 @app.route("/search", methods=["GET", "POST"])
 def search():
     query = request.form.get("query")
     recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
+    # Message for no search missing
+    if len(recipes) == 0:
+        flash("0 matches for \"{}\"".format(
+            request.form.get("query")))
     return render_template("recipes.html", recipes=recipes)
 
 
