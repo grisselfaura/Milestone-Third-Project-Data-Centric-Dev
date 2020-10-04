@@ -93,31 +93,21 @@
                             <i class="far fa-thumbs-up prefix light-blue-text"></i>
                             <label for="share_recipe">
                                 {% if recipe.share_recipe == "on" %}
-                                <input type="checkbox" id="share_recipe" name="share_recipe" checked>
+                                    <input type="checkbox" id="share_recipe" name="share_recipe" checked>
                                 {% else %}
-                                <input type="checkbox" id="share_recipe" name="share_recipe">
+                                    <input type="checkbox" id="share_recipe" name="share_recipe">
                                 {% endif %}
                                 <span class="lever"></span>
                                 Would you like to share this recipe with others?
                             </label>
                         </div>
                     </div>
-                    <!-- Added image-->
-                    <div class="file-field input-field col s6">
-                        <div class="btn-floating light-blue">
-                            <i class="fas fa-camera right"></i>
-                            <span>Upload image</span>
-                            <input type="file">
-                        </div>
-                        <div class="file-path-wrapper">
-                            <!-- YINYA TEMPLATE NEEDS ATTENTION-->
-                            {% if recipe.recipe_images == recipe.recipe_images %}
-                            <input class="file-path validate" type="text" value="{{ recipe.recipe_images }}" selected>
-                            {% else %}
-                            <input class="file-path validate" type="text" value="{{ recipe.recipe_images }}">
-                            {% endif %}
-                            <label for="">Upload image</label>    
-                        </div>
+                     <!-- Added image url-->
+                    <div class="input-field col s6">
+                        <i class="fas fa-camera material-icons prefix left light-blue-text"></i>
+                        <input id="recipe_images" name="recipe_images" class="validate" type="url" minlength="15" 
+                            value="{{ recipe.recipe_images }}" pattern="https?://.+" >
+                        <label for="recipe_images">Image Url</label>
                     </div>
                 </div>
                 <!-- submit button -->

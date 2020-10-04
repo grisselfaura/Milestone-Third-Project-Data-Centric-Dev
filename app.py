@@ -160,7 +160,7 @@ def add_recipe():
             "recipe_method": request.form.get("recipe_method"),
             "recipe_images": request.form.get("recipe_images"),
             "closing_line": request.form.get("closing_line"),
-            "share_recipe": "share_recipe",
+            "share_recipe": share_recipe,
             "created_by": session["user"]
         }
         mongo.db.recipes.insert_one(recipe)
@@ -185,7 +185,7 @@ def edit_recipe(recipe_id):
             "recipe_method": request.form.get("recipe_method"),
             "recipe_images": request.form.get("recipe_images"),
             "closing_line": request.form.get("closing_line"),
-            "share_recipe": "share_recipe",
+            "share_recipe": share_recipe,
             "created_by": session["user"]
         }
         mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
