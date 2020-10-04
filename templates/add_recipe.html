@@ -84,17 +84,12 @@
                             </label>
                         </div>
                     </div>
-                    <!-- Add image-->
-                    <div class="file-field input-field col s6">
-                        <div class="btn-floating light-blue">
-                            <i class="fas fa-camera right"></i>
-                            <span>Upload image</span>
-                            <input type="file">
-                        </div>
-                        <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text">
-                            <label for="">Upload image</label>    
-                        </div>
+                    <!-- Add image url-->
+                    <div class="input-field col s6">
+                        <i class="fas fa-camera material-icons prefix left light-blue-text"></i>
+                        <input id="recipe_images" name="recipe_images" class="validate" type="url" minlength="15" 
+                            value="{{ recipe_images }}" pattern="https?://.+">
+                        <label for="recipe_images">Image Url</label>
                     </div>
                 </div>
                 <!-- submit button -->
