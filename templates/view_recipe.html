@@ -1,24 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-    
-	<!-- <div class="">
-		<div class="row center">-->
-            <!-- Recipe name -->
-			<!-- <h3 class="tittle left-align">{{ recipe.recipe_name }}</h3>
-            {% if recipe.recipe_description|length > 0 %} 
-                <p class="light flow-text">{{ recipe.recipe_description }}</p>
-            {% endif %}
-            <div class="card-panel amber accent-3 padding">
-                <p style="text-transform:uppercase;"><a href="#">{{ recipe.category_name }}</a></p>--> <!--PENDING to hook to the corresponding category search) -->
-			<!--</div>
-        </div> -->
         
+
         <!-- Recipe container (template from Cookbook and Jamie Oliver)-->
         <div class="container recipe-container">
+        <br>
             <div class="row center">
                 <!-- Recipe name -->
                 <div class="single-recipe col-xs-12">
                     <h3 class="tittle left-align">{{ recipe.recipe_name }}</h3>
+                    <!-- Recipe description -->
                     {% if recipe.recipe_description|length > 0 %} 
                         <p class="subheading light flow-text">{{ recipe.recipe_description }}</p>
                     {% endif %}
@@ -29,24 +20,63 @@
                         <p><a href="#">{{ recipe.category_name }}</a></p> <!--PENDING to hook to the corresponding category search) -->
                     </div>
 				</div>
-			<!-- styling pending to fix image and css -->					
-            <div class="row recipe-header">
-                <div class="col-xs-12 col-lg-9">
-                    <div class="row top-section">
-                        <div class="col-lg-5 col-md-5 col-sm-6 col-sm-ls-7 recipe-header-left">
-                            <div class="hero-wrapper">
-                                <img sizes="(min-width: 1200px) 400px, (min-width: 780px) 335px, (min-width: 480px) 48vw, 95vw" src="https://img.jamieoliver.com/jamieoliver/recipe-database/92507777.jpg?tr=w-800,h-1066" alt="Double corn salad">                                                            
-                            </div>
-
+            </div>
+			<div class="row recipe-summary">
+                <!-- Recipe image -->
+                <div class="col s12 m6">
+                    <img class="responsive-img"  
+                        src="{{ recipe.recipe_images }}" alt="Recipe Images">       
+                </div>
+                <!-- Recipe Details -->
+                <div class="col s12 m6">
+                    <div class="row left-align">
+                        <p class="subheading light flow-text"><i class="fas fa-clock icon-color"></i>
+                            Cooks In : {{ recipe.recipe_time }}
+                        </p>                                                  
+                    </div>
+                    <div class="row left-align">
+                        <p class="subheading light flow-text"> <i class="fas fa-layer-group"></i>
+                            Difficulty : {{ recipe.recipe_difficulty }}</p>
+                    </div>
+                    <div class="row left-align">
+                        <p class="subheading light flow-text"> <i class="fas fa-at"></i>
+                            Recipe by : <b><em> {{ recipe.created_by }} </em></b></p>
+                    </div>
+                </div>
+                <!-- Recipe edit/delete with materialize modal -->
+                <div class="row center">
+                    {% if session["user"]|lower == recipe.created_by|lower %}
+                    <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }} " class="btn-small amber accent-4">EDIT</a>
+                    <!--Defensive Programming for User to reconfirm DELETE action (Similar approach from other students and materialize)-->
+                    <a href="#delete_recipe-{{recipe._id}}" class="btn-small amber accent-4 modal-trigger"
+                        data-target="delete_recipe-{{recipe._id}}">DELETE</a>
+                    <div id="delete_recipe-{{recipe._id}}" class="modal">
+                        <div class="modal-content center-align">
+                            <h5>Do you want to delete this recipe?</h5>
+                            <br>
+                            <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}"
+                                class="btn btn-small red modal-close">Delete</a>
+                            <a href="#" class="btn btn-small black modal-close">Cancel</a>
+                        </div>
+                    </div>
+                    {% else %}
+                    <a class="btn-small grey darken-2 tooltipped" data-position="bottom" 
+                        data-tooltip="Is this you recipe?">EDIT</a>
+                    <a class="btn grey darken-2 tooltipped" data-position="bottom" 
+                        data-tooltip="Is this you recipe?">DELETE</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
 		
-        <div class="card horizontal">
+        <!-- <div class="card horizontal"> -->
 				<!-- Recipe image -->
-				<div class="card-image">
+				<!-- <div class="card-image">
 					<img class="responsive-img" src="{{ recipe.recipe_images }}">
 							</div>
-					<div class="card-stacked">
+					<div class="card-stacked"> -->
 						<!-- Recipe details -->
-						<div class="card-content">
+						<!-- <div class="card-content">
 							<div class="row left-align">
 								<p style="text-transform:uppercase;"><i class="fas fa-clock icon-color"></i>
 									Cooks In : {{ recipe.recipe_time }}</p>
@@ -57,18 +87,15 @@
 							</div>
 							<div class="row left-align">
 								<p style="text-transform:uppercase;"> <i class="fas fa-at"></i>
-									<em> by:{{ recipe.created_by }} </em></p>
+									Recipe by : <b><em> {{ recipe.created_by }} </em></b></p>
 							</div>
-						</div>
-						<div class="card-action">
-							<p class="right-align"></p>
-						</div>
+						</div> -->
 						<!-- Recipe edit/delete with materialize modal -->
-						<div class="card-action">
+						<!-- <div class="card-action">
 							{% if session["user"]|lower == recipe.created_by|lower %}
-							<a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }} " class="btn-small amber accent-4">EDIT</a>
+							<a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }} " class="btn-small amber accent-4">EDIT</a> -->
 							<!--Defensive Programming for User to reconfirm DELETE action (Similar approach from other students and materialize)-->
-							<a href="#delete_recipe-{{recipe._id}}" class="btn-small amber accent-4 modal-trigger"
+							<!-- <a href="#delete_recipe-{{recipe._id}}" class="btn-small amber accent-4 modal-trigger"
 								data-target="delete_recipe-{{recipe._id}}">DELETE</a>
 							<div id="delete_recipe-{{recipe._id}}" class="modal">
 								<div class="modal-content center-align">
@@ -87,7 +114,7 @@
 							{% endif %}
 						</div>
 					</div>
-		</div>
+		</div> -->
             
         <!-- Template from Cookbook and Jamie Oliver -->
         <div class="row">
