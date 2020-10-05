@@ -126,12 +126,40 @@ main {
 }
 
 /*view_recipes.html*/
-.padding {
-    padding: 1px !important;
+.single-recipe {
+    border-bottom: 1px solid #c5b9a0;
+    margin-bottom: 15px;
 }
 
-ol ul {
-  list-style-type: circle !important;
+.subheading {
+    color: #a3865b;
+    font-family: 'Open Sans Condensed', sans-serif;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.category-tittle {
+    font-weight: 700;
+    padding: 1px !important;
+    text-transform:uppercase;
+}
+
+.ingredients-bullets ul:not(.browser-default)>li {
+  list-style-type: circle;
+  margin-left: 10px;
+}
+
+.instructions {
+  background-color: #ffffff;
+  padding: 20px 30px 20px 30px;
+  box-shadow: 2px 2px 5px #777777;
+  margin-bottom: 25px;
+}
+
+.instructions ul:not(.browser-default)>li {
+  list-style-type: circle;
+  margin-left: 10px;
 }
 
 /*categories.html*/

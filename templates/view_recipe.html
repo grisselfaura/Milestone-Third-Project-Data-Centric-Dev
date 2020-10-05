@@ -1,19 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
     
-	<div class="">
-		<div class="row center">
+	<!-- <div class="">
+		<div class="row center">-->
             <!-- Recipe name -->
-			<h3 class="tittle left-align">{{ recipe.recipe_name }}</h3>
+			<!-- <h3 class="tittle left-align">{{ recipe.recipe_name }}</h3>
             {% if recipe.recipe_description|length > 0 %} 
                 <p class="light flow-text">{{ recipe.recipe_description }}</p>
             {% endif %}
             <div class="card-panel amber accent-3 padding">
-                <p style="text-transform:uppercase;"><a href="#">{{ recipe.category_name }}</a></p> <!--PENDING to hook to the corresponding category search) -->
-			</div>
-        </div>
+                <p style="text-transform:uppercase;"><a href="#">{{ recipe.category_name }}</a></p>--> <!--PENDING to hook to the corresponding category search) -->
+			<!--</div>
+        </div> -->
+        
+        <!-- Recipe container (template from Cookbook and Jamie Oliver)-->
+        <div class="container recipe-container">
+            <div class="row center">
+                <!-- Recipe name -->
+                <div class="single-recipe col-xs-12">
+                    <h3 class="tittle left-align">{{ recipe.recipe_name }}</h3>
+                    {% if recipe.recipe_description|length > 0 %} 
+                        <p class="subheading light flow-text">{{ recipe.recipe_description }}</p>
+                    {% endif %}
+				</div>
+				<!-- Recipe category -->		
+				<div class="float-wrapper">
+                    <div class="card-panel yellow accent-4 category-tittle">
+                        <p><a href="#">{{ recipe.category_name }}</a></p> <!--PENDING to hook to the corresponding category search) -->
+                    </div>
+				</div>
+			<!-- styling pending to fix image and css -->					
+            <div class="row recipe-header">
+                <div class="col-xs-12 col-lg-9">
+                    <div class="row top-section">
+                        <div class="col-lg-5 col-md-5 col-sm-6 col-sm-ls-7 recipe-header-left">
+                            <div class="hero-wrapper">
+                                <img sizes="(min-width: 1200px) 400px, (min-width: 780px) 335px, (min-width: 480px) 48vw, 95vw" src="https://img.jamieoliver.com/jamieoliver/recipe-database/92507777.jpg?tr=w-800,h-1066" alt="Double corn salad">                                                            
+                            </div>
 
-		<div class="card horizontal">
+		
+        <div class="card horizontal">
 				<!-- Recipe image -->
 				<div class="card-image">
 					<img class="responsive-img" src="{{ recipe.recipe_images }}">
@@ -68,7 +94,7 @@
             <div class="col s12 m3">
                 <div class="row">
                     <!-- Ingredient -->
-                    <div class="col s12 ingredients">
+                    <div class="col s12 ingredients-bullets">
                             <h5 class="tittle left-align">Ingredients</h5>
                             <ul>
                                 {% for basic_ingredient in recipe.basic_ingredients %}
@@ -80,7 +106,7 @@
                     </div>
                     <!-- Complement with :  -->
                     {% if recipe.complementary_ingredients|length > 0 %} 
-                    <div class="col s12 ingredients">
+                    <div class="col s12 ingredients-bullets">
                             <h5 class="tittle left-align">Completement this with : </h5>
                             <ul>
                                 {% for complementary_ingredient in recipe.complementary_ingredients %}
@@ -93,19 +119,17 @@
                     {% endif %}
                 </div>
             </div>
+            <!-- Method -->
             <div class="col s12 offset-m1 m8 instructions">
                 <div class="row">
-                    <!-- Method -->
                     <div class="col s12">
                         <h5  class="tittle center-align">Instructions</h5>
-                        <ol>
                         <!-- PENDING THE JAVASCRIPT TO ADD INFO TO THE FORM  + bullet  not working-->
-                            {% for recipe_method in recipe.recipe_method %}
-                                <ul id="bullet" class= "method-font flow-text">  <!-- + bullet  not working-->
-                                    Step {{ loop.index }} {{ recipe_method.value }} <!-- key value not showing-->
-                                </ul>
-                            {% endfor %}
-                        </ol>
+                        {% for recipe_method in recipe.recipe_method %}
+                            <li class= "method-font flow-text">  
+                                Step {{ loop.index }} {{ recipe_method.value }} <!-- key value not showing-->
+                            </li>
+                        {% endfor %}
                     </div>
                     <!-- Method2 -->
                     {% if recipe.recipe_method2|length > 0 %} 
