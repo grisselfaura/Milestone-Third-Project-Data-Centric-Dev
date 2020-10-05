@@ -190,11 +190,11 @@ def edit_recipe(recipe_id):
         }
         mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
         flash("Recipe Successfully Updated")
+        return redirect(url_for("view_recipe", recipe_id=recipe_id))
 
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     categories = mongo.db.categories.find().sort("category_name", 1)
     return render_template("edit_recipe.html", recipe=recipe, categories=categories)
-
 
 # DELETE
 @app.route("/delete_recipe/<recipe_id>")
@@ -239,8 +239,6 @@ def edit_category(category_id):
     return render_template("edit_category.html", category=category)
 
 
-
-# add defensive programming so the user can confirm deletion
 @app.route("/delete_category/<category_id>")
 def delete_category(category_id):        
     mongo.db.categories.remove({"_id": ObjectId(category_id)})

@@ -3,55 +3,133 @@
     
 	<div class="">
 		<div class="row center">
-			<h3 class="">{{ recipe.recipe_name }}</h3>
+            <!-- Recipe name -->
+			<h3 class="tittle left-align">{{ recipe.recipe_name }}</h3>
             {% if recipe.recipe_description|length > 0 %} 
                 <p class="light flow-text">{{ recipe.recipe_description }}</p>
             {% endif %}
             <div class="card-panel amber accent-3 padding">
                 <p style="text-transform:uppercase;"><a href="#">{{ recipe.category_name }}</a></p> <!--PENDING to hook to the corresponding category search) -->
 			</div>
-			<div class="card horizontal">
+        </div>
+
+		<div class="card horizontal">
+				<!-- Recipe image -->
 				<div class="card-image">
 					<img class="responsive-img" src="{{ recipe.recipe_images }}">
-				</div>
-				<div class="card-stacked">
-					<div class="card-content">
-						<div class="row left-align">
-							<p style="text-transform:uppercase;"><i class="fas fa-clock icon-color"></i> 
-                             Cooks In : {{ recipe.recipe_time }}</p>
-                        </div>
-						<div class="row left-align">
-							<p style="text-transform:uppercase;"> <i class="fas fa-layer-group"></i>
-                             Difficulty : {{ recipe.recipe_difficulty }}</p>
+							</div>
+					<div class="card-stacked">
+						<!-- Recipe details -->
+						<div class="card-content">
+							<div class="row left-align">
+								<p style="text-transform:uppercase;"><i class="fas fa-clock icon-color"></i>
+									Cooks In : {{ recipe.recipe_time }}</p>
+							</div>
+							<div class="row left-align">
+								<p style="text-transform:uppercase;"> <i class="fas fa-layer-group"></i>
+									Difficulty : {{ recipe.recipe_difficulty }}</p>
+							</div>
+							<div class="row left-align">
+								<p style="text-transform:uppercase;"> <i class="fas fa-at"></i>
+									<em> by:{{ recipe.created_by }} </em></p>
+							</div>
 						</div>
-                        <div class="row left-align">
-							<p style="text-transform:uppercase;"> <i class="fas fa-at"></i>
-                             <em> by:{{ recipe.created_by }} </em></p>
+						<div class="card-action">
+							<p class="right-align"></p>
 						</div>
-					<div class="card-action">
-						<p class="right-align"></p>
+						<!-- Recipe edit/delete with materialize modal -->
+						<div class="card-action">
+							{% if session["user"]|lower == recipe.created_by|lower %}
+							<a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }} " class="btn-small amber accent-4">EDIT</a>
+							<!--Defensive Programming for User to reconfirm DELETE action (Similar approach from other students and materialize)-->
+							<a href="#delete_recipe-{{recipe._id}}" class="btn-small amber accent-4 modal-trigger"
+								data-target="delete_recipe-{{recipe._id}}">DELETE</a>
+							<div id="delete_recipe-{{recipe._id}}" class="modal">
+								<div class="modal-content center-align">
+									<h5>Do you want to delete this recipe?</h5>
+									<br>
+									<a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}"
+										class="btn btn-small red modal-close">Delete</a>
+									<a href="#" class="btn btn-small black modal-close">Cancel</a>
+								</div>
+							</div>
+							{% else %}
+							<a class="btn-small grey darken-2 tooltipped" data-position="bottom"
+								data-tooltip="Is this you recipe?">EDIT</a>
+							<a class="btn grey darken-2 tooltipped" data-position="bottom"
+								data-tooltip="Is this you recipe?">DELETE</a>
+							{% endif %}
+						</div>
 					</div>
-                    <div class="card-action">
-                    {% if session["user"]|lower == recipe.created_by|lower %}
-                        <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }} " class="btn-small amber accent-4">EDIT</a>
-                        <!--Defensive Programming for User to reconfirm DELETE action (Similar approach from other students and materialize)-->
-                        <a href="#delete_recipe-{{recipe._id}}" class="btn-small amber accent-4 modal-trigger" data-target="delete_recipe-{{recipe._id}}">DELETE</a>
-                        <div id="delete_recipe-{{recipe._id}}" class="modal">
-                            <div class="modal-content center-align">
-                                <h5>Do you want to delete this recipe?</h5>
-                                <br>
-                                <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="btn btn-small red modal-close">Delete</a>
-                                <a href="#" class="btn btn-small black modal-close">Cancel</a>
-                            </div>
-                        </div>
-                    {% else %}
-                        <a class="btn-small grey darken-2 tooltipped" data-position="bottom" data-tooltip="Is this you recipe?">EDIT</a>
-                        <a class="btn grey darken-2 tooltipped" data-position="bottom" data-tooltip="Is this you recipe?">DELETE</a>
-                    {% endif %}
-                    </div>
-				</div>
-			</div>
 		</div>
+            
+        <!-- Template from COokbook -->
+        <div class="row">
+            <div class="col s12 m3">
+                <div class="row">
+                    <!-- Ingredient -->
+                    <div class="col s12 ingredients">
+                            <h5 class="tittle left-align">Ingredients</h5>
+                            <ul>
+                                {% for basic_ingredient in recipe.basic_ingredients %}
+                                    <li>
+                                        {{ basic_ingredient }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                    </div>
+                    <!-- Complement with :  -->
+                    {% if recipe.complementary_ingredients|length > 0 %} 
+                    <div class="col s12 ingredients">
+                            <h5 class="tittle left-align">Completement this with : </h5>
+                            <ul>
+                                {% for complementary_ingredient in recipe.complementary_ingredients %}
+                                    <li>
+                                        {{ complementary_ingredient }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col s12 offset-m1 m8 instructions">
+                <div class="row">
+                    <!-- Method -->
+                    <div class="col s12">
+                        <h5  class="tittle center-align">Instructions</h5>
+                        <ol>
+                        <!-- PENDING THE JAVASCRIPT TO ADD INFO TO THE FORM  + bullet  not working-->
+                            {% for recipe_method in recipe.recipe_method %}
+                                <ul id="bullet">  <!-- + bullet  not working-->
+                                    Step {{ loop.index }} {{ recipe_method.value }} <!-- key value not showing-->
+                                </ul>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                    <!-- Method2 -->
+                    {% if recipe.recipe_method2|length > 0 %} 
+                    <div class="col s12">
+                        <h5  class="tittle center-align">Instructions</h5>
+                        <ol>
+                        <!-- PENDING THE JAVASCRIPT TO ADD INFO TO THE FORM  + bullet  not working-->
+                            {% for recipe_method in recipe.recipe_method2 %}
+                                <ul id="bullet">  <!-- + bullet  not working-->
+                                    Step {{ loop.index }} {{ recipe_method.value }} <!-- key value not showing-->
+                                </ul>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+        {% if recipe.closing_line|length > 0 %} 
+            <h6 class="center-align">{{ recipe.closing_line }}</h5>
+        {% endif %}
+        </div>
     </div>
 
 {% endblock %}

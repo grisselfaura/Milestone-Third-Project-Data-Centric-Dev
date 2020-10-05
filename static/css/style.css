@@ -1,4 +1,4 @@
-text-shadow {
+.text-shadow {
     text-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
@@ -26,9 +26,7 @@ text-shadow {
     margin: 5px;
 }
 
-#bullet #bullet2  {
-  list-style-type: circle;!
-}
+
 
 /*base.html*/
 .flashes h4 {
@@ -109,7 +107,16 @@ main {
 
 /*view_recipes.html*/
 .padding {
-    padding: 1px!important;
+    padding: 1px !important;
+}
+
+.tittle {
+    font-family: "Fredericka the Great", cursive;
+    font-weight: 300;
+}
+
+ol ul {
+  list-style-type: circle !important;
 }
 
 /*categories.html*/
