@@ -63,7 +63,7 @@
 					</div>
 		</div>
             
-        <!-- Template from COokbook -->
+        <!-- Template from Cookbook and Jamie Oliver -->
         <div class="row">
             <div class="col s12 m3">
                 <div class="row">
@@ -72,7 +72,7 @@
                             <h5 class="tittle left-align">Ingredients</h5>
                             <ul>
                                 {% for basic_ingredient in recipe.basic_ingredients %}
-                                    <li>
+                                    <li class= "ingredient-font flow-text">
                                         {{ basic_ingredient }}
                                     </li>
                                 {% endfor %}
@@ -84,7 +84,7 @@
                             <h5 class="tittle left-align">Completement this with : </h5>
                             <ul>
                                 {% for complementary_ingredient in recipe.complementary_ingredients %}
-                                    <li>
+                                    <li class= "ingredient-font flow-text">
                                         {{ complementary_ingredient }}
                                     </li>
                                 {% endfor %}
@@ -101,7 +101,7 @@
                         <ol>
                         <!-- PENDING THE JAVASCRIPT TO ADD INFO TO THE FORM  + bullet  not working-->
                             {% for recipe_method in recipe.recipe_method %}
-                                <ul id="bullet">  <!-- + bullet  not working-->
+                                <ul id="bullet" class= "method-font flow-text">  <!-- + bullet  not working-->
                                     Step {{ loop.index }} {{ recipe_method.value }} <!-- key value not showing-->
                                 </ul>
                             {% endfor %}
@@ -114,7 +114,7 @@
                         <ol>
                         <!-- PENDING THE JAVASCRIPT TO ADD INFO TO THE FORM  + bullet  not working-->
                             {% for recipe_method in recipe.recipe_method2 %}
-                                <ul id="bullet">  <!-- + bullet  not working-->
+                                <ul id="bullet" class= "method-font">  <!-- + bullet  not working-->
                                     Step {{ loop.index }} {{ recipe_method.value }} <!-- key value not showing-->
                                 </ul>
                             {% endfor %}
@@ -127,7 +127,7 @@
 
         <div class="row">
         {% if recipe.closing_line|length > 0 %} 
-            <h6 class="center-align">{{ recipe.closing_line }}</h5>
+            <h5 class="close-font center-align">{{ recipe.closing_line }}</h5>
         {% endif %}
         </div>
     </div>

@@ -12,6 +12,26 @@
     margin-bottom: 0px;
 }
 
+/* Fonts recipe card*/
+.tittle {
+    font-family: "Fredericka the Great", cursive;
+    font-weight: 300;
+}
+
+.ingredient-font {
+    font-family: 'Caveat', cursive;
+    font-weight: 400;
+}
+
+.method-font {
+  font-family: 'Architects Daughter', cursive;   
+}
+
+.close-font {
+    font-family: "Indie Flower", cursive;
+    font-weight: 400;
+}
+
 
 /* #custom {
     display: block;
@@ -108,11 +128,6 @@ main {
 /*view_recipes.html*/
 .padding {
     padding: 1px !important;
-}
-
-.tittle {
-    font-family: "Fredericka the Great", cursive;
-    font-weight: 300;
 }
 
 ol ul {
