@@ -103,7 +103,7 @@ def join_free():
             {"username": request.form.get("username").lower()})
     
         if existing_user:
-            flash("Username already exists")
+            flash("Username already exists, please choose another name.")
             return redirect(url_for("join_free")) 
 
         # Checking confirmation password
@@ -191,6 +191,7 @@ def add_recipe():
             "category_name": request.form.get("category_name"),
             "recipe_name": request.form.get("recipe_name"),
             "recipe_description": request.form.get("recipe_description"),
+            "recipe_difficulty": request.form.get("recipe_difficulty"),
             "basic_ingredients": request.form.get("basic_ingredients").split(','),
             "complementary_ingredients": request.form.get("complementary_ingredients"),
             "recipe_method": request.form.get("recipe_method"),
@@ -204,7 +205,9 @@ def add_recipe():
         return redirect(url_for("get_recipes"))
 
     categories = mongo.db.categories.find().sort("category_name", 1)
-    return render_template("add_recipe.html", categories=categories)
+    difficulty = mongo.db.difficulty.find().sort("sort_difficult", 1)
+    return render_template("add_recipe.html", categories=categories, 
+                            difficulty=difficulty)
 
 
 # UPDATE
@@ -216,6 +219,7 @@ def edit_recipe(recipe_id):
             "category_name": request.form.get("category_name"),
             "recipe_name": request.form.get("recipe_name"),
             "recipe_description": request.form.get("recipe_description"),
+            "recipe_difficulty": request.form.get("recipe_difficulty"),
             "basic_ingredients": request.form.get("basic_ingredients").split(','),
             "complementary_ingredients": request.form.get("complementary_ingredients"),
             "recipe_method": request.form.get("recipe_method"),
@@ -230,7 +234,9 @@ def edit_recipe(recipe_id):
 
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     categories = mongo.db.categories.find().sort("category_name", 1)
-    return render_template("edit_recipe.html", recipe=recipe, categories=categories)
+    difficulty = mongo.db.difficulty.find().sort("sort_difficult", 1)
+    return render_template("edit_recipe.html", recipe=recipe, categories=categories, 
+                            difficulty=difficulty)
 
 # DELETE
 @app.route("/delete_recipe/<recipe_id>")
