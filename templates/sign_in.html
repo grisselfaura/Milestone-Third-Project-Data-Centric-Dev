@@ -1,43 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
-    
-    <h3 class="center-align amber-text text-accent-3">Sign In!!!</h3>
 
-    <div class="row">
-        <form class="col s12 m6 offset-m3" method="POST" action="{{ url_for('sign_in') }}">
-            <div class="card-panel">
-                <!-- username-->
-                <div class="row">
-                    <div class="card input-field col s8 offset-m2">
-                        <i class="fas fa-user-cog prefix amber-text text-accent-3"></i>
-                        <span class="brown-text text-lighten-4"></span>
-                        <input id="username" name="username" type="text" minlength="5"
-                            maxlenght="15" class="validate" required>
-                        <label for="username">Username</label>
-                    </div> 
-                </div>
-                <!-- password-->
-                <div class="row">
-                    <div class="card input-field col s8 offset-m2">
-                        <i class="fas fa-user-lock prefix amber-text text-accent-3"></i>
-                        <span class="brown-text text-lighten-4"></span>
-                        <input id="password" name="password" type="password" minlength="5"
-                            maxlenght="15" pattern="^[a-zA-Z0-9]{5,15}$" class="validate" required>
-                        <label for="password">Password</label>
+    <section class="container">
+        <h3 class="center-align amber-text text-accent-3">Sign In!!!</h3>
+
+        <div class="row">
+            <form class="col s12 m6 offset-m3" method="POST" action="{{ url_for('sign_in') }}">
+                <div class="card-panel">
+                    <!-- username-->
+                    <div class="row">
+                        <div class="card input-field col s11">
+                            <i class="fas fa-user-cog prefix amber-text text-accent-3"></i>
+                            <span class="brown-text text-lighten-4"></span>
+                            <input id="username" name="username" type="text" minlength="5"
+                                maxlenght="15" class="validate" required>
+                            <label for="username">Username</label>
+                        </div> 
                     </div>
-                </div> 
-                <!-- sign in-->
-                <div class="row">
-                     <button type="submit" class="col s8 offset-m2 btn-large amber accent-4 text-shadow">
-                        Sign In <i class="fas fa-sign-in-alt"></i>
-                    </button>
+                    <!-- password-->
+                    <div class="row">
+                        <div class="card input-field col s11">
+                            <i class="fas fa-user-lock prefix amber-text text-accent-3"></i>
+                            <span class="brown-text text-lighten-4"></span>
+                            <input id="password" name="password" type="password" minlength="5"
+                                maxlenght="15" pattern="^[a-zA-Z0-9]{5,15}$" class="validate" required>
+                            <label for="password">Password</label>
+                        </div>
+                    </div> 
+                    <!-- sign in-->
+                    <div class="row">
+                        <button type="submit" class="col s8 offset-m2 btn-large amber accent-4 text-shadow">
+                            Sign In <i class="fas fa-sign-in-alt"></i>
+                        </button>
+                    </div>
+                    <div class="card-action right-align">
+                        <span class= ""> New Here? </span>
+                        <a href="{{ url_for('join_free') }}">Create an Account </a>
+                    </div>  
                 </div>
-                <div class="card-action right-align">
-                    <span class= ""> New Here? </span>
-                    <a href="{{ url_for('join_free') }}">Create an Account </a>
-                </div>  
-            </div>
-        </form>
-    </div>
+            </form>
+        </div>
+    </section>
 
 {% endblock %}
