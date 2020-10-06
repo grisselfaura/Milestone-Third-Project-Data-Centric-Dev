@@ -33,10 +33,10 @@
             {% for recipe in recipes %}
                 <div class="col s12 m6 l4">
                     <div class="card">
-                        <div class="card-image waves-effect waves-block waves-light">
+                        <div class="card-image all-recipes waves-effect waves-block waves-light">
                             <img class="activator responsive-img fit-size" src="{{ recipe.recipe_images }}">
                         </div>
-                        <div class="card-content">
+                        <div class="card-content card-recipes-content">
                             <span class="card-title activator grey-text text-darken-4"><a href="{{ url_for('view_recipe',recipe_id=recipe._id) }}">{{ recipe.recipe_name }}</a>
                             <i class="material-icons right">more_vert</i></span>
                             <p><a href="#">{{ recipe.category_name }}</a></p> <!--PENDING to hook to the corresponding category search) -->
@@ -66,5 +66,7 @@
         <li class="waves-effect"><a href="#!">5</a></li>
         <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
     </ul>  
+
+
 {% endblock %}
 

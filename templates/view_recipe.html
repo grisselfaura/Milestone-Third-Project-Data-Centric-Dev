@@ -2,251 +2,149 @@
 {% block content %}
         
 
+    <section class="container">
         <!-- Recipe container (template from Cookbook and Jamie Oliver)-->
-        <div class="container recipe-container">
-        <br>
+        <div class="container">
+            <br>
             <div class="row center">
                 <!-- Recipe name -->
                 <div class="single-recipe col-xs-12">
                     <h3 class="tittle left-align">{{ recipe.recipe_name }}</h3>
                     <!-- Recipe description -->
-                    {% if recipe.recipe_description|length > 0 %} 
+                    {% if recipe.recipe_description|length > 0 %}
                         <p class="subheading light flow-text">{{ recipe.recipe_description }}</p>
                     {% endif %}
-				</div>
-				<!-- Recipe category -->		
-				<div class="float-wrapper">
+                </div>
+                <!-- Recipe category -->
+                <div class="float-wrapper">
                     <div class="card-panel yellow accent-4 category-tittle">
-                        <p><a href="#">{{ recipe.category_name }}</a></p> <!--PENDING to hook to the corresponding category search) -->
+                        <p><a href="#">{{ recipe.category_name }}</a></p>
+                        <!--PENDING to hook to the corresponding category search) -->
                     </div>
-				</div>
+                </div>
             </div>
-			<div class="row recipe-summary">
-                <!-- Recipe image -->
-                <div class="col s12 m6">
-                    <img class="responsive-img"  
-                        src="{{ recipe.recipe_images }}" alt="Recipe Images">       
-                </div>
-                <!-- Recipe Details -->
-                <div class="col s12 m6">
-                    <div class="row left-align">
-                        <p class="subheading light flow-text"><i class="fas fa-clock icon-color"></i>
-                            Cooks In : {{ recipe.recipe_time }}
-                        </p>                                                  
+        
+            <div class="row recipe-summary">
+                <div class="card horizontal">
+                    <div class="card-image">
+                        <img class="responsive-img z-depth-3"
+                        src="{{ recipe.recipe_images }}" alt="Recipe Images">
                     </div>
-                    <div class="row left-align">
-                        <p class="subheading light flow-text"> <i class="fas fa-layer-group"></i>
-                            Difficulty : {{ recipe.recipe_difficulty }}</p>
-                    </div>
-                    <div class="row left-align">
-                        <p class="subheading light flow-text"> <i class="fas fa-at"></i>
-                            Recipe by : <b><em> {{ recipe.created_by }} </em></b></p>
-                    </div>
-                </div>
-                <!-- Recipe edit/delete with materialize modal -->
-                <div class="row center">
-                    {% if session["user"]|lower == recipe.created_by|lower %}
-                    <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }} " class="btn-small amber accent-4">EDIT</a>
-                    <!--Defensive Programming for User to reconfirm DELETE action (Similar approach from other students and materialize)-->
-                    <a href="#delete_recipe-{{recipe._id}}" class="btn-small amber accent-4 modal-trigger"
-                        data-target="delete_recipe-{{recipe._id}}">DELETE</a>
-                    <div id="delete_recipe-{{recipe._id}}" class="modal">
-                        <div class="modal-content center-align">
-                            <h5>Do you want to delete this recipe?</h5>
+                    <div class="card-stacked lime lighten-4">
+                        <div class="card-content">
+                            <div class="row">
                             <br>
-                            <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}"
-                                class="btn btn-small red modal-close">Delete</a>
-                            <a href="#" class="btn btn-small black modal-close">Cancel</a>
+                                <p class="subheading light flow-text"><i class="fas fa-clock icon-color"></i>
+                                    Cooks In : {{ recipe.recipe_time }}
+                                </p>
+                            </div>
+                            <div class="row ">
+                                <p class="subheading light flow-text"> <i class="fas fa-layer-group"></i>
+                                    Difficulty : {{ recipe.recipe_difficulty }}</p>
+                                </div>
+                            <div class="row">
+                                <p class="subheading light flow-text"> <i class="fas fa-at"></i>
+                                    Recipe by : <b><em> {{ recipe.created_by }} </em></b></p>
+                            </div>
+
+                            <div class="row center">
+                                {% if session["user"]|lower == recipe.created_by|lower %}
+                                <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }} " class="btn-small amber accent-4">EDIT</a>
+                                <!--Defensive Programming for User to reconfirm DELETE action (Similar approach from other students and materialize)-->
+                                <a href="#delete_recipe-{{recipe._id}}" class="btn-small amber accent-4 modal-trigger"
+                                    data-target="delete_recipe-{{recipe._id}}">DELETE</a>
+                                <div id="delete_recipe-{{recipe._id}}" class="modal">
+                                    <div class="modal-content center-align">
+                                        <h5>Do you want to delete this recipe?</h5>
+                                        <br>
+                                        <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}"
+                                            class="btn btn-small red modal-close">Delete</a>
+                                        <a href="#" class="btn btn-small black modal-close">Cancel</a>
+                                    </div>
+                                </div>
+                                {% else %}
+                                <a class="btn-small grey darken-2 tooltipped" data-position="bottom"
+                                    data-tooltip="Is this you recipe?">EDIT</a>
+                                <a class="btn grey darken-2 tooltipped" data-position="bottom"
+                                    data-tooltip="Is this you recipe?">DELETE</a>
+                                {% endif %}
+                            </div>	
                         </div>
                     </div>
-                    {% else %}
-                    <a class="btn-small grey darken-2 tooltipped" data-position="bottom" 
-                        data-tooltip="Is this you recipe?">EDIT</a>
-                    <a class="btn grey darken-2 tooltipped" data-position="bottom" 
-                        data-tooltip="Is this you recipe?">DELETE</a>
-                    {% endif %}
+                    </div>
                 </div>
-            </div>
-        </div>
-		
-        <!-- <div class="card horizontal"> -->
-				<!-- Recipe image -->
-				<!-- <div class="card-image">
-					<img class="responsive-img" src="{{ recipe.recipe_images }}">
-							</div>
-					<div class="card-stacked"> -->
-						<!-- Recipe details -->
-						<!-- <div class="card-content">
-							<div class="row left-align">
-								<p style="text-transform:uppercase;"><i class="fas fa-clock icon-color"></i>
-									Cooks In : {{ recipe.recipe_time }}</p>
-							</div>
-							<div class="row left-align">
-								<p style="text-transform:uppercase;"> <i class="fas fa-layer-group"></i>
-									Difficulty : {{ recipe.recipe_difficulty }}</p>
-							</div>
-							<div class="row left-align">
-								<p style="text-transform:uppercase;"> <i class="fas fa-at"></i>
-									Recipe by : <b><em> {{ recipe.created_by }} </em></b></p>
-							</div>
-						</div> -->
-						<!-- Recipe edit/delete with materialize modal -->
-						<!-- <div class="card-action">
-							{% if session["user"]|lower == recipe.created_by|lower %}
-							<a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }} " class="btn-small amber accent-4">EDIT</a> -->
-							<!--Defensive Programming for User to reconfirm DELETE action (Similar approach from other students and materialize)-->
-							<!-- <a href="#delete_recipe-{{recipe._id}}" class="btn-small amber accent-4 modal-trigger"
-								data-target="delete_recipe-{{recipe._id}}">DELETE</a>
-							<div id="delete_recipe-{{recipe._id}}" class="modal">
-								<div class="modal-content center-align">
-									<h5>Do you want to delete this recipe?</h5>
-									<br>
-									<a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}"
-										class="btn btn-small red modal-close">Delete</a>
-									<a href="#" class="btn btn-small black modal-close">Cancel</a>
-								</div>
-							</div>
-							{% else %}
-							<a class="btn-small grey darken-2 tooltipped" data-position="bottom"
-								data-tooltip="Is this you recipe?">EDIT</a>
-							<a class="btn grey darken-2 tooltipped" data-position="bottom"
-								data-tooltip="Is this you recipe?">DELETE</a>
-							{% endif %}
-						</div>
-					</div>
-		</div> -->
-            
-        <!-- Template from Cookbook and Jamie Oliver -->
-        <div class="row">
-            <div class="col s12 m3">
-                <div class="row">
-                    <!-- Ingredient -->
-                    <div class="col s12 ingredients-bullets">
+
+            <!-- Template from Cookbook and Jamie Oliver -->
+            <div class="row">
+                <div class="col s12 m4">
+                    <div class="row">
+                        <!-- Ingredient -->
+                        <div class="col s12 ingredients-bullets">
                             <h5 class="tittle left-align">Ingredients</h5>
                             <ul>
                                 {% for basic_ingredient in recipe.basic_ingredients %}
-                                    <li class= "ingredient-font flow-text">
-                                        {{ basic_ingredient }}
-                                    </li>
+                                <li class="ingredient-font flow-text">
+                                    {{ basic_ingredient }}
+                                </li>
                                 {% endfor %}
                             </ul>
-                    </div>
-                    <!-- Complement with :  -->
-                    {% if recipe.complementary_ingredients|length > 0 %} 
-                    <div class="col s12 ingredients-bullets">
+                        </div>
+                        <!-- Complement with :  -->
+                        {% if recipe.complementary_ingredients|length > 0 %}
+                        <div class="col s12 ingredients-bullets">
                             <h5 class="tittle left-align">Completement this with : </h5>
                             <ul>
                                 {% for complementary_ingredient in recipe.complementary_ingredients %}
-                                    <li class= "ingredient-font flow-text">
+                                    <li class="ingredient-font flow-text">
                                         {{ complementary_ingredient }}
                                     </li>
                                 {% endfor %}
                             </ul>
+                        </div>
+                        {% endif %}
                     </div>
-                    {% endif %}
                 </div>
-            </div>
-            <!-- Method -->
-            <div class="col s12 offset-m1 m8 instructions">
-                <div class="row">
-                    <div class="col s12">
-                        <h5  class="tittle center-align">Instructions</h5>
-                        <!-- PENDING THE JAVASCRIPT TO ADD INFO TO THE FORM  + bullet  not working-->
-                        {% for recipe_method in recipe.recipe_method %}
-                            <li class= "method-font flow-text">  
-                                Step {{ loop.index }} {{ recipe_method.value }} <!-- key value not showing-->
+                <!-- Method -->
+                <div class="col s12 offset-m1 m7 instructions">
+                    <div class="row">
+                        <div class="col s12">
+                            <h5 class="tittle center-align">Instructions</h5>
+                            <!-- PENDING THE JAVASCRIPT TO ADD INFO TO THE FORM -->
+                            {% for recipe_method in recipe.recipe_method %}
+                            <li class="method-font flow-text">
+                                Step {{ loop.index }} {{ recipe_method.value }}
+                                <!-- key value not showing-->
                             </li>
-                        {% endfor %}
-                    </div>
-                    <!-- Method2 -->
-                    {% if recipe.recipe_method2|length > 0 %} 
-                    <div class="col s12">
-                        <h5  class="tittle center-align">Instructions</h5>
-                        <ol>
-                        <!-- PENDING THE JAVASCRIPT TO ADD INFO TO THE FORM  + bullet  not working-->
-                            {% for recipe_method in recipe.recipe_method2 %}
-                                <ul id="bullet" class= "method-font">  <!-- + bullet  not working-->
-                                    Step {{ loop.index }} {{ recipe_method.value }} <!-- key value not showing-->
-                                </ul>
                             {% endfor %}
-                        </ol>
+                        </div>
+                        <!-- Method2 -->
+                        {% if recipe.recipe_method2|length > 0 %}
+                        <div class="col s12">
+                            <h5 class="tittle center-align">Instructions</h5>
+                            <ol>
+                                <!-- PENDING THE JAVASCRIPT TO ADD INFO TO THE FORM  -->
+                                {% for recipe_method in recipe.recipe_method2 %}
+                                <ul class="method-font flow-text">
+                                    Step {{ loop.index }} {{ recipe_method.value }}
+                                    <!-- key value not showing-->
+                                </ul>
+                                {% endfor %}
+                            </ol>
+                        </div>
+                        {% endif %}
                     </div>
-                    {% endif %}
                 </div>
             </div>
+        
+            <!-- Closing line -->
+            <div class="row">
+            {% if recipe.closing_line|length > 0 %}
+                <h5 class="close-font center-align">{{ recipe.closing_line }}</h5>
+            {% endif %}
+            </div>
+        
         </div>
+    </section
 
-        <div class="row">
-        {% if recipe.closing_line|length > 0 %} 
-            <h5 class="close-font center-align">{{ recipe.closing_line }}</h5>
-        {% endif %}
-        </div>
-    </div>
 
 {% endblock %}
-
-    <!--PENDING HOW TO MAKE THEM DISPLAY SIDE BY SIZE--> 
-    <!-- <div class="row"> 
-        {% for recipe in recipes %}
-        <div class="col s12 m6  l4">
-            <div class="card horizontal large">
-                <div class="card-image">
-                    <img class="responsive-img" src="{{ recipe.recipe_images }}">
-                </div>
-                <div class="card-stacked">
-                    <div class="card-content">
-                        <span class="card-title grey-text text-darken-4"><strong>{{ recipe.recipe_name }}</strong></span>
-                        {% if recipe.recipe_description|length > 0 %} 
-                            <p>{{ recipe.recipe_description }}</p>
-                        {% endif %}
-                        <p>{{ recipe.category_name }}</p>
-                        <ul class="collapsible">
-                            <li>
-                                <div class="collapsible-header"><i class="far fa-caret-square-down"></i>Basic Ingredients: </div>
-                                <div class="collapsible-body">
-                                    {% for basic_ingredient in recipe.basic_ingredients %}
-                                    <span id="bullet"> {{ basic_ingredient }}</span>
-                                    {% endfor %}
-                                </div>    
-                            </li>
-                            {% if recipe.complementary_ingredients|length > 0 %} 
-                            <li>
-                                <div class="collapsible-header"><i class="far fa-caret-square-down"></i>Complement with: </div>
-                                <div class="collapsible-body">
-                                    {% for complementary_ingredient in recipe.complementary_ingredients %}
-                                    <span id="bullet2"> {{ complementary_ingredient }}</span>
-                                    {% endfor %}
-                                </div>
-                            </li>
-                            {% endif %}--> 
-                            <!--unpacking not working because is an object-->
-                            <!-- <li>
-                                <div class="collapsible-header"><i class="far fa-caret-square-down"></i>Method: </div>
-                                <div class="collapsible-body">
-                                    {% for recipe_method in recipe.recipe_method  %}
-                                    <span> {{ recipe_method }}</span>
-                                    {% endfor %}
-                                </div>    
-                            </li>
-                            {% if recipe.recipe_method2|length > 0 %}
-                            <li>
-                                <div class="collapsible-header"><i class="far fa-caret-square-down"></i>Method2: </div>
-                                <div class="collapsible-body">
-                                    {% for recipe_method in recipe.recipe_method2  %}
-                                    <span> {{ recipe_method }}</span>
-                                    {% endfor %}
-                                </div>    
-                            </li>
-                            {% endif %}
-                            {% if recipe.closing_line|length > 0 %}
-                            <h6 class="center-align">{{ recipe.closing_line }}</h5>
-                            {% endif %}
-                        </ul>
-                    </div>  
-                </div>
-            </div>
-        </div>    
-        {% endfor %} 
-    </div> --> 
-
-    

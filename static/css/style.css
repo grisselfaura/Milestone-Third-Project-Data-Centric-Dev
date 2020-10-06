@@ -117,13 +117,23 @@ main {
     height: 100vh;
 } 
 
-.card .card-image {
+.all-recipes  {
     height: 800px;
 }
 
-.card .card-content {
+/* it does not affect the recipes.html check if affect sg else and erase */
+/* .card .card-image {
+    height: 800px;
+}   */
+
+.card-recipes-content {
     height: 150px;
 }
+/* it does not affect the recipes.html check if affect sg else and erase */
+/* .card .card-content {
+    height: 150px;
+} */
+
 
 /*view_recipes.html*/
 .single-recipe {
@@ -137,6 +147,7 @@ main {
     letter-spacing: 0;
     text-transform: uppercase;
     text-align: center;
+    padding-bottom: 15px;
 }
 
 .category-tittle {
@@ -161,6 +172,7 @@ main {
   list-style-type: circle;
   margin-left: 10px;
 }
+
 
 /*categories.html*/
 .reduce-size {
