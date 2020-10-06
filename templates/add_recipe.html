@@ -40,19 +40,21 @@
                 <!-- Recipe details-->
                 <div class="row">
                     <!-- Difficulty-->
-                    <div class="input-field col s6">
+                    <div class="input-field col s12 m6">
                         <i class="fas fa-signal prefix light-blue-text"></i>
                         <select id="recipe_difficulty" name="recipe_difficulty" class="validate" required>
-                            <option value="" disabled selected>Difficulty</option>
+                            <option value="" disabled selected>Chooce difficulty</option>
                             {% for difficulty in difficulty %}
                             <option value="{{ difficulty.recipe_difficulty }}">{{ difficulty.recipe_difficulty }}</option>
                             {% endfor %}
                         </select>
                         <label for="recipe_difficulty">Difficulty</label>
                     </div>
-                    <div class="input-field col s6">
-                        <input id="last_name" type="text" class="validate">
-                        <label for="last_name">Last Name</label>
+                    <!-- Cook time-->
+                    <div class="input-field col s12 m6">
+                        <i class="fas fa-clock material-icons prefix light-blue-text"></i>
+                        <input id="cooking_time" type="time" class="validate" min="5" max="60">
+                        <label for="cooking_time">Cooking in :</label>
                     </div>
                 </div>
                 <!-- Basic ingredients-->
