@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col s12 m6 offset-m3">
             <div class="card-panel">
-                <h3 class="center-align light-blue-text">
+                <h3 class="tittle center-align light-blue-text">
                     Hello {{ username }}'s 
                     <!-- #add all the task created by the user or recipes
                     <div class="background">
@@ -35,35 +35,24 @@
         </div>
     </section>
 
-    
-
-    <!--My recipes only -->
+    <!--My recipes only simplified card-->
     <div class="container">
         <div class="row"> 
-        {% for recipe in recipes %}
-            {% if session["user"]|lower == recipe.created_by|lower %}
-                <div class="col s12 m6 l4">
-                    <div class="card">
-                        <div class="card-image all-recipes waves-effect waves-block waves-light">
-                            <img class="activator responsive-img fit-size" src="{{ recipe.recipe_images }}">
-                        </div>
-                        <div class="card-content card-recipes-content">
-                            <span class="card-title activator grey-text text-darken-4"><a href="{{ url_for('view_recipe',recipe_id=recipe._id) }}">{{ recipe.recipe_name }}</a>
-                            <i class="material-icons right">more_vert</i></span>
-                            <p><a href="#">{{ recipe.category_name }}</a></p> <!--PENDING to hook to the corresponding category search) -->
-                            <p class="right-align"><em> by : {{ recipe.created_by }} </em></p> 
-                        </div>
-                        <div class="card-reveal">
-                            <span class="card-title grey-text text-darken-4">Recipe Description<i class="material-icons right">close</i></span>
-                            {% if recipe.recipe_description|length > 0 %} 
-                                <p class="light">{{ recipe.recipe_description }}</p>
-                            {% else %}
-                                <p class="light">Description not available</p>
-                            {% endif %}
-                        </div>
+        {% for recipe in recipe_owner %}
+            <div class="col s12 m6 l4">
+                <div class="card">
+                    <div class="card-image">
+                        <img class="responsive-img" src="{{ recipe.recipe_images }}">
+                        <a class="btn-floating halfway-fab waves-effect waves-light amber accent-4" href="{{ url_for('view_recipe',recipe_id=recipe._id) }}">
+                        <i class="material-icons">add</i></a></span>
                     </div>
-                </div>
-            {% endif %}
+                    <div class="card-content">
+                        <span class="card-title tittle">{{ recipe.recipe_name }}</span>
+                        <p class="category-tittle"><a href="#">{{ recipe.category_name }}</a></p> <!--PENDING to hook to the corresponding category search) -->
+                        <p class="right-align"><em> created on : {{ recipe.created_date }} </em></p> 
+                    </div>
+                 </div>
+            </div>
         {% endfor %}
         </div>
     </div>
