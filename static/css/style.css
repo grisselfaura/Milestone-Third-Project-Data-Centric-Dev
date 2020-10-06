@@ -150,6 +150,14 @@ main {
     padding-bottom: 15px;
 }
 
+.created {
+    text-transform: lowercase;   
+}
+
+.bold {
+    font-weight: bold;
+}
+
 .category-tittle {
     font-weight: 700;
     padding: 1px !important;

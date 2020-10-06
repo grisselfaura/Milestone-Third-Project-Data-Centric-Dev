@@ -5,6 +5,7 @@ from flask import (
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env 
@@ -167,9 +168,13 @@ def myrecipes(username):
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
     
-    if session["user"]: 
-        return render_template("myrecipes.html", username=username)
+    user_recipes = mongo.db.recipes.find({"created_by": username})
+    total_user_recipes = user_recipes.count()
+    
+    if session["user"] == username: 
+        return render_template("myrecipes.html", username=username, recipe_owner=user_recipes, total_user_recipes=total_user_recipes)
 
+    flash("You need to sign in!")
     return redirect(url_for("sign_in"))
 
 
@@ -199,7 +204,8 @@ def add_recipe():
             "recipe_images": request.form.get("recipe_images"),
             "closing_line": request.form.get("closing_line"),
             "share_recipe": share_recipe,
-            "created_by": session["user"]
+            "created_by": session["user"],
+            "created_date": datetime.now().strftime("%d/%m/%Y")
         }
         mongo.db.recipes.insert_one(recipe)
         flash("Recipe Successfully Added")
@@ -228,7 +234,7 @@ def edit_recipe(recipe_id):
             "recipe_images": request.form.get("recipe_images"),
             "closing_line": request.form.get("closing_line"),
             "share_recipe": share_recipe,
-            "created_by": session["user"]
+            "created_by": session["user"],
         }
         mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
         flash("Recipe Successfully Updated")

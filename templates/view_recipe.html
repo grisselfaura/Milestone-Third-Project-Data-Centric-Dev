@@ -35,7 +35,7 @@
                             <div class="row">
                             <br>
                                 <p class="subheading light flow-text"><i class="fas fa-clock icon-color"></i>
-                                    Cooks In : {{ recipe.recipe_time }}
+                                    Cooks In : {{ recipe.cooking_time }}
                                 </p>
                             </div>
                             <div class="row ">
@@ -44,7 +44,9 @@
                                 </div>
                             <div class="row">
                                 <p class="subheading light flow-text"> <i class="fas fa-at"></i>
-                                    Recipe by : <b><em> {{ recipe.created_by }} </em></b></p>
+                                    Recipe by : <span class="created bold"> {{ recipe.created_by }} </span>
+                                    <span class="created">on {{ recipe.created_date }} </span>
+                                    </p>
                             </div>
 
                             <div class="row center">

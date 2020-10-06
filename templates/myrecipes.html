@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 
+
+<!--User's Profile -->
     <div class="row">
         <div class="col s12 m6 offset-m3">
             <div class="card-panel">
                 <h3 class="center-align light-blue-text">
-                    {{ username }}'s Profile
+                    Hello {{ username }}'s 
                     <!-- #add all the task created by the user or recipes
                     <div class="background">
                         <img src="images/office.jpg">
@@ -16,6 +18,53 @@
                     </div>-->
                 </h3>
             </div>
+        </div>
+    </div>
+
+    <!--User's recipe summary -->
+    <section class="row container">
+        <div class="col s12">
+            <h4>You have submitted the following recipes</h4>
+            {% if total_user_recipes > 0 %}
+                <h6>Showing your {{ total_user_recipes }} recipes</h6>
+            {% else %}
+            <h6>You have not submitted any recipes Yet!</h6>
+                <a href="{{ url_for('add_recipe') }}" class="btn black"><i class="material-icons">add_circle</i>Add a recipe</a>
+            {% endif %}
+
+        </div>
+    </section>
+
+    
+
+    <!--My recipes only -->
+    <div class="container">
+        <div class="row"> 
+        {% for recipe in recipes %}
+            {% if session["user"]|lower == recipe.created_by|lower %}
+                <div class="col s12 m6 l4">
+                    <div class="card">
+                        <div class="card-image all-recipes waves-effect waves-block waves-light">
+                            <img class="activator responsive-img fit-size" src="{{ recipe.recipe_images }}">
+                        </div>
+                        <div class="card-content card-recipes-content">
+                            <span class="card-title activator grey-text text-darken-4"><a href="{{ url_for('view_recipe',recipe_id=recipe._id) }}">{{ recipe.recipe_name }}</a>
+                            <i class="material-icons right">more_vert</i></span>
+                            <p><a href="#">{{ recipe.category_name }}</a></p> <!--PENDING to hook to the corresponding category search) -->
+                            <p class="right-align"><em> by : {{ recipe.created_by }} </em></p> 
+                        </div>
+                        <div class="card-reveal">
+                            <span class="card-title grey-text text-darken-4">Recipe Description<i class="material-icons right">close</i></span>
+                            {% if recipe.recipe_description|length > 0 %} 
+                                <p class="light">{{ recipe.recipe_description }}</p>
+                            {% else %}
+                                <p class="light">Description not available</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
         </div>
     </div>
 
