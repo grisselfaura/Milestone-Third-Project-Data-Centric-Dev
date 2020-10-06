@@ -181,7 +181,15 @@ main {
   margin-left: 10px;
 }
 
-/*add_recipes.html*/
+/*myrecipes.html*/
+
+.myrecipes-h4 {
+    font-family: 'Gloria Hallelujah', cursive;
+}
+
+.myrecipes-h5 {
+    font-family: 'Josefin Slab', serif;
+}
 
 
 /*categories.html*/
