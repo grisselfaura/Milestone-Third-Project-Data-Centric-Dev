@@ -3,6 +3,7 @@
 
     <h3 class="center-align light-blue-text">Add Recipe</h3>
 
+    <section class="container">
         <div class="row card-panel grey lighten-5">
             <form class="col s12" method="POST" action="{{ url_for('add_recipe') }}">
                 <!-- Category selection-->
@@ -102,6 +103,7 @@
                 </div>
             </form>
         </div>
-        
+    </section>   
+
 
 {% endblock %}
