@@ -26,11 +26,12 @@
 	    </div> 
 	</section>
 
-    <!--PENDING only to share recipes that are allowed to be shared (check toggle) -->
+    <!--Show recipes when share_recipes toggle is ON unless user=ADMIN--> 
     <div class="container">
         <div class="row"> 
-        <!--IF share_recipes ON (check toggle) -->
-            {% for recipe in recipes %}
+        {% for recipe in recipes %}
+            <!--Show recipes when user=ADMIN-->        
+            {% if session.user|lower == "admin"|lower %}
                 <div class="col s12 m6 l4">
                     <div class="card">
                         <div class="card-image all-recipes waves-effect waves-block waves-light">
@@ -52,7 +53,32 @@
                         </div>
                     </div>
                 </div>
-            {% endfor %}
+            <!--Show recipes when share_recipes toggle is ON-->     
+            {% elif recipe.share_recipe =="on"  %}
+                <div class="col s12 m6 l4">
+                    <div class="card">
+                        <div class="card-image all-recipes waves-effect waves-block waves-light">
+                            <img class="activator responsive-img fit-size" src="{{ recipe.recipe_images }}">
+                        </div>
+                        <div class="card-content card-recipes-content">
+                            <span class="tittle card-title activator grey-text text-darken-4"><a href="{{ url_for('view_recipe',recipe_id=recipe._id) }}">{{ recipe.recipe_name }}</a>
+                            <i class="material-icons right">more_vert</i></span>
+                            <p class="category-tittle"><a href="#">{{ recipe.category_name }}</a></p> <!--PENDING to hook to the corresponding category search) -->
+                            <p class="right-align"><em> by : {{ recipe.created_by }} </em></p> 
+                        </div>
+                        <div class="card-reveal">
+                            <span class="card-title grey-text text-darken-4">Recipe Description<i class="material-icons right">close</i></span>
+                            {% if recipe.recipe_description|length > 0 %} 
+                                <p class="light">{{ recipe.recipe_description }}</p>
+                            {% else %}
+                                <p class="light">Description not available</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        
         </div>
     </div>
     

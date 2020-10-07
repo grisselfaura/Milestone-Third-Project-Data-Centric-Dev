@@ -43,8 +43,9 @@
                     {% if session.user|lower == "admin"|lower %}
                         <li><a href="{{ url_for('get_categories') }}" class="grey-text text-darken-4">Manage Recipe Categories
                         <i class="fas fa-user-lock right"></i></a></li>
+                        <li><a href="{{ url_for('get_recipes') }}" class="grey-text text-darken-4">RECIPES</a></li>
                     {% endif %}
-                    <li><a href="{{ url_for('sign_out') }}" class="grey-text  text-darken-4">Sign Out!</a></li>
+                    <li><a href="{{ url_for('sign_out') }}" class="grey-text text-darken-4">Sign Out!</a></li>
                 {% else %}
                     <li><a href="{{ url_for('home') }}" class="grey-text text-darken-4">HOME</a></li>
                     <li><a href="{{ url_for('get_recipes') }}" class="grey-text text-darken-4">RECIPES</a></li>
@@ -67,6 +68,7 @@
                     {% if session.user|lower == "admin"|lower %}
                         <li><a href="{{ url_for('get_categories') }}" class="grey-text text-darken-4"><i class="material-icons">supervisor_account</i>Manage Recipe Categories
                         <i class="fas fa-user-lock right"></i></a></li>
+                        <li><a href="{{ url_for('get_recipes') }}" class="grey-text text-darken-4"><i class="material-icons">search</i>Recipes</a></li>
                     {% endif %}
                     <li><a href="{{ url_for('sign_out') }}" class="grey-text text-darken-4"><i class="material-icons">person_outline</i>Sign Out!</a></li>
                 {% else %}
@@ -94,7 +96,6 @@
     </section>
     
     <!--Templates-->
-    <!-- <main class="container"> -->
     <main>
         {% block content %}
         {% endblock %}
