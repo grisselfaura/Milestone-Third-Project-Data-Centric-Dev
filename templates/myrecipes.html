@@ -24,6 +24,10 @@
     <!--User's recipe summary -->
     <section class="row container">
         <div class="col s12">
+        {% if session.user|lower == "admin"|lower %}
+            <h3 class="myrecipes-h4 center"><i class="material-icons red accent-4 small">lock</i></a>
+            You have been assigned as the admin of this app</h3>
+        {% else %}
             <h4 class="myrecipes-h4">You have submitted the following recipes</h4>
             {% if total_user_recipes > 0 %}
                 <h5 class="myrecipes-h6">Showing your {{ total_user_recipes }} recipes</h6>
@@ -31,6 +35,7 @@
             <h6>You have not submitted any recipes Yet!</h6>
                 <a href="{{ url_for('add_recipe') }}" class="btn black"><i class="material-icons">add_circle</i>Add a recipe</a>
             {% endif %}
+        {% endif %}
 
         </div>
     </section>

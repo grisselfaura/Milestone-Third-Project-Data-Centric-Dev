@@ -36,21 +36,23 @@
             <ul class="right hide-on-med-and-down">
                 <!-- <li><a href=".html" class="grey-text text-darken-4">Recipe Search</a></li>
                 <li><a href=".html" class="grey-text text-darken-4">Ingredients index</a></li> -->
-                {% if session.user %}
+                {% if session.user|lower == "admin"|lower%}
+                    <li><a href="{{ url_for('home') }}" class="grey-text text-darken-4">HOME</a></li>
+                    <li><a href="{{ url_for('get_recipes') }}" class="grey-text text-darken-4">RECIPES</a></li>
+                    <li><a href="{{ url_for('get_categories') }}" class="grey-text text-darken-4">Manage Recipe Categories
+                    <i class="fas fa-user-lock right"></i></a></li>
+                    <li><a href="{{ url_for('sign_out') }}" class="grey-text text-darken-4">Sign Out!</a></li>
+                {% elif session.user %}
                     <li><a href="{{ url_for('home') }}" class="grey-text text-darken-4">HOME</a></li>
                     <li><a href="{{ url_for('myrecipes', username=session['user']) }}" class="grey-text text-darken-4">MyRecipes</a></li>
                     <li><a href="{{ url_for('add_recipe') }}" class="grey-text text-darken-4">Add a recipe</a></li>
-                    {% if session.user|lower == "admin"|lower %}
-                        <li><a href="{{ url_for('get_categories') }}" class="grey-text text-darken-4">Manage Recipe Categories
-                        <i class="fas fa-user-lock right"></i></a></li>
-                        <li><a href="{{ url_for('get_recipes') }}" class="grey-text text-darken-4">RECIPES</a></li>
-                    {% endif %}
                     <li><a href="{{ url_for('sign_out') }}" class="grey-text text-darken-4">Sign Out!</a></li>
                 {% else %}
                     <li><a href="{{ url_for('home') }}" class="grey-text text-darken-4">HOME</a></li>
                     <li><a href="{{ url_for('get_recipes') }}" class="grey-text text-darken-4">RECIPES</a></li>
                     <li><a href="{{ url_for('sign_in') }}" class="grey-text  text-darken-4">Sign In!</a></li>
                     <li><a href="{{ url_for('join_free') }}" class="grey-text  text-darken-4">Join Free</a></li>
+                    
                 {% endif %}
             </ul>
             </div>
@@ -61,16 +63,17 @@
             <img class="responsive-img" src="{{ url_for('static', filename='images/logo_nav.png') }}" alt="logo-image">
                 <!-- <li><a href=".html" class="grey-text text-darken-4">Recipe Search</a></li>
                 <li><a href=".html" class="grey-text text-darken-4">Ingredients index</a></li> -->
-                {% if session.user %}
+                {% if session.user|lower == "admin"|lower %}
+                    <li><a href="{{ url_for('home') }}" class="grey-text text-darken-4"><i class="material-icons">home</i>Home</a></li>
+                    <li><a href="{{ url_for('get_recipes') }}" class="grey-text text-darken-4"><i class="material-icons">search</i>Recipes</a></li>
+                    <li><a href="{{ url_for('get_categories') }}" class="grey-text text-darken-4"><i class="fas fa-user-lock"></i>
+                    Manage Recipe Categories</a></li>
+                    <li><a href="{{ url_for('sign_out') }}" class="grey-text text-darken-4"><i class="material-icons">person_outline</i>Sign Out!</a></li>
+                {% elif session.user %}
                     <li><a href="{{ url_for('home') }}" class="grey-text text-darken-4"><i class="material-icons">home</i>Home</a></li>
                     <li><a href="{{ url_for('myrecipes', username=session['user']) }}" class="grey-text text-darken-4"><i class="material-icons">person</i>MyRecipes</a></li>
                     <li><a href="{{ url_for('add_recipe') }}" class="grey-text text-darken-4"><i class="material-icons">add_circle</i>Add a recipe</a></li>
-                    {% if session.user|lower == "admin"|lower %}
-                        <li><a href="{{ url_for('get_categories') }}" class="grey-text text-darken-4"><i class="material-icons">supervisor_account</i>Manage Recipe Categories
-                        <i class="fas fa-user-lock right"></i></a></li>
-                        <li><a href="{{ url_for('get_recipes') }}" class="grey-text text-darken-4"><i class="material-icons">search</i>Recipes</a></li>
-                    {% endif %}
-                    <li><a href="{{ url_for('sign_out') }}" class="grey-text text-darken-4"><i class="material-icons">person_outline</i>Sign Out!</a></li>
+                    <li><a href="{{ url_for('sign_out') }}" class="grey-text text-darken-4"><i class="material-icons">person_outline</i>Sign Out!</a></li>                    
                 {% else %}
                     <li><a href="{{ url_for('home') }}" class="grey-text text-darken-4"><i class="material-icons">home</i>Home</a></li>
                     <li><a href="{{ url_for('get_recipes') }}" class="grey-text text-darken-4"><i class="material-icons">search</i>Recipes</a></li>
