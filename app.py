@@ -46,6 +46,7 @@ KEY_SEARCH_TERM = 'search_term'
 KEY_ORDER_BY = 'order_by'
 KEY_ORDER = 'order'
 
+
 def get_paginated_items(entity, query={}, **params):
     page_size = int(params.get(KEY_PAGE_SIZE, PAGE_SIZE))
     page_number = int(params.get(KEY_PAGE_NUMBER, 1))
