@@ -114,7 +114,7 @@
                             <!-- PENDING THE JAVASCRIPT TO ADD INFO TO THE FORM -->
                             {% for step in recipe.recipe_method %}
                             <li class="method-font flow-text">
-                                Step {{ loop.index }} {{ recipe_method }}
+                                Step {{ loop.index }} : {{ step }}
                             </li>
                             {% endfor %}
                         </div>

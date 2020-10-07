@@ -75,13 +75,13 @@
                             <div class="card-content">
                                 <i class="fas fa-shopping-basket custom-prefix light-blue-text"></i>
                                 <span class="card-title ingredient-title">Basic Ingredients</span>
-                                <div class="addIngredient new-ingredient ingredient">
-                                {% for ingredient in recipe.basic_ingredients %}
+                                <div class="addIngredient new-ingredient ingredient">                                
                                     <label for="basic_ingredients">Ingredients follow example format!</label>
-                                    <input id="basic_ingredients" name="basic_ingredients[]" type="text" minlength="1" 
-                                    maxlength="100" placeholder="100gr onion, finely chopped" 
-                                        value = "{{ recipe.basic_ingredients }}" class="ingredients validate" required>
-                                {% endfor %}
+                                    {% for basic_ingredient in recipe.basic_ingredients %}
+                                        <input id="basic_ingredients" name="basic_ingredients[]" type="text" minlength="1" 
+                                        maxlength="100" placeholder="100gr onion, finely chopped" 
+                                        value = "{{ basic_ingredient }}" class="ingredients validate" required> 
+                                    {% endfor %}                               
                                 </div>    
                                 <p class="center">
                                     <!-- Add-ingredient button -->
@@ -101,12 +101,12 @@
                                 <i class="fas fa-plus-square custom-prefix light-blue-text"></i>
                                 <span class="card-title ingredient-title">Complement with: </span>
                                 <div class="addCompIngredient new-CompIngredient compIngredient">
-                                {% for complementary_ingredient in recipe.complementary_ingredients %}
                                     <label for="complementary_ingredients">Complement ingredients follow example format!</label>
-                                    <input id="complementary_ingredients" name="complementary_ingredients[]"  type="text" minlength="1" 
-                                        maxlength="100" value = "{{ recipe.complementary_ingredients }}" placeholder="100gr green onion, finely chopped" 
+                                    {% for complementary_ingredient in recipe.complementary_ingredients %}
+                                        <input id="complementary_ingredients" name="complementary_ingredients[]"  type="text" minlength="1" 
+                                        maxlength="100" value = "{{ complementary_ingredient }}" placeholder="100gr green onion, finely chopped" 
                                         class="validate">
-                                {% endfor %}
+                                    {% endfor %} 
                                 </div>    
                                 <p class="center">
                                     <!-- Add-complementary-ingredient button -->
@@ -126,12 +126,12 @@
                                 <i class="fas fa-utensils custom-prefix light-blue-text"></i>
                                 <span class="card-title ingredient-title">Steps</span>
                                 <div class="addpreparation preparation new-step">
-                                    {% for step in recipe.recipe_method %}
                                     <label for="recipe_method">Steps follow example format!</label>
-                                    <input id="recipe_method" name="recipe_method[]" type="text" 
+                                    {% for step in recipe.recipe_method %}
+                                        <input id="recipe_method" name="recipe_method[]" type="text" 
                                         placeholder="Fill a large pan with salted water, place on a high heat and bring to the boil." 
-                                        value = "{{ recipe.recipe_method }}" class="validate" required>
-                                    {% endfor %}
+                                        value = "{{ step }}" class="validate" required>
+                                    {% endfor %}    
                                 </div>    
                                 <p class="center">
                                     <!-- Add-step button -->
