@@ -61,28 +61,71 @@
                 <!-- Basic ingredients-->
                 <div class="row">
                     <div class="input-field col s12">
-                        <i class="fas fa-shopping-basket prefix light-blue-text"></i>
-                        <textarea id="basic_ingredients" name="basic_ingredients" 
-                            data-length="300" class="materialize-textarea validate" required></textarea>
-                        <label for="basic_ingredients">Ingredients please add them separated by a comma!</label>
+                        <div class="card">
+                            <div class="card-content">
+                                <i class="fas fa-shopping-basket custom-prefix light-blue-text"></i>
+                                <span class="card-title ingredient-title">Basic Ingredients</span>
+                                <div class="addIngredient new-ingredient ingredient">
+                                    <label for="basic_ingredients">Ingredients follow example format!</label>
+                                    <input id="basic_ingredients" name="basic_ingredients[]" type="text" minlength="1" maxlength="100"
+                                        placeholder="100gr onion, finely chopped"  class="ingredients validate" required>
+                                </div>    
+
+                                <p class="center">
+                                    <!-- Add-ingredient button -->
+                                    <a id="add_ingredient" class="btn-floating green"><i class="material-icons">add</i></a>
+                                    <!-- Remove-ingredient button -->
+                                    <a id="remove_ingredient" class="btn-floating red lighten-1"><i class="material-icons">remove</i></a>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- Complementary ingredients-->
                 <div class="row">
                     <div class="input-field col s12">
-                        <i class="fas fa-plus-square prefix light-blue-text"></i>
-                        <textarea id="complementary_ingredients" name="complementary_ingredients" 
-                            data-length="300" class="materialize-textarea validate" ></textarea>
-                        <label for="complementary_ingredients">Complement with: ingredients please add them separated by a comma! </label>
+                        <div class="card">
+                            <div class="card-content">
+                                <i class="fas fa-plus-square custom-prefix light-blue-text"></i>
+                                <span class="card-title ingredient-title">Complement with: </span>
+                                <div class="addCompIngredient new-CompIngredient compIngredient">
+                                    <label for="complementary_ingredients">Complement ingredients follow example format!</label>
+                                    <input id="complementary_ingredients" name="complementary_ingredients[]"  type="text" minlength="1" 
+                                        maxlength="100" placeholder="100gr green onion, finely chopped" class="validate">
+                                </div>    
+
+                                <p class="center">
+                                    <!-- Add-complementary-ingredient button -->
+                                    <a id="add_comp_ingredient" class="btn-floating green"><i class="material-icons">add</i></a>
+                                    <!-- Remove-complementary-ingredient button -->
+                                    <a id="remove_comp_ingredient" class="btn-floating red lighten-1"><i class="material-icons">remove</i></a>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <!-- Steps--> <!-- DISCUSS FORMAT STEP1 AND STEP2 TO OBLY USER TO KEEP STANDARD FORMAT!-->
+                <!-- Steps-->
                 <div class="row">
                     <div class="input-field col s12">
-                        <i class="fas fa-utensils prefix light-blue-text"></i>
-                        <textarea id="recipe_method" name="recipe_method" 
-                            data-length="1000" class="materialize-textarea validate" required></textarea>
-                        <label for="recipe_method">Steps please step 1, step 2, step 3 </label>
+                        <div class="card">
+                            <div class="card-content">
+                                <i class="fas fa-utensils custom-prefix light-blue-text"></i>
+                                <span class="card-title ingredient-title">Steps</span>
+                                <div class="addpreparation preparation new-step">
+                                    <label for="recipe_method">Steps follow example format!</label>
+                                    <input id="recipe_method" name="recipe_method[]" type="text" 
+                                        placeholder="Fill a large pan with salted water, place on a high heat and bring to the boil." 
+                                        class="validate" required>
+                                </div>    
+
+                                <p class="center">
+                                    <!-- Add-step button -->
+                                    <a id="add_step" class="btn-floating green"><i class="material-icons">add</i></a>
+                                    <!-- Remove-step button -->
+                                    <a id="remove_step" class="btn-floating red lighten-1"><i class="material-icons">remove</i></a>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- Closing line-->
@@ -91,7 +134,7 @@
                         <i class="fas fa-exclamation prefix light-blue-text"></i>
                         <textarea id="closing_line" name="closing_line" data-length="100" 
                             class="materialize-textarea validate"></textarea>
-                        <label for="closing_line">Remarks!</label>
+                        <label for="closing_line">Tips or Remarks!</label>
                     </div>
                 </div>
                 <div class="row">

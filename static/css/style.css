@@ -32,16 +32,6 @@
     font-weight: 400;
 }
 
-
-/* #custom {
-    display: block;
-    margin: auto;
-    height: 20vh;
-    align-items: center;
-    -webkit-filter: sepia(30) hue-rotate(100deg);
-        filter:sepia(30) hue-rotate(100deg);
-} */
-
 .btn-small {
     margin: 5px;
 }
@@ -191,6 +181,20 @@ main {
     font-family: 'Josefin Slab', serif;
 }
 
+/*add_recipes.html*/
+.custom-prefix {
+    width: 3rem;
+    font-size: 2rem;
+    -webkit-transition: color .2s;
+    transition: color .2s;
+    top: .5rem;
+}
+
+.ingredient-title {
+    display: inline !important;
+    margin-left: .4rem;
+    padding-bottom: .4rem;
+}
 
 /*categories.html*/
 .reduce-size {
