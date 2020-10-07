@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% import 'components.html' as components %}
+
 {% block content %}
     
 
@@ -29,7 +31,8 @@
     <!--Show recipes when share_recipes toggle is ON unless user=ADMIN--> 
     <div class="container">
         <div class="row"> 
-        {% for recipe in recipes %}
+        {{ session.user }}
+        {% for recipe in recipes['items'] %}
             <!--Show recipes when user=ADMIN-->        
             {% if session.user|lower == "admin"|lower %}
                 <div class="col s12 m6 l4">
@@ -81,18 +84,10 @@
         
         </div>
     </div>
-    
-    <!--PENDING to connect pagination-->
-    <ul class="pagination center">
-        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-        <li class="active"><a href="#!">1</a></li>
-        <li class="waves-effect"><a href="#!">2</a></li>
-        <li class="waves-effect"><a href="#!">3</a></li>
-        <li class="waves-effect"><a href="#!">4</a></li>
-        <li class="waves-effect"><a href="#!">5</a></li>
-        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-    </ul>  
-
+     
+    <div class="container">
+        {{ components.pagination(url_for('get_recipes'), recipes) }}
+    </div>
 
 {% endblock %}
 

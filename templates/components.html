@@ -1,0 +1,28 @@
+{%- macro pagination(url, params) -%}
+
+<!-- Pagination, sample from Guido -->
+
+<ul class="pagination">
+    {% if params['prev_uri'] is none %}
+    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+    {% else %}
+    <li class="waves-effect"><a href="{{ url }}?page_number={{params['prev_uri']['page_number']}}&page_size={{params['prev_uri']['page_size']}}&search_term={{params['search_term']}}&order_by={{params['order_by']}}&order={{params['order']}}">
+        <i class="material-icons">chevron_left</i></a></li>
+    {% endif %} 
+    {% for page in range(1, params['page_count'] + 1) %} 
+        {% if params['page_number'] == page %}
+            <li class="waves-effect active">
+        {% else %}
+            <li class="waves-effect">
+        {% endif %}
+            <a href="{{ url }}?page_number={{ page }}&page_size={{ params['page_size'] }}&search_term={{ params['search_term'] }}&order_by={{ params['order_by'] }}&order={{ params['order'] }}">{{ page }}</a></li>
+    {% endfor %} 
+    {% if params['next_uri'] is none %}
+        <li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+    {% else %}
+    <li class="waves-effect"><a href="{{ url }}?page_number={{params['next_uri']['page_number']}}&page_size={{ params['next_uri']['page_size'] }}&search_term={{ params['search_term'] }}&order_by={{params['order_by']}}&order={{params['order']}}">
+    <i class="material-icons">chevron_right</i></a></li>
+    {% endif %}
+</ul>
+
+{%- endmacro -%}

@@ -119,17 +119,30 @@ main {
 .card-recipes-content {
     height: 150px;
 }
-/* it does not affect the recipes.html check if affect sg else and erase */
-/* .card .card-content {
-    height: 150px;
-} */
+
+/* Pagination */
+.pagination-page-info {
+    padding: .6em;
+    padding-left: 0;
+    width: 40em;
+    margin: .5em;
+    margin-left: 0;
+    font-size: 12px;
+}
+.pagination-page-info b {
+    color: black;
+    background: #6aa6ed;
+    padding-left: 2px;
+    padding: .1em .25em;
+    font-size: 150%;
+}
 
 
 /*view_recipes.html*/
-.single-recipe {
+/* .single-recipe {
     border-bottom: 1px solid #c5b9a0;
     margin-bottom: 15px;
-}
+} */ 
 
 .subheading {
     color: #a3865b;

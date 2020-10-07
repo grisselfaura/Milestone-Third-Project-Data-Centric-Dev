@@ -1,12 +1,14 @@
 # Imported modules
 import os
+import math
 from flask import (
     Flask, flash, render_template, 
     redirect, request, session, url_for)
-from flask_pymongo import PyMongo
+from flask_pymongo import PyMongo, pymongo
 from bson.objectid import ObjectId
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
+
 if os.path.exists("env.py"):
     import env 
 
@@ -30,49 +32,83 @@ mongo = PyMongo(app)
 def home():
     return render_template("home.html")
 
-# Code explanation from DCD  
-@app.route('/documents')
-def documents():
-	# The URL looks something like 
-	# /documents?limit=6&offset=0
-	 
-	# Request the limit (in the example URL == 6)	
-	p_limit = int(request.args['limit'])
 
-	# Request the offset (in the example URL == 0)	
-	p_offset = int(request.args['offset'])
-	
-	# Prevent user to enter pages with negative values (server error)
-	# only if he manually enters the value to URL
-	if p_offset < 0:
-		p_offset = 0
+# Pagination and sorting
+PAGE_SIZE = 5
+KEY_PAGE_SIZE = 'page_size'
+KEY_PAGE_NUMBER = 'page_number'
+KEY_TOTAL = 'total'
+KEY_PAGE_COUNT = 'page_count'
+KEY_ENTITIES = 'items'
+KEY_NEXT = 'next_uri'
+KEY_PREV = 'prev_uri'
+KEY_SEARCH_TERM = 'search_term'
+KEY_ORDER_BY = 'order_by'
+KEY_ORDER = 'order'
 
-	# Prevent user to enter pages with values over the collection count(server error)
-	# only if he manually enters the value to URL
-	num_results = recipes_collection.find().count(),
-	if p_offset > num_results:
-		p_offset = num_results
+def get_paginated_items(entity, query={}, **params):
+    page_size = int(params.get(KEY_PAGE_SIZE, PAGE_SIZE))
+    page_number = int(params.get(KEY_PAGE_NUMBER, 1))
+    order_by = params.get(KEY_ORDER_BY, '_id')
+    order = params.get(KEY_ORDER, 'asc')
+    order = pymongo.ASCENDING if order == 'asc' else pymongo.DESCENDING
+    if page_number < 1:
+        page_number = 1
+    offset = (page_number - 1) * page_size
+    items = []
+    search_term = ''
+    if KEY_SEARCH_TERM in params:
+        search_term = params.get(KEY_SEARCH_TERM)
+        if len(search_term.split()) > 0:
+            entity.create_index([("$**", 'text')])
+            result = entity.find({'$text': {'$search': search_term}})
+            items = result.sort(order_by, order).skip(offset).limit(page_size)
+        else:
+            items = entity.find().sort(
+                order_by, order
+            ).skip(offset).limit(page_size)
+    else:
+        items = entity.find(query).sort(order_by, order).skip(
+            offset).limit(page_size)
+    total_items = items.count()
+    if page_size > total_items:
+        page_size = total_items
+    if page_number < 1:
+        page_number = 1
+    if page_size:
+        page_count = math.ceil(total_items / page_size)
+    else:
+        page_count = 0
+    if page_number > page_count:
+        page_number = page_count
+    next_uri = {
+        KEY_PAGE_SIZE: page_size,
+        KEY_PAGE_NUMBER: page_number + 1
+    } if page_number < page_count else None
+    prev_uri = {
+        KEY_PAGE_SIZE: page_size,
+        KEY_PAGE_NUMBER: page_number - 1
+    } if page_number > 1 else None
 
-	# Send the query with limit and offset taken from args
-	recipes = recipes_collection.find().limit(p_limit).skip(p_offset)
-
-	args = {
-		"p_limit" : p_limit,
-		"p_offset" : p_offset,
-		"num_results" : num_results,
-		"next_url" : f"/documents?limit={str(p_limit)}&offset={str(p_offset + p_limit)}",
-		"prev_url" : f"/documents?limit={str(p_limit)}&offset={str(p_offset - p_limit)}",
-		"recipes" : recipes
-	}
-	return render_template("documents.html", args=args)
+    return {
+        KEY_TOTAL: total_items,
+        KEY_PAGE_SIZE: page_size,
+        KEY_PAGE_COUNT: page_count,
+        KEY_PAGE_NUMBER: page_number,
+        KEY_NEXT: next_uri,
+        KEY_PREV: prev_uri,
+        KEY_SEARCH_TERM: search_term,
+        KEY_ORDER_BY: order_by,
+        KEY_ORDER: order,
+        KEY_ENTITIES: items
+    }
 
 
 # READ
 # Page to view all recipes
-@app.route("/get_recipes")
+@app.route("/get_recipes", methods=['GET'])
 def get_recipes():
-    recipes = list(mongo.db.recipes.find())
-    #recipes = list(mongo.db.recipes.find({category_name: 1})) CHECK HOW TO CONNECT THIS TO FILTER
+    recipes = get_paginated_items(mongo.db.recipes, **request.args.to_dict())
     return render_template("recipes.html", recipes=recipes)
 
 
@@ -296,6 +332,7 @@ def delete_category(category_id):
     return redirect(url_for("get_categories"))
 
 
+# The correct running of you app file :)  In terms of Environmental Variables on Heroku. 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
