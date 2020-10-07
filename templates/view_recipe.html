@@ -48,7 +48,7 @@
                                     <span class="created">on {{ recipe.created_date }} </span>
                                     </p>
                             </div>
-
+                            <!--Control if user to access delete/edit options-->
                             <div class="row center">
                                 {% if session["user"]|lower == recipe.created_by|lower %}
                                 <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }} " class="btn-small amber accent-4">EDIT</a>
@@ -112,28 +112,12 @@
                         <div class="col s12">
                             <h5 class="tittle center-align">Instructions</h5>
                             <!-- PENDING THE JAVASCRIPT TO ADD INFO TO THE FORM -->
-                            {% for recipe_method in recipe.recipe_method %}
+                            {% for step in recipe.recipe_method %}
                             <li class="method-font flow-text">
-                                Step {{ loop.index }} {{ recipe_method.value }}
-                                <!-- key value not showing-->
+                                Step {{ loop.index }} {{ recipe_method }}
                             </li>
                             {% endfor %}
                         </div>
-                        <!-- Method2 -->
-                        {% if recipe.recipe_method2|length > 0 %}
-                        <div class="col s12">
-                            <h5 class="tittle center-align">Instructions</h5>
-                            <ol>
-                                <!-- PENDING THE JAVASCRIPT TO ADD INFO TO THE FORM  -->
-                                {% for recipe_method in recipe.recipe_method2 %}
-                                <ul class="method-font flow-text">
-                                    Step {{ loop.index }} {{ recipe_method.value }}
-                                    <!-- key value not showing-->
-                                </ul>
-                                {% endfor %}
-                            </ol>
-                        </div>
-                        {% endif %}
                     </div>
                 </div>
             </div>
