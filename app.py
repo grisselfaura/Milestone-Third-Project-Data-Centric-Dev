@@ -26,14 +26,8 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
-# HOME
-@app.route("/")
-@app.route("/home")
-def home():
-    return render_template("home.html")
-
-
-# Pagination and sorting
+# Pagination and sorting 
+# Reused code from https://github.com/mirofrankovic/cookbook-trisport-project-03/blob/master/app.py#L26-L101
 PAGE_SIZE = 5
 KEY_PAGE_SIZE = 'page_size'
 KEY_PAGE_NUMBER = 'page_number'
@@ -105,44 +99,66 @@ def get_paginated_items(entity, query={}, **params):
     }
 
 
-# READ
-# Page to view all recipes
-@app.route("/get_recipes", methods=['GET'])
+# HOME
+@app.route('/')
+@app.route('/home')
+def home():
+    categories = list(mongo.db.categories.find())
+    return render_template('home.html', categories=categories)
+
+
+# READ ALL RECIPE   
+@app.route('/get_recipes', methods=['GET'])
 def get_recipes():
+    # Page to view all recipes
     recipes = get_paginated_items(mongo.db.recipes, **request.args.to_dict())
-    return render_template("recipes.html", recipes=recipes)
+    return render_template('recipes.html', recipes=recipes)
 
 
-# Page to view one recipes
-@app.route("/view_recipe/<recipe_id>")
+# RECIPE BY CATEGORY
+@app.route('/get_recipes_by_category/<category_name>', methods=['GET'])
+def get_recipes_by_category(category_name):
+    # Page to view all recipes
+    recipes = get_paginated_items(mongo.db.recipes,
+                                    query={'category_name': category_name},
+                                    **request.args.to_dict())
+    categories = list(mongo.db.categories.find())
+    return render_template('recipes.html',
+                            title='category_name', 
+                            recipes=recipes,
+                            categories=categories)
+
+
+# Page to view individual card recipes
+@app.route('/view_recipe/<recipe_id>')
 def view_recipe(recipe_id):
-    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-    return render_template("view_recipe.html", recipe=recipe)
+    recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
+    return render_template('view_recipe.html', recipe=recipe)
 
 
 # Search functionality in the recipe page
-@app.route("/search", methods=["GET", "POST"])
+@app.route('/search', methods=['GET', 'POST'])
 def search():
     query = request.form.get("query")
-    recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
-    # Message for no search missing
+    recipes = list(mongo.db.recipes.find({'$text': {'$search': query}}))
+    # Message when search yield no results
     if len(recipes) == 0:
         flash("0 matches for \"{}\"".format(
             request.form.get("query")))
-    return render_template("recipes.html", recipes=recipes)
+    return render_template('recipes.html', recipes=recipes)
 
 
 # Register
-@app.route("/join_free", methods=["GET", "POST"])
+@app.route('/join_free', methods=['GET', 'POST'])
 def join_free():
-    if request.method == "POST":
-        # check if username already exists in db
+    if request.method == 'POST':
+        # checks if username already exists in db
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
     
         if existing_user:
-            flash("Username already exists, please choose another name.")
-            return redirect(url_for("join_free")) 
+            flash("Username already exists, please choose a different name.")
+            return redirect(url_for('join_free')) 
 
         # Checking confirmation password
         password = request.form.get("password")
@@ -283,7 +299,7 @@ def edit_recipe(recipe_id):
     return render_template("edit_recipe.html", recipe=recipe, categories=categories, 
                             difficulty=difficulty)
 
-# DELETE
+# DELETE RECIPE
 @app.route("/delete_recipe/<recipe_id>")
 def delete_recipe(recipe_id):
     mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
@@ -311,6 +327,7 @@ def add_category():
     return render_template("add_category.html")
 
 
+# EDIT CATEGORIES
 @app.route("/edit_category/<category_id>", methods=["GET", "POST"])
 def edit_category(category_id):
     if request.method == "POST":
@@ -326,16 +343,18 @@ def edit_category(category_id):
     return render_template("edit_category.html", category=category)
 
 
-@app.route("/delete_category/<category_id>")
+# DELETE CATEGORIES
+@app.route('/delete_category/<category_id>')
 def delete_category(category_id):        
-    mongo.db.categories.remove({"_id": ObjectId(category_id)})
+    mongo.db.categories.remove({'_id': ObjectId(category_id)})
     flash("Category Successfully Deleted")
-    return redirect(url_for("get_categories"))
+    return redirect(url_for('get_categories'))
 
 
 # The correct running of you app file :)  In terms of Environmental Variables on Heroku. 
-if __name__ == "__main__":
-    app.run(host=os.environ.get("IP"),
-            port=int(os.environ.get("PORT")),
-            debug=True)# change to false before submit this for assesment
+if __name__ == '__main__':
+    app.run(host=os.environ.get('IP'),
+            port=int(os.environ.get('PORT')),
+            debug=True)
+# change debug to false before submit this for assesment
 

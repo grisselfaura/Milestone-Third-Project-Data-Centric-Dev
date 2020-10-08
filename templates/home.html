@@ -12,16 +12,13 @@
         </div>
     </section>
 
-    <!--Materialize Carrousel to display categories (LINKS TO EACH CATEGORY PENDING TO DEVELOP)-->
+    <!--Materialize Carrousel to display categories (linked to each category)-->
     <section>
         <h2 class="tittle center-align light-blue-text">Categories</h3>
         <div class="carousel">
-            <a class="carousel-item" href="#breakfast!"><img src="https://i.postimg.cc/Jtcxbrkz/breakfast.png"></a>
-            <a class="carousel-item" href="#lunch!"><img src="https://i.postimg.cc/hz0m7G5F/Lunch.png"></a>
-            <a class="carousel-item" href="#salads!"><img src="https://i.postimg.cc/t7TJzD1n/Salads.png"></a>
-            <a class="carousel-item" href="#borrel!"><img src="https://i.postimg.cc/fJzKCGcj/borrel.png"></a>
-            <a class="carousel-item" href="#soup!"><img src="https://i.postimg.cc/BjWv40m2/Soups.png"></a>
-            <a class="carousel-item" href="#dinner!"><img src="https://i.postimg.cc/FY1x50nY/dinner.png"></a>
+        {% for category in categories %}
+            <a class="carousel-item" href="{{ url_for('get_recipes_by_category', category_name=category.category_name) }}"><img src="{{ category.category_image }}"></a>
+        {% endfor %}
         </div>
     </section>
 

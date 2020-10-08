@@ -31,7 +31,6 @@
     <!--Show recipes when share_recipes toggle is ON unless user=ADMIN--> 
     <div class="container">
         <div class="row"> 
-        {{ session.user }}
         {% for recipe in recipes['items'] %}
             <!--Show recipes when user=ADMIN-->        
             {% if session.user|lower == "admin"|lower %}
@@ -85,7 +84,7 @@
         </div>
     </div>
      
-    <div class="container">
+    <div class="container center">
         {{ components.pagination(url_for('get_recipes'), recipes) }}
     </div>
 
