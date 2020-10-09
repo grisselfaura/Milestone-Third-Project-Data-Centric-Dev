@@ -35,7 +35,7 @@
                             <div class="row">
                             <br>
                                 <p class="subheading light flow-text"><i class="fas fa-clock icon-color"></i>
-                                    Cooks In : {{ recipe.cooking_time }}
+                                    Cooks In : {{ recipe.cooking_time }} mins
                                 </p>
                             </div>
                             <div class="row ">
@@ -76,13 +76,14 @@
                     </div>
                 </div>
 
-            <!-- Template from Cookbook and Jamie Oliver -->
+            <!-- Template inspiration from Cookbook and Jamie Oliver -->
             <div class="row">
                 <div class="col s12 m4">
                     <div class="row">
                         <!-- Ingredient -->
                         <div class="col s12 ingredients-bullets">
                             <h5 class="tittle left-align">Ingredients</h5>
+                            <!-- Added javascript code to add ingredients as an array -->
                             <ul>
                                 {% for basic_ingredient in recipe.basic_ingredients %}
                                 <li class="ingredient-font flow-text">
@@ -94,7 +95,8 @@
                         <!-- Complement with :  -->
                         {% if recipe.complementary_ingredients|length > 0 %}
                         <div class="col s12 ingredients-bullets">
-                            <h5 class="tittle left-align">Completement this with : </h5>
+                            <h5 class="tittle left-align">Completement this with </h5>
+                            <!-- Added javascript code to add complent ingredients as an array -->
                             <ul>
                                 {% for complementary_ingredient in recipe.complementary_ingredients %}
                                     <li class="ingredient-font flow-text">
@@ -111,7 +113,7 @@
                     <div class="row">
                         <div class="col s12">
                             <h5 class="tittle center-align">Instructions</h5>
-                            <!-- PENDING THE JAVASCRIPT TO ADD INFO TO THE FORM -->
+                            <!-- Added javascript code to add instructions as an array -->
                             {% for step in recipe.recipe_method %}
                             <li class="method-font flow-text">
                                 Step {{ loop.index }} : {{ step }}
