@@ -28,7 +28,7 @@ mongo = PyMongo(app)
 
 # Pagination and sorting 
 # Reused code from https://github.com/mirofrankovic/cookbook-trisport-project-03/blob/master/app.py#L26-L101
-PAGE_SIZE = 5
+PAGE_SIZE = 6
 KEY_PAGE_SIZE = 'page_size'
 KEY_PAGE_NUMBER = 'page_number'
 KEY_TOTAL = 'total'
