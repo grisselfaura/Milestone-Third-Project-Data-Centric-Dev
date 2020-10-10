@@ -268,7 +268,7 @@ def add_recipe():
         }
         mongo.db.recipes.insert_one(recipe)
         flash("Recipe Successfully Added")
-        return redirect(url_for('get_recipes'))
+        return redirect(url_for('myrecipes', username=session["user"]))
 
     categories = mongo.db.categories.find().sort("category_name", 1)
     difficulty = mongo.db.difficulty.find().sort("sort_difficult", 1)
@@ -294,6 +294,7 @@ def edit_recipe(recipe_id):
             "closing_line": request.form.get("closing_line"),
             "share_recipe": share_recipe,
             "created_by": session["user"],
+            "created_date": datetime.now().strftime("%d/%m/%Y")
         }
         mongo.db.recipes.update({'_id': ObjectId(recipe_id)}, submit)
         flash("Recipe Successfully Updated")
@@ -311,8 +312,7 @@ def edit_recipe(recipe_id):
 def delete_recipe(recipe_id):
     mongo.db.recipes.remove({'_id': ObjectId(recipe_id)})
     flash("Recipe Successfully Deleted")
-    return redirect(url_for('get_recipes'))
-
+    return redirect(url_for('myrecipes', username=session["user"]))
 
 # Read all Categories
 @app.route('/get_categories')

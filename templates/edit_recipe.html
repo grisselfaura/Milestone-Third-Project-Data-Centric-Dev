@@ -79,7 +79,7 @@
                                     <label for="basic_ingredients">Ingredients follow example format!</label>
                                     {% for basic_ingredient in recipe.basic_ingredients %}
                                         <input id="basic_ingredients" name="basic_ingredients[]" type="text" minlength="1" 
-                                        maxlength="100" placeholder="100gr onion, finely chopped" 
+                                        maxlength="150" placeholder="100gr onion, finely chopped" 
                                         value = "{{ basic_ingredient }}" class="ingredients validate" required> 
                                     {% endfor %}                               
                                 </div>    
@@ -104,7 +104,7 @@
                                     <label for="complementary_ingredients">Complement ingredients follow example format!</label>
                                     {% for complementary_ingredient in recipe.complementary_ingredients %}
                                         <input id="complementary_ingredients" name="complementary_ingredients[]"  type="text" minlength="1" 
-                                        maxlength="100" value = "{{ complementary_ingredient }}" placeholder="100gr green onion, finely chopped" 
+                                        maxlength="180" value = "{{ complementary_ingredient }}" placeholder="100gr green onion, finely chopped" 
                                         class="validate">
                                     {% endfor %} 
                                 </div>    
