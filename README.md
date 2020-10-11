@@ -20,8 +20,9 @@ When more time is available it would be my wish to attempt to generate a json fi
 ## Demo
 
 You can check out the website [here]( https://griss-milestone-3-project.herokuapp.com/)!
-![Responsive mockup](http://ami.responsivedesign.is/?url=https://griss-milestone-3-project.herokuapp.com/)
-https://raw.githubusercontent.com/grisselfaura/Milestone-Second-Project-Interactive-Frontend-Development/master/assets/images/read-mockups/Mock-up-responsive-test.PNG "Responsive mockup")
+[Responsive mockup](http://ami.responsivedesign.is/?url=https://griss-milestone-3-project.herokuapp.com/)!
+![Responsive mockup](https://i.ibb.co/Gs6qG2x/Mockups.png "Responsive mockup")
+
 
 ## UX
 
