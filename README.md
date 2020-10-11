@@ -1,22 +1,27 @@
 # B a s e - F o o d - RECIPE MANAGER (Milestone Project 3) * to be updated
 
-Welcome to my Stream Two Project: Interactive Frontend Development - Code Institute!
+Welcome to my Stream Third Project: Data Centric Development Milestone Project  - Code Institute!
 
-Global Warming for Dummies is a website which interacts with anyone (target age <+ 12years) that my be interested in the subject. 
-It provides basic information as well as a basic infographic (which have become a quite fashionable way to display data) to show CO2 data emissions per different sectors. 
+The goal was to create an application that allows users to store and easily access vegan cooking recipes online.
+This app also allows the users to share their recipes with other users or just app viewers.
+The recipes are built on the Flask framework using MongoDB database which can be filtered by a user on the website using the categories href but also searching for a specific ingredient (if available).
+It is a (data-driven) application, and the target audience is any user targeted towards athletes working out for their competition. 
 
 This website is part of my portfolio to present to prospective employers.
 
 Please note this is merely a course project, and then the information on the side is used for that purpose alone. I only use publicly available data for this purpose.
-CO2 Data used on this example = https://ourworldindata.org/grapher/global-carbon-dioxide-emissions-by-sector
-Data can be filtered by country, sector and year. One disadvantage is that a few countries are missing from this database which will be shown in the map as gray.
-world_countries file for the WorldMap https://github.com/jdamiani27/Data-Visualization-and-D3/blob/master/lesson4/world_countries.json
+Recipe Data used on this app was provided by Tom Van Oijen in attempt to help him share his experience as turning vegan!
+All the photos available in this app were taken by photographer Gaby Van Ingen so please DO ASK permission to use them as they have been share for the solely use of this project.
+Recipes can be filtered by category or thorugh the searchbox for example:  ingredients or method words.
+One disadvantage is that the recipes where provided using a pdf format in Dutch language and had to be manually entered to test the funcionality of this app. 
+When more time is available it would be my wish to attempt to generate a json file database and load this directly to the db Mongo.
 
 
 ## Demo
 
-You can check out the website [here]( https://grisselfaura.github.io/Milestone-Second-Project-Interactive-Frontend-Development//)!
-![Responsive mockup](https://raw.githubusercontent.com/grisselfaura/Milestone-Second-Project-Interactive-Frontend-Development/master/assets/images/read-mockups/Mock-up-responsive-test.PNG "Responsive mockup")
+You can check out the website [here]( https://griss-milestone-3-project.herokuapp.com/)!
+![Responsive mockup](http://ami.responsivedesign.is/?url=https://griss-milestone-3-project.herokuapp.com/)
+https://raw.githubusercontent.com/grisselfaura/Milestone-Second-Project-Interactive-Frontend-Development/master/assets/images/read-mockups/Mock-up-responsive-test.PNG "Responsive mockup")
 
 ## UX
 
