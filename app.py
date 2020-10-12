@@ -139,15 +139,18 @@ def view_recipe(recipe_id):
 
 
 # Search functionality in the Home page
-@app.route('/search', methods=['GET', 'POST'])
+@app.route('/search', methods=['GET'])
 def search():
-    query = request.form.get("query")
+    query = request.args.get("query")
+    
     recipes = get_paginated_items(mongo.db.recipes, {'$text': {'$search': query}})
-    # Message when search yield no results NOT WORKING
-    if len(recipes) > 0:
+    
+    # Message when search yield
+    if recipes['total'] > 0:
         return render_template('recipes.html', recipes=recipes)
-    else:
-        flash("0 matches for \"{}\"".format(request.form.get(query)))
+    
+    flash("0 matches for \"{}\"".format(query))
+    return render_template('recipes.html', recipes=recipes)
 
 
 # Register
