@@ -184,15 +184,26 @@ Tabs and sections with interesting bugs or problems discovered during testing:
 
 ## Deployment
 
-This site is hosted using GitHub pages, deployed directly from the master branch. 
-The deployed site will update automatically upon new commits to the master branch.
-In order for the site to deploy correctly on GitHub pages, the landing page must be named `index.html`.
-
 To run locally, you can clone this repository directly into the editor of your choice by pasting
 ```
  `git clone  https://github.com/grisselfaura/Milestone-Third-Project-Data-Centric-Dev.git` into your terminal. 
 ```
 To cut ties with this GitHub repository, type `git remote rm origin` into the terminal.
+
+
+The following section describes the process to deploy this project to Heroku.
+
+1. Ensure all required technologies are installed locally, as per the [requirements.txt] file.
+2. Login to Heroku, using 'heroku login' command. Input Heroku login details.
+3. Create new Heroku app, using 'heroku apps:create appname' command.
+4. Push project to Heroku, using 'push -u heroku master' command.
+5. Create scale, using 'heroku ps:scale web=1' command.
+6. Login to Heroku and select newly created app.
+7. Select settings. Select ‘Reveal Config'. Add IP 0.0.0.0 and PORT 5000.
+8. From 'More' menu on the top right, select 'Restart all dynos'.
+9. View app: In settings, select Domain URL, NOT Git URL to view your hosted application.
+10. Deployed via Heroku:..............
+
 
 ## Contribution
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. 
