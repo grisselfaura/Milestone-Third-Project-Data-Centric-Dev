@@ -34,8 +34,8 @@
             {% if session.user|lower == "admin"|lower %}
                 <div class="col s12 m6 l4">
                     <div class="card">
-                        <div class="card-image waves-effect waves-block waves-light height-img-card">
-                            <img class="activator responsive-img" src="{{ recipe.recipe_images }}">
+                        <div class="card-image waves-effect waves-block waves-light height-card">
+                            <img class="activator responsive-img height-img-card" src="{{ recipe.recipe_images }}">
                         </div>
                         <div class="card-content lime lighten-2 card-recipes-content">
                             <span class="tittle card-title activator grey-text text-darken-4"><a href="{{ url_for('view_recipe',recipe_id=recipe._id) }}">{{ recipe.recipe_name }}</a>
@@ -57,8 +57,8 @@
             {% elif recipe.share_recipe =="on"  %}
                 <div class="col s12 m6 l4">
                     <div class="card">
-                        <div class="card-image all-recipes waves-effect waves-block waves-light">
-                            <img class="activator responsive-img fit-size" src="{{ recipe.recipe_images }}">
+                        <div class="card-image waves-effect waves-block waves-light height-card">
+                            <img class="activator responsive-img height-img-card" src="{{ recipe.recipe_images }}">
                         </div>
                         <div class="card-content lime lighten-2 card-recipes-content">
                             <span class="tittle card-title activator grey-text text-darken-4"><a href="{{ url_for('view_recipe',recipe_id=recipe._id) }}">{{ recipe.recipe_name }}</a>

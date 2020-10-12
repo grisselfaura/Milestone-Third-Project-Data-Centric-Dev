@@ -103,8 +103,12 @@ main {
 }
 
 /*recipes.html*/
+.height-card {
+    height: 600px;
+} 
+
 .height-img-card {
-    height: 800px;
+    margin: auto;
 } 
 
 
