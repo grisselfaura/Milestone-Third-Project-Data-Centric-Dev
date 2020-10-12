@@ -8,7 +8,7 @@ $(document).ready(function(){
     $(".modal").modal();
     $("input#input_text, textarea#textarea2, textarea#recipe_description, textarea#basic_ingredients, textarea#complementary_ingredients, textarea#category_method"
 ).characterCounter();
-    $('.cancel-form').click(function() {
+    $(".cancel-form").click(function() {
         window.history.back();
     });
     

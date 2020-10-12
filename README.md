@@ -26,34 +26,102 @@ You can check out the website [here]( https://griss-milestone-3-project.herokuap
 
 ## UX
 
-- My goal on the website design was to make it as easy as possible for the potential viewers to access the information on the site while striving for a simple layout approach. 
+- My goal on the website design was to make it as easy as possible for the potential users to upload, share and access the information on the site while striving for a simple layout approach.
+The website can also be used by people who are only interested in finding recipes to get inspired. 
 
-- The design color scheme was inherited from the Bootstrap landing page to create a consistent and  visual impactful yet straighforward easy-for-the-eye feeling. 
+- For the basic viewers:
+* view the recipes from any device (mobile, tablet, desktop).
+* view all recipes as a Guest.
+* see recipes from other users to get new ideas (unless user's restricted view).
+* search any specific recipe, ingredients, methods.
+* search recipes by different category.
+* easily navigate through the recipes by various main filters.
 
-- For the basic viewers, I wanted to provide them with an overview of the  general concepts on global warming and its importance, together with videos and news to make it easy to follow and to connect with the subject. 
-  A contact form was also added for keeping contact and making a database of interested viewers via a user friendly design.
-  This way, they would be able to get a glimpse of the information and a voluntary request for signing up. For this exercise GDPR legal terms were not taken into account. 
-  In the 'Sign Up' section, I wanted them to be able to quickly reach out and connect with this website using a voluntary and transparent approach. 
- 
-- For advance viewers, I wanted to provide them with a dashboard overview showing data visualization graphs regarding CO2 emissions. In addition 
- 'Sign up form' section where they can suscribe them for further information. 
- The footer shows links to other institutions with further and more in-depth information. 
-  *[In future and when available to the general public real live Co2 database will be further used for the infographic].
+- For advance viewers:
+* Register as a user
+* Login and add recipes.[Creatre]
+* Add recipes for their account without sharing to other users.
+* Easily see all of the recipes submitted under their Profile.
+* Get the instruction to make a dish from this site.[Read]
+* Edit the recipes they have added.[Edit]
+* Delete the recipes they have submitted.[Delete]
+* Adm user also to manage the categories where the recipes will become allocated for the filter functionality.
+
+### Design
+- The design color scheme choice was keep a simple and elegant combination in order to create a consistent and visual impactful yet straighforward easy-for-the-eye feeling. 
+
+#### Framework
+
+* **[Materialize 1.0.0] = To get a modern and clean layout, I used Materialize as a framework.
+* **[jQuery 3.5.1] = Used to manipulate the DOM, for example buttons, and showing / hiding elements
+* **[Flask 1.1.2] = Flask is the micro web framework that runs the application
+
+#### Database
+
+For the database, I choose MongoDB following the example from the course. 
+The database is made up of the following collections : categories / difficulty / recipes/ users.
+
+#### Typography
+
+The following fonts were used:
+
+* **Fredericka** was used for the recipe names.
+* **Open Sans Condensed** was used for the Form: description/subheading.
+* **Caveat & family Indie Flower** was used for the Form: Ingredients.
+* **Architects Daughter familyIndie+Flower** was used for the Form: Methods.
+* **Indie Flower** was used for the Form: closing line.
+* **Gloria Hallelujah** was used for the general text in myrecipes.html.
+* **Josefin Slab** was used for the general text in myrecipes.html.
+
+#### Icon
+
+A combination of [Materialize icons] & [Fontawesome] has been used for this project.
 
 - Wireframes available.
 
 ## Features
 
 - ### Existing Features 
-- This site uses the Scrolling Nav feature in Bootstrap with an extra feature which highlights the nav bar that is being selected by the user. Further work is need to maintained highlighted the tab that has been accessed.
+In this section I will describe the front-end features of my project:
+1. [Navbar]: consists of the PREPARE FOR YOUR RACE logo which also returns the user to the "Home" page of the application.
+             My navbar also has links to "All Recipes", "Your Suggestion", "Contact Us", "Dashboard", "Login". The navbar will appear in all pages
+             with the same functions for all links. with an extra feature which highlights the nav bar that is being selected by the user.
+         
+2. [Home]: consists of one background image along with some information on contacting the webmaster and a link to the contact us page of the site. 
+    
+3. [All_Recipes]: directs the user to the "All Recipes" page which displays ALL recipes from ALL users which have been entered on the site. 
+                The user can then filter or browse through the recipes.
+                The can view more information on each recipe by selectign the "See Recipe Description" link which delivers the user to the "Recipe Detail" page. 
+
+4. [Recipe_Detail]: provides users with the recipe details containg a recipe name, description, image (if available), flavour, meal type, race day, sport type, nutrition wise type of meal, author and date posted.
+
+5. [My_Recipes]: provides the user with the recipes that they have added themselves. The user's recipes can be edited and deleted by using the buttons displayed under the recipes.
+
+6. [Login]: when first selected the user will be prompted to create a username to login to the application so that they can add recipes to the database.
+
+7. [Register]:
+
+8. [Dashboard]: once logged in the user will be presented with their dashboard which provides a count of their recipes, along with 4 data charts depicting the number of favourite meal type, favourite sport type, favourite race day and meal associated for the vegan.
+
+9. [Contact_Us]: delivers the user to the contact page. This page displays a blank form, which allows users to contact the website developers to offer feedback and suggestions (not currently wired up to an email address as this is not a real business). 
+              Their are also 4 social media buttons so that the user may interact on social networks.
+
+10. [Social_Links]: provides users with links to the website social media pages.
+
+- This site uses the Scrolling Nav feature in Bootstrap  Further work is need to maintained highlighted the tab that has been accessed.
 - The navbar is fixed to the top and includes an dropdown Menu for the md-screen that collapses when selected. 
 
 - ### Features Left to Implement
+
+8. [Dashboard]: once logged in the user will be presented with their dashboard which provides a count of their recipes, along with 4 data charts depicting the number of favourite meal type, favourite sport type, favourite race day and meal associated for the vegan.
+
 * In the future i would like to add a a choropath map direcly using dc.js instead of generated using d3.js so as multiple charts can be quickly drawn (code is already started under test_script_chloro_DC_worldmap.html) but due to time limitation is yet pending to integrate all the functions to generate the infographic). 
 Fixed with the help from mentor during last session. However the generated map is not centered on the div and cant not be target via css.
 * In addition the "About us" and links from the footnote are yet to be constructed.
 * Furthermore the links to social media are not linked for the purpose of this exercise.
 * Lastly, I would like to be able to have real life data feeding the info-charts. The Database choosed only contained CO2 data for the purpose of this exercise. However on a real case scenario will be more graphics showing additional parameters like temperature and water melting. 
+
+
 
 ## Technologies Used
 
@@ -122,24 +190,28 @@ In order for the site to deploy correctly on GitHub pages, the landing page must
 
 To run locally, you can clone this repository directly into the editor of your choice by pasting
 ```
- `git clone  https://github.com/grisselfaura/Milestone-Second-Project-Interactive-Frontend-Development/.git` into your terminal. 
+ `git clone  https://github.com/grisselfaura/Milestone-Third-Project-Data-Centric-Dev.git` into your terminal. 
 ```
 To cut ties with this GitHub repository, type `git remote rm origin` into the terminal.
 
 ## Contribution
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. 
 
 ## Credits
 
+Go Humongous With MongoDB Atlas
 ### Content
-The original text for the entired site was taken from already published website as this is only an educational exercise. They can be provided if required.
+Most of the text was provided by Tom Van Oijenor and translated from me.
+This is only an educational exercise. They can be share upon requested as it is the wish of the writer these recipes reach as many as possible.
 
 ### Media
-The photos used in this site were taken from already published website as this is only an educational exercise.
+The recipe photos were provided by photographer Gaby Van Ingen so please DO ASK permission to use them as they have been share for the solely use of this project.
+Other images used in this site were taken from already published website as this is only an educational exercise.
 
 ### Acknowledgements
-
-Regarding the subject I am very deeply concerned about global warming in general and therefore i was motivated to based this project on this theme.
+Special thanks to my Code Institute mentor, for his mentoring during this project and also helping me to sort pagination issues and the javascript behind the form input for the ingredients and methods.
+Regarding my desicion to choose for a vegan recipe app, it is my personal passion to promote any kind of projects that promote the care and respect for the animals and resources available in this planet.
+.
 For the project itself I received inspiration from my tutor and also from other students via Slack. 
 The Bootstrap Nav tutorial was found through this tutorial [here](https://startbootstrap.com/templates/scrolling-nav/).
 The Bootstrap landing page and footer inspiration [here](https://startbootstrap.com/themes/landing-page/).
