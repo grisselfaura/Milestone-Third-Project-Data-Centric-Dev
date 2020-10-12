@@ -126,28 +126,37 @@ In this section I will describe the front-end features of my project:
 #### Languages
 
 * **[HTML] used as the markup language
-2. CSS
-3. Bootstrap (4.4.1)
-3.1. Scrolling Nav
-3.2. Landing Page
-4. Font-awesome (4.7.0) and fonts.googleapis.com used.
-5. [JQuery](https://jquery.com) The project uses **JQuery** to simplify DOM manipulation.
-6. JavaScript to embedd facebook videos in both the Home and reduce tabs.
-7. Dc.js, crossfilter, queue, topojson and D3.js for the data visualization (graph and world data map)
+* **[CSS] used as the base for cascading styles.
+* **[JavaScript] used mostly for DOM manipulation
+* **[Python3] used to run the backend application
 * this website is only available in english
-8. Email.js to send Email Directly From JavaScript
+
+#### Libraries
+
+* **[Google Fonts] provided the fonts used throughout the project
+* **[Font Awesome] to provide the icon set
+* **[Materialize] used as the CSS framework for the project
+* **[jQuery] used as the primary JavaScript functionality to simplify DOM manipulation.
+* **[Flask] is the micro web framework that runs the application
+* **[Jinja] is the default templating language for flask and is used to display data from the python application in the frontend html pages
+* **[PyMongo] was used to enable the python application to access the Mongo database
+* MAT for basic javascript operations and datetime to obtain recipe creation date were also used.
+
+#### Tools
+
+* **[GitHub]** provides hosting for software development version control using Git
+* **[Am I Responsive]** to create the images in this readme file.
 
 #### Framework
 
-* **[Materialize 1.0.0] = To get a modern and clean layout, I used Materialize as a framework.
-* **[jQuery 3.5.1] = Used to manipulate the DOM, for example buttons, and showing / hiding elements
-* **[Flask 1.1.2] = Flask is the micro web framework that runs the application
+* **[Materialize] = To get a modern and clean layout, I used Materialize as a framework.
+* **[jQuery] = Used to manipulate the DOM, for example buttons, and showing / hiding elements
+* **[Flask] = Flask is the micro web framework that runs the application
 
 #### Database
 
-For the database, I choose MongoDB following the example from the course. 
+For the database, I choose MongoDB [MongoDB Atlas] following the example from the course. 
 The database is made up of the following collections : categories / difficulty / recipes/ users.
-
 
 ## Testing
 ### Validation
@@ -158,28 +167,33 @@ The database is made up of the following collections : categories / difficulty /
 
 - **JavaScript:** I have used https://jshint.com/ in order to check the JavaScript code.
 
+- **[PEP8 Online]:** (http://pep8online.com/) was used to validate Python.
 
+# Manual Testing
 By clicking on the links in the navbar, the background effect will confirm to the user which tab has been selected. All tabs can be independently accessed without having to go back to the HOME tab. 
-*The footnote and social media links as well as the "About us" tab are pending to be developed (future construction) as for the purpose of this project they will not add any further skill . 
+*The social media links are pending to be developed (future construction) as for the purpose of this project they will not add any further skill . 
 
-1. HOME TAB
--If you try to click on the embeded facebook link it will start displaying and can be paused from the same screen.
--All navigations link work and will redirect you to the desire tab.
--If you try to do a quick sign up for news from the quick CALL TO ACTION FORM, it will redirect you to the Sign up Tab and will prefill you email to the new form.
-*Country was by default showing Afghanistan as the country form is being shown in alfabetical display. (Fixed to show a choose value instead)
+ * **REGISTER** 
+  I've created my own account, and 3 other accounts to confirm that the authentication and validation for creating account worked as expected.
 
-2. DASHBOARD TAB
--The infographics is interactive. The user can search for any given country from the database.
--In addition hover feature has been added to the charts to highlight user interaction with potential action. The hover over on any pie slice/bar chart/country will display detailed data information.
+* **LOG IN AND LOG OUT** * Log In To An Existing Account
+  The accounts created were tested by attempting log in and out. No issues found or expected. Flash messages confirms the user if attempts were succesful and hence the location.
 
-3. REDUCE TAB
--If you try to click on the embeded facebook link it will start displaying and can be paused from the same screen.
--A color scale map was also added for easy and fun visualization comparing the data of all countries in one single view.
+* **Add | View | Edit | Delete a Recipe**
+    I've created more than 20 test recipes in order to :
+        Show functionality.
+        Preparare for the pagination using different accounts I created for testing.
+        Test share_recipe buttom.
+    	The data validation in the add recipe form is solid and only accepts input in the correct format.
+        * Recipes has been modify in several ocassion to test the functionality of updating a recipe to the database. 
+        Delete buttom still needs IMPROVEMENT
+        Tested edit and delete button were available for the owner of the recipes, and disabled for others.
+        Some cards were deleted to test the correct function of the delete functionality.When the delete button is pressed, a modal asks to confirm deletion. 
+        If a user selects cancel, they are taken back to all the recipes and I've confirmed that the recipe has been deleted.
 
-4. SIGN UP TAB
--If you try to submit the contact form with an invalid email address, there will be an error noting the invalid email address. 
--Furthermore, the 'required' attribute is added to all the fields, so if those fields are not filled in, the form will not submit. There will be an error indicating to the user what it is missing.
--When form is submitted a loading gif will be show to indicate the user that the website is loading. Furthermore when submission is successfull the user will see an alert message confirming that submission was or not successfull.
+**Known Issues**
+
+Pagination - Pagination was not working for search result. For setting the pagination for search result and the recipes, my mentor Guido guided me and together we solved the pagination issues.
 
 All the social links will open in a new tab using 'target="_blank" except for the ones that are not yet developed further as previously indicated. 
 All links have been manually tested to ensure that they are pointing to the correct destination with exception to the links that are not yet developed/connected as aboved indicated.
@@ -189,13 +203,9 @@ In addition, the site  was tested via  http://ami.responsivedesign.is/ to review
 
 Tabs and sections with interesting bugs or problems discovered during testing:
 - Section padding was to big for the UX desing of this project. This was fixed by modifying the scrolling css from Bootstraap as per our needs (fixed).
-- * Further work is need to add feature that highlights active pages for example using similar system than the scrollSpy which highlights activated sections (fixed all taps except HOME). 
-- The required attribute with the select element in a single choice form needs an empty value attribute or first child element with no text for our sign-in form (fixed).
-- Footnote on dashboard was not centered. This was achieved with using the correct grid option from Bootstraap (fixed).
-- Showcase and reduce images were all different sizes and therefore dificult to scale up for responsiveness design without using targetting images individually. Aspect ratio strategy was not a successful approach to scale them up at once (fixed when added as images).
-- WordlMap responsiveness needs to be address and removed from the header div to avoid shadow bug inside the worldmap div (fixed). Centering WordMap remains pending to be address.
-- Facebook embeeded videos are loading are taking very long time to load in the REDUCE TAB (fixed). Error in the console was found when uploading more than one video. Still needs to be further explored however all videos are reachable and react to play/pause. 
-- Charts delay a few seconds to load.
+- 
+- images size were all different sizes .
+Aspect ratio strategy was not a successful approach to scale them up at once (fixed when added as images).
 
 
 ## Deployment

@@ -16,9 +16,7 @@
                         <label for="query"> Find a recipe !</label>
 	                </div>
                     <!--PENDING TO ADD FILTERS FOR CATEGORY AND INGREDIENTS -->
-                    <!--is reset bottom necesary -->
-	                <div class="col s12 m4">
-	                    <!-- <a href="{{ url_for('get_recipes') }}" class="red btn text-shadow">Reset</a> -->
+                    <div class="col s12 m4">
 	                    <button type="submit" class="light-blue darken-1 btn text-shadow">
 	                        <i class= "fas fa-search left"></i>Search
 	                    </button>
@@ -36,8 +34,8 @@
             {% if session.user|lower == "admin"|lower %}
                 <div class="col s12 m6 l4">
                     <div class="card">
-                        <div class="card-image all-recipes waves-effect waves-block waves-light">
-                            <img class="activator responsive-img fit-size" src="{{ recipe.recipe_images }}">
+                        <div class="card-image waves-effect waves-block waves-light height-img-card">
+                            <img class="activator responsive-img" src="{{ recipe.recipe_images }}">
                         </div>
                         <div class="card-content lime lighten-2 card-recipes-content">
                             <span class="tittle card-title activator grey-text text-darken-4"><a href="{{ url_for('view_recipe',recipe_id=recipe._id) }}">{{ recipe.recipe_name }}</a>

@@ -103,13 +103,10 @@ main {
 }
 
 /*recipes.html*/
-.fit-size {
-    height: 100vh;
+.height-img-card {
+    height: 800px;
 } 
 
-.all-recipes  {
-    height: 800px;
-}
 
 /* it does not affect the recipes.html check if affect sg else and erase */
 /* .card .card-image {
