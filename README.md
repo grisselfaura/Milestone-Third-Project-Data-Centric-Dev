@@ -50,17 +50,6 @@ The website can also be used by people who are only interested in finding recipe
 ### Design
 - The design color scheme choice was keep a simple and elegant combination in order to create a consistent and visual impactful yet straighforward easy-for-the-eye feeling. 
 
-#### Framework
-
-* **[Materialize 1.0.0] = To get a modern and clean layout, I used Materialize as a framework.
-* **[jQuery 3.5.1] = Used to manipulate the DOM, for example buttons, and showing / hiding elements
-* **[Flask 1.1.2] = Flask is the micro web framework that runs the application
-
-#### Database
-
-For the database, I choose MongoDB following the example from the course. 
-The database is made up of the following collections : categories / difficulty / recipes/ users.
-
 #### Typography
 
 The following fonts were used:
@@ -77,57 +66,66 @@ The following fonts were used:
 
 A combination of [Materialize icons] & [Fontawesome] has been used for this project.
 
-- Wireframes available.
+- Wireframes available [here](https://github.com/grisselfaura/Milestone-Third-Project-Data-Centric-Dev/blob/master/static/wireframes)
 
 ## Features
 
 - ### Existing Features 
 In this section I will describe the front-end features of my project:
-1. [Navbar]: consists of the PREPARE FOR YOUR RACE logo which also returns the user to the "Home" page of the application.
-             My navbar also has links to "All Recipes", "Your Suggestion", "Contact Us", "Dashboard", "Login". The navbar will appear in all pages
-             with the same functions for all links. with an extra feature which highlights the nav bar that is being selected by the user.
+1. [Navbar]: consists of the app logo which also returns the user to the "Home" page of the application.
+             My navbar also has links to "Recipes", "Login" and "Join-free. 
+             The navbar will appear in all pages and comes with an extra feature which highlights the nav bar that is being selected by the user.
+             In addition there is a side **Mobile Collapse Button* for mobile view.
+             Visitors to the site who are not logged in, can only access the links above.
          
-2. [Home]: consists of one background image along with some information on contacting the webmaster and a link to the contact us page of the site. 
+2. [Home]: consists of one background image along with some information regarding the vegan world and a carrousal showing all the recipe categories available in the app. 
     
-3. [All_Recipes]: directs the user to the "All Recipes" page which displays ALL recipes from ALL users which have been entered on the site. 
-                The user can then filter or browse through the recipes.
-                The can view more information on each recipe by selectign the "See Recipe Description" link which delivers the user to the "Recipe Detail" page. 
+3. [Recipes]: directs the user to the "All Recipes" page which displays ALL recipes from ALL users which have been entered and marked as SHARE on the app. 
+                Except for the ADMIN user who can see all recipes irrespectively.
+                The user can use the search input form to find an specific recipe.
+                The user can browse through all the recipes via the pagination links or can select an specific recipe .
+                They can view more information on each recipe by selectign the reveal bottom for example: the "See Recipe Description" link which delivers the user to the "Recipe Detail" card. 
 
-4. [Recipe_Detail]: provides users with the recipe details containg a recipe name, description, image (if available), flavour, meal type, race day, sport type, nutrition wise type of meal, author and date posted.
+4. [View_recipe]: provides users with the recipe details containg a recipe name, description, image (if available), category, difficulty, cook time, ingredients, methods, author and date posted.
 
-5. [My_Recipes]: provides the user with the recipes that they have added themselves. The user's recipes can be edited and deleted by using the buttons displayed under the recipes.
+5. [My_Recipes]: provides the user with the recipes that they have added themselves. The user's recipes can ONLY be modified by the recipe_owner by editing and deleting via the buttons displayed under the recipes.
 
-6. [Login]: when first selected the user will be prompted to create a username to login to the application so that they can add recipes to the database.
+6. [Register]:  Users can use the site as a guest, but some features are not available unless logged in.
+                A built-in authentication and authorization to check certain criterias had been incorporated before an account is validated. 
+                All passwords are hashed for security purposes!
 
-7. [Register]:
+7. [Login]: user can log in by entering username and password. Check has been incorporated to change user and password are correct.
 
-8. [Dashboard]: once logged in the user will be presented with their dashboard which provides a count of their recipes, along with 4 data charts depicting the number of favourite meal type, favourite sport type, favourite race day and meal associated for the vegan.
+8. [Logout]: user can log simply log out of their account.
 
-9. [Contact_Us]: delivers the user to the contact page. This page displays a blank form, which allows users to contact the website developers to offer feedback and suggestions (not currently wired up to an email address as this is not a real business). 
-              Their are also 4 social media buttons so that the user may interact on social networks.
+8. [Add/edit/delete Recipe]: user can enter recipes using the recipe form available. In addtion they can edit or delete and to select if recipe is for public display.
 
-10. [Social_Links]: provides users with links to the website social media pages.
+9. [Flashed Messages]: The app uses the flask flash method to communicate important events to the user and make it user friendly.
 
-- This site uses the Scrolling Nav feature in Bootstrap  Further work is need to maintained highlighted the tab that has been accessed.
-- The navbar is fixed to the top and includes an dropdown Menu for the md-screen that collapses when selected. 
 
 - ### Features Left to Implement
 
-8. [Dashboard]: once logged in the user will be presented with their dashboard which provides a count of their recipes, along with 4 data charts depicting the number of favourite meal type, favourite sport type, favourite race day and meal associated for the vegan.
-
-* In the future i would like to add a a choropath map direcly using dc.js instead of generated using d3.js so as multiple charts can be quickly drawn (code is already started under test_script_chloro_DC_worldmap.html) but due to time limitation is yet pending to integrate all the functions to generate the infographic). 
-Fixed with the help from mentor during last session. However the generated map is not centered on the div and cant not be target via css.
-* In addition the "About us" and links from the footnote are yet to be constructed.
-* Furthermore the links to social media are not linked for the purpose of this exercise.
-* Lastly, I would like to be able to have real life data feeding the info-charts. The Database choosed only contained CO2 data for the purpose of this exercise. However on a real case scenario will be more graphics showing additional parameters like temperature and water melting. 
-
+1. [Dashboard]: once logged in the user will be presented with their dashboard which provides a count of their recipes, along with 4 data charts depicting the number of favourite meal type, favourite sport type, favourite race day and meal associated for the vegan.
+2. [Social_Links]: pending to add links to the website social media pages.
+3. Search more filters
+4. Pagination errors when viewing from category, misisng link from my recipes (try another method)
+5. Check if date can be added as updated date when editing?
+6. sort recipes by upload date
+7. form javascript not deleting original ingredients/methods input
+8. responsive size when not right size
+9. english bottom to translated
+10. review href missing linksreview html and css
+11. search doesnt work anymore
+12. locate potential error of page doesnt Existing
+13. change debug to false
+14. [Nav] Further work is need to maintained highlighted the tab that has been accessed.
 
 
 ## Technologies Used
 
-In this section, you should mention all of the languages, frameworks, libraries, and any other tools that you have used to construct this project. For each, provide its name, a link to its official site and a short sentence of why it was used.
+#### Languages
 
-1. HTML
+* **[HTML] used as the markup language
 2. CSS
 3. Bootstrap (4.4.1)
 3.1. Scrolling Nav
@@ -139,9 +137,27 @@ In this section, you should mention all of the languages, frameworks, libraries,
 * this website is only available in english
 8. Email.js to send Email Directly From JavaScript
 
+#### Framework
+
+* **[Materialize 1.0.0] = To get a modern and clean layout, I used Materialize as a framework.
+* **[jQuery 3.5.1] = Used to manipulate the DOM, for example buttons, and showing / hiding elements
+* **[Flask 1.1.2] = Flask is the micro web framework that runs the application
+
+#### Database
+
+For the database, I choose MongoDB following the example from the course. 
+The database is made up of the following collections : categories / difficulty / recipes/ users.
+
+
 ## Testing
-HTML and CSS code checked for coding errors.
-CSS prefixes were checked against https://autoprefixer.github.io/
+### Validation
+
+- **HTML:** I have used https://validator.w3.org/ in order to validate the HTML code.
+
+- **CSS:** I have used https://jigsaw.w3.org/css-validator/ in order to validate the CSS code & CSS prefixes were checked against with https://autoprefixer.github.io/
+
+- **JavaScript:** I have used https://jshint.com/ in order to check the JavaScript code.
+
 
 By clicking on the links in the navbar, the background effect will confirm to the user which tab has been selected. All tabs can be independently accessed without having to go back to the HOME tab. 
 *The footnote and social media links as well as the "About us" tab are pending to be developed (future construction) as for the purpose of this project they will not add any further skill . 
@@ -165,7 +181,7 @@ By clicking on the links in the navbar, the background effect will confirm to th
 -Furthermore, the 'required' attribute is added to all the fields, so if those fields are not filled in, the form will not submit. There will be an error indicating to the user what it is missing.
 -When form is submitted a loading gif will be show to indicate the user that the website is loading. Furthermore when submission is successfull the user will see an alert message confirming that submission was or not successfull.
 
-All links will open in a new tab using 'target="_blank" except for the ones that are not yet developed further as previously indicated. 
+All the social links will open in a new tab using 'target="_blank" except for the ones that are not yet developed further as previously indicated. 
 All links have been manually tested to ensure that they are pointing to the correct destination with exception to the links that are not yet developed/connected as aboved indicated.
 
 -This site was tested across multiple browsers (Chrome, Safari, Internet Explorer, FireFox) and on multiple mobile devices (iPhone 4, 5, 7: Chrome and Safari, iPad, Samsung Galaxy) to ensure compatibility and responsiveness. 
