@@ -1,4 +1,4 @@
-# Imported modules
+#Imported modules
 import os
 import math
 from flask import (
@@ -50,7 +50,6 @@ def get_paginated_items(entity, query={}, **params):
     # Avoiding pagination errors 
     if page_number < 1:
         page_number = 1
-
     offset = (page_number - 1) * page_size
     items = []
     search_term = ''
@@ -114,7 +113,7 @@ def home():
 @app.route('/get_recipes', methods=['GET'])
 def get_recipes():
     # Page to view all recipes
-    recipes = get_paginated_items(mongo.db.recipes, **request.args.to_dict())
+    recipes = get_paginated_items(mongo.db.recipes, **request.args.to_dict())  #dictionary
     return render_template('recipes.html', recipes=recipes)
 
 
@@ -143,12 +142,13 @@ def view_recipe(recipe_id):
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     query = request.form.get("query")
-    recipes = list(mongo.db.recipes.find({'$text': {'$search': query}}))
+    recipes = get_paginated_items(mongo.db.recipes,{'$text': {'$search': query}})
     # Message when search yield no results
-    if len(recipes) == 0:
-        flash("0 matches for \"{}\"".format(
-            request.form.get("query")))
-    return render_template('recipes.html', recipes=recipes)
+    if len(recipes) > 0:
+        return render_template('recipes.html', recipes=recipes)
+
+    else:
+        flash("0 matches for \"{}\"".format(request.form.get(query)))
 
 
 # Register

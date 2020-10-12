@@ -34,8 +34,6 @@
             <a href="{{ url_for('home') }}" class="brand-logo black-text"><img class="hide-on-med-and-down" src="{{ url_for('static', filename='images/logo_nav.png') }}"></a> 
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
             <ul class="right hide-on-med-and-down">
-                <!-- <li><a href=".html" class="grey-text text-darken-4">Recipe Search</a></li>
-                <li><a href=".html" class="grey-text text-darken-4">Ingredients index</a></li> -->
                 {% if session.user|lower == "admin"|lower%}
                     <li><a href="{{ url_for('home') }}" class="grey-text text-darken-4">HOME</a></li>
                     <li><a href="{{ url_for('get_recipes') }}" class="grey-text text-darken-4">RECIPES</a></li>
@@ -62,8 +60,6 @@
         <!-- Mobile Sidenavbar-->
         <ul class="sidenav" id="mobile-demo">
             <img class="responsive-img" src="{{ url_for('static', filename='images/logo_nav.png') }}" alt="logo-image">
-                <!-- <li><a href=".html" class="grey-text text-darken-4">Recipe Search</a></li>
-                <li><a href=".html" class="grey-text text-darken-4">Ingredients index</a></li> -->
                 {% if session.user|lower == "admin"|lower %}
                     <li><a href="{{ url_for('home') }}" class="grey-text text-darken-4"><i class="material-icons">home</i>Home</a></li>
                     <li><a href="{{ url_for('get_recipes') }}" class="grey-text text-darken-4"><i class="material-icons">search</i>Recipes</a></li>
@@ -114,7 +110,7 @@
                 <div class="grid-example col s12 m6">
                     <strong>&copy; 2020 B a s e - F o o d  Copyright </strong>
                 <div>
-                <div class="grid-example col s12 m6">
+                <div class="grid-example col s12 m6"><!--General links added but not personalized-->
                     <a class="grey-text text-lighten-4" href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook social-icon right"></i></a>
                     <a class="grey-text text-lighten-4" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram social-icon right"></i></a>
                     <a class="grey-text text-lighten-4" href="https://www.twitter.com/" target="_blank"><i class="fab fa-twitter social-icon right"></i></a>
