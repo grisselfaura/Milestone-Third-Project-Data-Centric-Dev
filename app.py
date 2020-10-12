@@ -4,7 +4,7 @@ import math
 from flask import (
     Flask, flash, render_template, 
     redirect, request, session, url_for)
-from flask_pymongo import PyMongo, pymongo
+from flask_pymongo import PyMongo, pymongo, DESCENDING
 from bson.objectid import ObjectId
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -142,11 +142,10 @@ def view_recipe(recipe_id):
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     query = request.form.get("query")
-    recipes = get_paginated_items(mongo.db.recipes,{'$text': {'$search': query}})
-    # Message when search yield no results
+    recipes = get_paginated_items(mongo.db.recipes, {'$text': {'$search': query}})
+    # Message when search yield no results NOT WORKING
     if len(recipes) > 0:
         return render_template('recipes.html', recipes=recipes)
-
     else:
         flash("0 matches for \"{}\"".format(request.form.get(query)))
 
@@ -224,8 +223,8 @@ def myrecipes(username):
     # grab the session user's username from db
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-    
-    user_recipes = mongo.db.recipes.find({"created_by": username})
+    # recipes display by date of entry
+    user_recipes = mongo.db.recipes.find({"created_by": username}).sort("created_date", DESCENDING)
     total_user_recipes = user_recipes.count()
     
     if session["user"] == username: 
