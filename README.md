@@ -98,7 +98,7 @@ In this section I will describe the front-end features of my project:
 
 8. [Logout]: user can log simply log out of their account.
 
-8. [Add/edit/delete Recipe]: user can enter recipes using the recipe form available. In addtion they can edit or delete and to select if recipe is for public display.
+8. [Add_Recipe][Edit_Recipe][Delete_Recipe]: user can enter recipes using the recipe form available. In addtion they can edit or delete and to select if recipe is for public display.
 
 9. [Flashed Messages]: The app uses the flask flash method to communicate important events to the user and make it user friendly.
 
@@ -107,18 +107,20 @@ In this section I will describe the front-end features of my project:
 
 1. [Dashboard]: once logged in the user will be presented with their dashboard which provides a count of their recipes, along with 4 data charts depicting the number of favourite meal type, favourite sport type, favourite race day and meal associated for the vegan.
 2. [Social_Links]: pending to add links to the website social media pages.
-3. Search more filters
-4. Pagination errors when viewing from category, misisng link from my recipes (try another method)
-5. Check if date can be added as updated date when editing?
-6. sort recipes by upload date
-7. form javascript not deleting original ingredients/methods input
-8. responsive size when not right size
-9. english bottom to translated
-10. review href missing linksreview html and css
-11. search doesnt work anymore
-12. locate potential error of page doesnt Existing
-13. change debug to false
-14. [Nav] Further work is need to maintained highlighted the tab that has been accessed.
+3. [Nav] Further work is need to maintained highlighted the tab that has been accessed.
+4. [Myrecipes] now is sorted recipes by created date.
+5. [Add/edit bottom form] Javascript was tagreting the wrong add/remove lines. Add was cloning all the lines entered during the add_recipe and delete was not possible on the lines added during the add_recipe.
+    Error has been fixed and now is targeting the correct elements.
+6. [Search] function was affected by introduction of pagination but caused bug has been repaired.
+7. [Search & filters] : discussion to add more filters when database is expanded.
+8. [Pagination] errors when viewing from category, 
+9. [Pagination] pending to be added for myrecipes.
+10. Check if created_date can be blocked during edit_recipe
+11. [Translation] english bottom to translated
+12. responsive size when not right size
+13. Errors 404 : locate potential error of page doesnt Existing
+14. Review href missing linksreview html and css
+15. change debug to false
 
 
 ## Technologies Used

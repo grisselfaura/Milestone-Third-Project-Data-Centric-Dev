@@ -5,6 +5,7 @@ from flask import (
     Flask, flash, render_template, 
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo, pymongo, DESCENDING
+from flask_mongoengine import MongoEngine
 from bson.objectid import ObjectId
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -226,6 +227,7 @@ def myrecipes(username):
     # grab the session user's username from db
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
+
     # recipes display by date of entry
     user_recipes = mongo.db.recipes.find({"created_by": username}).sort("created_date", DESCENDING)
     total_user_recipes = user_recipes.count()
@@ -315,6 +317,7 @@ def delete_recipe(recipe_id):
     mongo.db.recipes.remove({'_id': ObjectId(recipe_id)})
     flash("Recipe Successfully Deleted")
     return redirect(url_for('myrecipes', username=session["user"]))
+
 
 # Read all Categories
 @app.route('/get_categories')
