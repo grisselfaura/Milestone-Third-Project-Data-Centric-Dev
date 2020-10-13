@@ -43,12 +43,12 @@ $(document).ready(function(){
     }
 });
 
-// Code template approach share from previous students
+// Re-use code 
 // Add and Remove Ingredients
  var ingredientField = $(".ingredient").length;
     $("#add_ingredient").on("click", function () {
         $("select").formSelect("destroy");
-        $(".new-ingredient:first").clone().insertBefore("#add_ingredient").find("input[type='text'], select, textarea").val("");
+        $(".ingredient:first").clone().insertBefore("#add_ingredient").val("");
         $("select").formSelect();
         ingredientField += 1;
     });
@@ -56,13 +56,11 @@ $(document).ready(function(){
     $("#remove_ingredient").on("click", function () {
         if (ingredientField > 1) {
             /* only remove the :last item */
-            $(this).siblings(".new-ingredient:last").remove();
+            $(".ingredient:last").remove();
             /* ensure original ingredient line never gets deleted */
             ingredientField-= 1;
         }
-    });
-
-      
+    });   
 
 // Add and Remove Extra Ingredients
  var extraIngredientField = $(".compIngredient").length;

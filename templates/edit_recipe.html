@@ -75,13 +75,15 @@
                             <div class="card-content">
                                 <i class="fas fa-shopping-basket custom-prefix light-blue-text"></i>
                                 <span class="card-title ingredient-title">Basic Ingredients</span>
-                                <div class="addIngredient new-ingredient ingredient">                                
-                                    <label for="basic_ingredients">Ingredients follow example format!</label>
-                                    {% for basic_ingredient in recipe.basic_ingredients %}
-                                        <input id="basic_ingredients" name="basic_ingredients[]" type="text" minlength="1" 
-                                        maxlength="150" placeholder="100gr onion, finely chopped" 
-                                        value = "{{ basic_ingredient }}" class="ingredients validate" required> 
-                                    {% endfor %}                               
+                                <div class="addIngredient new-ingredient ingredients">    
+                                    <div class="input-field">                            
+                                        <label for="basic_ingredients">Ingredients follow example format!</label>
+                                        {% for basic_ingredient in recipe.basic_ingredients %}
+                                            <input id="basic_ingredients" name="basic_ingredients[]" type="text" minlength="1" 
+                                            maxlength="150" placeholder="100gr onion, finely chopped" 
+                                            value = "{{ basic_ingredient }}" class="ingredient validate" required> 
+                                        {% endfor %}  
+                                    </div>                             
                                 </div>    
                                 <p class="center">
                                     <!-- Add-ingredient button -->
