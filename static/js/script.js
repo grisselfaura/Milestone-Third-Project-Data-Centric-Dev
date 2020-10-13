@@ -43,7 +43,7 @@ $(document).ready(function(){
     }
 });
 
-// Re-use code 
+// Code approach with help from former students and improved
 // Add and Remove Ingredients
  var ingredientField = $(".ingredient").length;
     $("#add_ingredient").on("click", function () {
@@ -55,36 +55,36 @@ $(document).ready(function(){
 
     $("#remove_ingredient").on("click", function () {
         if (ingredientField > 1) {
-            /* only remove the :last item */
+            /* only to remove the :last item */
             $(".ingredient:last").remove();
-            /* ensure original ingredient line never gets deleted */
+            /* it ensures original ingredient line never gets deleted */
             ingredientField-= 1;
         }
     });   
 
-// Add and Remove Extra Ingredients
+// Add and Remove Extra Ingredients 
  var extraIngredientField = $(".compIngredient").length;
     $("#add_comp_ingredient").on("click", function () {
         $("select").formSelect("destroy");
-        $(".new-CompIngredient:first").clone().insertBefore("#add_comp_ingredient").find("input[type='text'], select, textarea").val("");
+        $(".compIngredient:first").clone().insertBefore("#add_comp_ingredient").val("");
         $("select").formSelect();
         extraIngredientField += 1;
     });
 
     $("#remove_comp_ingredient").on("click", function () {
         if (extraIngredientField > 1) {
-            /* only remove the :last item */
-            $(this).siblings(".new-CompIngredient:last").remove();
-            /* ensure original ingredient line never gets deleted */
+            /* only to remove the :last item */
+            $(".compIngredient:last").remove();
+            /* it ensures original ingredient line never gets deleted */
             extraIngredientField-= 1;
         }
     });
 
 // Add and Remove preparation steps
-var preparationField = $(".preparation").length;
+var preparationField = $(".new-step").length;
     /* add new cloned item */
     $("#add_step").on("click", function () {
-        $(".new-step:first").clone().insertBefore("#add_step").find("input[type='text'], select, textarea").val("");
+        $(".new-step:first").clone().insertBefore("#add_step").val("");
         /* increase counter so original direction is never removed */
        preparationField += 1;
     });
@@ -92,7 +92,7 @@ var preparationField = $(".preparation").length;
     $("#remove_step").on("click", function () {
         if ( preparationField > 1) {
             /* only remove the :last item */
-            $(this).siblings(".new-step:last").remove();
+            $(".new-step:last").remove();
             /* ensure original direction line never gets deleted */
             preparationField-= 1;
         }

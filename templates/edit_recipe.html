@@ -102,13 +102,15 @@
                             <div class="card-content">
                                 <i class="fas fa-plus-square custom-prefix light-blue-text"></i>
                                 <span class="card-title ingredient-title">Complement with: </span>
-                                <div class="addCompIngredient new-CompIngredient compIngredient">
-                                    <label for="complementary_ingredients">Complement ingredients follow example format!</label>
-                                    {% for complementary_ingredient in recipe.complementary_ingredients %}
-                                        <input id="complementary_ingredients" name="complementary_ingredients[]"  type="text" minlength="1" 
-                                        maxlength="180" value = "{{ complementary_ingredient }}" placeholder="100gr green onion, finely chopped" 
-                                        class="validate">
-                                    {% endfor %} 
+                                <div class="addCompIngredient new-CompIngredient compIngredients">
+                                    <div class="input-field"> 
+                                        <label for="complementary_ingredients">Complement ingredients follow example format!</label>
+                                        {% for complementary_ingredient in recipe.complementary_ingredients %}
+                                            <input id="complementary_ingredients" name="complementary_ingredients[]"  type="text" minlength="1" 
+                                            maxlength="180" value = "{{ complementary_ingredient }}" placeholder="100gr green onion, finely chopped" 
+                                            class="compIngredient validate">
+                                        {% endfor %} 
+                                    </div>
                                 </div>    
                                 <p class="center">
                                     <!-- Add-complementary-ingredient button -->
@@ -127,14 +129,16 @@
                             <div class="card-content">
                                 <i class="fas fa-utensils custom-prefix light-blue-text"></i>
                                 <span class="card-title ingredient-title">Steps</span>
-                                <div class="addpreparation preparation new-step">
-                                    <label for="recipe_method">Steps follow example format!</label>
-                                    {% for step in recipe.recipe_method %}
-                                        <input id="recipe_method" name="recipe_method[]" type="text" 
-                                        placeholder="Fill a large pan with salted water, place on a high heat and bring to the boil." 
-                                        value = "{{ step }}" class="validate" required>
-                                    {% endfor %}    
-                                </div>    
+                                <div class="addpreparation preparation new-steps">
+                                    <div class="input-field">
+                                        <label for="recipe_method">Steps follow example format!</label>
+                                        {% for step in recipe.recipe_method %}
+                                            <input id="recipe_method" name="recipe_method[]" type="text" 
+                                            placeholder="Fill a large pan with salted water, place on a high heat and bring to the boil." 
+                                            value = "{{ step }}" class="new-step validate" required>
+                                        {% endfor %}    
+                                    </div>    
+                                </div>
                                 <p class="center">
                                     <!-- Add-step button -->
                                     <a id="add_step" class="btn-floating green"><i class="material-icons">add</i></a>

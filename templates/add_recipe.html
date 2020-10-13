@@ -72,7 +72,6 @@
                                             placeholder="100gr onion, finely chopped"  class="ingredient validate" required>
                                     </div>  
                                 </div>    
-
                                 <p class="center">
                                     <!-- Add-ingredient button -->
                                     <a id="add_ingredient" class="btn-floating green"><i class="material-icons">add</i></a>
@@ -90,12 +89,13 @@
                             <div class="card-content">
                                 <i class="fas fa-plus-square custom-prefix light-blue-text"></i>
                                 <span class="card-title ingredient-title">Complement with: </span>
-                                <div class="addCompIngredient new-CompIngredient compIngredient">
-                                    <label for="complementary_ingredients">Complement ingredients follow example format!</label>
-                                    <input id="complementary_ingredients" name="complementary_ingredients[]"  type="text" minlength="1" 
-                                        maxlength="100" placeholder="100gr green onion, finely chopped" class="validate">
+                                <div class="addCompIngredient new-CompIngredient compIngredients">
+                                    <div class="input-field">
+                                        <label for="complementary_ingredients">Complement ingredients follow example format!</label>
+                                        <input id="complementary_ingredients" name="complementary_ingredients[]"  type="text" minlength="1" 
+                                        maxlength="100" placeholder="100gr green onion, finely chopped" class="compIngredient validate">
+                                    </div>
                                 </div>    
-
                                 <p class="center">
                                     <!-- Add-complementary-ingredient button -->
                                     <a id="add_comp_ingredient" class="btn-floating green"><i class="material-icons">add</i></a>
@@ -113,13 +113,14 @@
                             <div class="card-content">
                                 <i class="fas fa-utensils custom-prefix light-blue-text"></i>
                                 <span class="card-title ingredient-title">Steps</span>
-                                <div class="addpreparation preparation new-step">
-                                    <label for="recipe_method">Steps follow example format!</label>
-                                    <input id="recipe_method" name="recipe_method[]" type="text" 
-                                        placeholder="Fill a large pan with salted water, place on a high heat and bring to the boil." 
-                                        class="validate" required>
-                                </div>    
-
+                                <div class="addpreparation preparation new-steps">
+                                    <div class="input-field">
+                                        <label for="recipe_method">Steps follow example format!</label>
+                                        <input id="recipe_method" name="recipe_method[]" type="text" 
+                                            placeholder="Fill a large pan with salted water, place on a high heat and bring to the boil." 
+                                            class="new-step validate" required>
+                                    </div>    
+                                </div>
                                 <p class="center">
                                     <!-- Add-step button -->
                                     <a id="add_step" class="btn-floating green"><i class="material-icons">add</i></a>
