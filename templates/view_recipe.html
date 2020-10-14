@@ -18,12 +18,10 @@
                 <!-- Recipe category -->
                 <div class="float-wrapper">
                     <div class="card-panel yellow accent-4 category-tittle">
-                        <p><a href="#">{{ recipe.category_name }}</a></p>
-                        <!--PENDING to hook to the corresponding category search) -->
+                        <p class="category_name_recipe blue-text text-darken-2 flow-text">{{ recipe.category_name }}</p>
                     </div>
                 </div>
             </div>
-        
             <div class="row recipe-summary">
                 <div class="card horizontal">
                     <div class="card-image">
@@ -75,7 +73,6 @@
                     </div>
                     </div>
                 </div>
-
             <!-- Template inspiration from Cookbook and Jamie Oliver -->
             <div class="row">
                 <div class="col s12 m4">
@@ -123,7 +120,6 @@
                     </div>
                 </div>
             </div>
-        
             <!-- Closing line -->
             <div class="row">
             {% if recipe.closing_line|length > 0 %}
@@ -132,7 +128,7 @@
             </div>
         
         </div>
-    </section
+    </section>
 
 
 {% endblock %}

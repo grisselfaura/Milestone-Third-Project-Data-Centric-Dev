@@ -8,7 +8,6 @@ from flask_pymongo import PyMongo, pymongo, DESCENDING
 from bson.objectid import ObjectId
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_paginate import Pagination, get_page_args
 
 if os.path.exists("env.py"):
     import env 
@@ -28,7 +27,7 @@ mongo = PyMongo(app)
 
 
 # Pagination and sorting 
-# Reused code from https://github.com/mirofrankovic/cookbook-trisport-project-03/blob/master/app.py#L26-L101
+# params variables
 PAGE_SIZE = 6
 KEY_PAGE_SIZE = 'page_size'
 KEY_PAGE_NUMBER = 'page_number'
@@ -371,32 +370,6 @@ def delete_category(category_id):
     mongo.db.categories.remove({'_id': ObjectId(category_id)})
     flash("Category Successfully Deleted")
     return redirect(url_for('get_categories'))
-
-
-@app.route('/here')
-def showTests():
-    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page')
-    # If you are hard coding the number of items per page then uncomment the two lines below
-    # per_page = 12
-    # offset = page * per_page
-
-    # Gets the total values to be used later
-    total = mongo.db.recipes.find().count()
-
-    # Gets all the values
-    thetests = mongo.db.recipes.find()
-    # Paginates the values
-    paginatedTests = thetests[offset: offset + per_page]
-
-    pagination = Pagination(page=page, per_page=per_page, total=total,
-                            css_framework='bootstrap4')
-    return render_template('thetests.html',
-                           tests=paginatedTests,
-                           page=page,
-                           per_page=per_page,
-                           pagination=pagination,
-                           )
-
 
 
 # The correct running of you app file & in terms of Environmental Variables in Heroku
