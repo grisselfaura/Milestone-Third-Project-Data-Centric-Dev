@@ -2,11 +2,11 @@
     text-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
-.same-size {
+/* .same-size {
     object-fit: contain;
     height:100%;
     align-items: center;
-}
+} */
 
 #margin {
     margin-bottom: 0px;
@@ -44,6 +44,7 @@
 }
 
 /* Nav Bar */
+
 nav {
   font-family: 'Architects Daughter', cursive;
   
@@ -55,6 +56,7 @@ nav ul a {
 
 
 /*base.html*/
+
 .flashes h4 {
     line-height: 2;
 }
@@ -70,6 +72,7 @@ nav ul a {
 }
 
 /*sticky footer*/
+
 body {
     display: flex;
     min-height: 100vh;
@@ -77,11 +80,12 @@ body {
 }
 
 main {
-        flex: 1 0 auto;
+    flex: 1 0 auto;
   }
     
 
 /*home.html*/
+
 .bg-header {
     background-image: url("../images/cookbook_background.jpg");
     background-position: 50% 30%; 
@@ -119,8 +123,9 @@ main {
 }
 
 /*recipes.html*/
+
 /*  pending */
-@media (min-width: 595px) and (max-width: 650px) {
+/* @media (min-width: 595px) and (max-width: 650px) {
 .height-card {
     height: 600px;
 } 
@@ -129,13 +134,12 @@ main {
     margin: auto;
 } 
 
-
-
 .card-recipes-content {
     height: 150px;
-}
+} */
 
 /* Pagination */
+
 .pagination-page-info {
     padding: .6em;
     padding-left: 0;
@@ -207,6 +211,7 @@ main {
 }
 
 /*add_recipes.html*/
+
 .custom-prefix {
     width: 3rem;
     font-size: 2rem;
@@ -222,6 +227,7 @@ main {
 }
 
 /*categories.html*/
+
 .reduce-size {
     height: 70px;
 }
