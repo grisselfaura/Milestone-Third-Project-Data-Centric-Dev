@@ -43,6 +43,15 @@
     margin: 5px;
 }
 
+/* Nav Bar */
+nav {
+  font-family: 'Architects Daughter', cursive;
+  
+}
+
+nav ul a {
+  font-size: 2rem !important;
+}
 
 
 /*base.html*/
@@ -110,6 +119,8 @@ main {
 }
 
 /*recipes.html*/
+/*  pending */
+@media (min-width: 595px) and (max-width: 650px) {
 .height-card {
     height: 600px;
 } 
@@ -119,7 +130,7 @@ main {
 } 
 
 
-/* it does not affect the recipes.html check if affect sg else and erase */
+
 .card-recipes-content {
     height: 150px;
 }
