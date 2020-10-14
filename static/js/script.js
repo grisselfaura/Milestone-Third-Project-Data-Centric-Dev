@@ -11,9 +11,8 @@ $(document).ready(function(){
     $(".cancel-form").click(function() {
         window.history.back();
     });
-    
 
-    
+
 // Code provided from the explanatory videos from the Course 
     validateMaterializeSelect();
     function validateMaterializeSelect() {
@@ -44,6 +43,7 @@ $(document).ready(function(){
     }
 });
 
+
 // Code approach with help from former students and improved
 // Add and Remove Ingredients
  var ingredientField = $(".ingredient").length;
@@ -63,6 +63,7 @@ $(document).ready(function(){
         }
     });   
 
+
 // Add and Remove Extra Ingredients 
  var extraIngredientField = $(".compIngredient").length;
     $("#add_comp_ingredient").on("click", function () {
@@ -81,6 +82,7 @@ $(document).ready(function(){
         }
     });
 
+    
 // Add and Remove preparation steps
 var preparationField = $(".new-step").length;
     /* add new cloned item */
