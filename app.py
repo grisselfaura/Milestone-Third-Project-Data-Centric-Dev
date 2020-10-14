@@ -129,7 +129,8 @@ def get_recipes_by_category(category_name):
     return render_template('recipes.html',
                             title='category_name', 
                             recipes=recipes,
-                            categories=categories)
+                            categories=categories,
+                            category_name=category_name)
 
 
 # Page to view individual card recipes
