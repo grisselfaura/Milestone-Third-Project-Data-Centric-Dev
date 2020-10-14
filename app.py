@@ -230,11 +230,19 @@ def myrecipes(username):
     # recipes display by date of entry
     user_recipes = mongo.db.recipes.find({"created_by": username}).sort("created_date", DESCENDING)
     total_user_recipes = user_recipes.count()
-    
+
+    # added for pagination but remove if doesnt work, together with titlte and user_myrecipe_paginated
+    user_myrecipe_paginated = get_paginated_items(mongo.db.recipes,
+                                    query={"created_by": username},
+                                    **request.args.to_dict()) #dictionary
+
+
     if session["user"] == username: 
         return render_template('myrecipes.html', username=username, 
                                 recipe_owner=user_recipes, 
-                                total_user_recipes=total_user_recipes)
+                                total_user_recipes=total_user_recipes,
+                                title='created_by', 
+                                user_myrecipe_paginated=user_myrecipe_paginated)
 
     flash("You need to sign in!")
     return redirect(url_for('sign_in'))

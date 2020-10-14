@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% import 'components.html' as components %}
 
 {% block content %}
 
@@ -56,7 +56,10 @@
         </div>
     </div>
 
-    
+    <!--Pagination-->
+    <div class="container center">
+        {{ components.pagination(url_for('myrecipes', username=username), user_myrecipe_paginated) }}
+    </div>
 
 
 {% endblock %}

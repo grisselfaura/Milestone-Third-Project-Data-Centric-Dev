@@ -13,6 +13,7 @@ $(document).ready(function(){
     });
     
 
+    
 // Code provided from the explanatory videos from the Course 
     validateMaterializeSelect();
     function validateMaterializeSelect() {
