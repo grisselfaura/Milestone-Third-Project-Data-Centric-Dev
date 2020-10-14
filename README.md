@@ -116,7 +116,7 @@ In this section I will describe the front-end features of my project:
 8. [Pagination] errors when viewing from category, 
 9. [Pagination] pending to be added for myrecipes.
 10. Check if created_date can be blocked during edit_recipe
-11. [Translation] english bottom to translated
+11. [Translation] google translation bottom to be added. Attempted but it is not possible due to override css by materialize.
 12. responsive size when not right size
 13. Errors 404 : locate potential error of page doesnt Existing
 14. Review href missing linksreview html and css

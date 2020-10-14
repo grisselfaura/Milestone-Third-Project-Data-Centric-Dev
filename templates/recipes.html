@@ -45,7 +45,7 @@
                         <div class="card-content lime lighten-2 card-recipes-content">
                             <span class="tittle card-title activator grey-text text-darken-4"><a href="{{ url_for('view_recipe',recipe_id=recipe._id) }}">{{ recipe.recipe_name }}</a>
                             <i class="material-icons right">more_vert</i></span>
-                            <p class="category-tittle"><a href="#">{{ recipe.category_name }}</a></p> <!--PENDING to hook to the corresponding category search) -->
+                            <p class="category-tittle"><a href="#">{{ recipe.category_name }}</a></p> <!--href hooked to a filter with the recipes from the same category) -->
                             <p class="right-align"><em> by : {{ recipe.created_by }} </em></p> 
                         </div>
                         <div class="card-reveal">
@@ -68,7 +68,7 @@
                         <div class="card-content lime lighten-2 card-recipes-content">
                             <span class="tittle card-title activator grey-text text-darken-4"><a href="{{ url_for('view_recipe',recipe_id=recipe._id) }}">{{ recipe.recipe_name }}</a>
                             <i class="material-icons right">more_vert</i></span>
-                            <p class="category-tittle"><a href="#">{{ recipe.category_name }}</a></p> <!--PENDING to hook to the corresponding category search) -->
+                            <p class="category-tittle"><a href="#">{{ recipe.category_name }}</a></p> <!--href hooked to a filter with the recipes from the same category) -->
                             <p class="right-align"><em> by : {{ recipe.created_by }} </em></p> 
                         </div>
                         <div class="card-reveal">

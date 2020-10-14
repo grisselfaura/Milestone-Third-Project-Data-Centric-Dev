@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="fas fa-folder-open prefix"></i>
-                        <input id="category_name" name="category_name" minlength="3" maxlenght="25" 
+                        <input id="category_name" name="category_name" 
                         type="text" value="{{ category_name }}" class="validate" required>
                         <label for="category_name">Category Name</label>
                     </div>
@@ -19,8 +19,8 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="fas fa-camera material-icons prefix"></i>
-                        <input id="category_image" name="category_image" class="validate" type="url" minlength="15" 
-                        value="{{ category_image }}" pattern="https?://.+">
+                        <input id="category_image" name="category_image" pattern="https?://.+"  
+                        type="url" value="{{ category_image }}" class="validate">
                         <label for="category_image">Image Url</label>
                     </div>
                 </div>
