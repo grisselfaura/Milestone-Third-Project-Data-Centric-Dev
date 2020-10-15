@@ -48,15 +48,18 @@ def get_paginated_items(entity, query={}, **params):
     order_by = params.get(KEY_ORDER_BY, '_id')
     order = params.get(KEY_ORDER, 'asc')
     order = pymongo.ASCENDING if order == 'asc' else pymongo.DESCENDING
-    # Avoiding pagination errors 
+    
+    # If statement to avoid issues arising from pagination 
     if page_number < 1:
         page_number = 1
     offset = (page_number - 1) * page_size
     items = []
-    search_term = ''
-    if KEY_SEARCH_TERM in params:
-        search_term = params.get(KEY_SEARCH_TERM)
-        if len(search_term.split()) > 0:
+    search_term = params.get(KEY_SEARCH_TERM, '')
+    if bool(query):
+        items = entity.find(query).sort(order_by, order).skip(
+            offset).limit(page_size)
+    else:
+        if search_term != '':
             entity.create_index([("$**", 'text')])
             result = entity.find({'$text': {'$search': search_term}})
             items = result.sort(order_by, order).skip(offset).limit(page_size)
@@ -64,11 +67,9 @@ def get_paginated_items(entity, query={}, **params):
             items = entity.find().sort(
                 order_by, order
             ).skip(offset).limit(page_size)
-    else:
-        items = entity.find(query).sort(order_by, order).skip(
-            offset).limit(page_size)
+
     total_items = items.count()
-    # Avoiding pagination errors 
+
     if page_size > total_items:
         page_size = total_items
     if page_number < 1:
@@ -145,6 +146,7 @@ def view_recipe(recipe_id):
 def search():
     query = request.args.get("query")
     
+    # Page to view all recipes from the search
     recipes = get_paginated_items(mongo.db.recipes, {'$text': {'$search': query}})
     
     # Message when search yield
@@ -155,11 +157,11 @@ def search():
     return render_template('recipes.html', recipes=recipes)
 
 
-# Register
+# Register a new user
 @app.route('/join_free', methods=['GET', 'POST'])
 def join_free():
     if request.method == 'POST':
-        # checks if username already exists in db
+        # Checks if username already exists in db
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
     
@@ -167,7 +169,7 @@ def join_free():
             flash("Username already exists, please choose a different name.")
             return redirect(url_for('join_free'))
 
-        # Checking confirmation password
+        # Check passwords and match against each other
         password = request.form.get("password")
         password2 = request.form.get("password2")        
 
@@ -195,12 +197,12 @@ def join_free():
 @app.route('/sign_in', methods=['GET', 'POST'])
 def sign_in():
     if request.method == "POST":
-        # check if username already exists in db
+        # Check if username already exists in db
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
 
         if existing_user:
-            # ensure hashed password matches user input
+            # Ensures hashed password matches user input
             if check_password_hash(
                 existing_user["password"], request.form.get("password")):
                     session["user"] = request.form.get("username").lower()
@@ -210,12 +212,12 @@ def sign_in():
                         'myrecipes', username=session["user"]))
                     
             else:
-                # invalid password match
+                # Invalid password match
                 flash("Incorrect Username and/or Password")
                 return redirect(url_for('sign_in'))
 
         else:
-            # username doesnt exist
+            # Username doesnt exist
             flash("Incorrect Username and/or Password")
             return redirect(url_for('sign_in'))
     
@@ -225,24 +227,22 @@ def sign_in():
 # User's account
 @app.route('/myrecipes/<username>', methods=['GET', 'POST'])
 def myrecipes(username):
-    # grab the session user's username from db
+    # Grab the session user's username from db
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
 
-    # recipes display by date of entry
-    user_recipes = mongo.db.recipes.find({"created_by": username}).sort("created_date", DESCENDING)
-    total_user_recipes = user_recipes.count()
-
-    # added for pagination but remove if doesnt work, together with titlte and user_myrecipe_paginated
+    # Use params variables from pagination to sort by "created_date"
+    params = request.args.to_dict()
+    params[KEY_ORDER_BY] = "created_date"
+    
+    # Page user's recipes sorted by "created_date"
     user_myrecipe_paginated = get_paginated_items(mongo.db.recipes,
                                     query={"created_by": username},
-                                    **request.args.to_dict()) #dictionary
-
+                                    **params) #dictionary
 
     if session["user"] == username: 
         return render_template('myrecipes.html', username=username, 
-                                recipe_owner=user_recipes, 
-                                total_user_recipes=total_user_recipes,
+                                total_user_recipes=user_myrecipe_paginated[KEY_TOTAL],
                                 title='created_by', 
                                 user_myrecipe_paginated=user_myrecipe_paginated)
 
@@ -253,7 +253,7 @@ def myrecipes(username):
 # Sign Out
 @app.route('/sign_out')
 def sign_out():
-    # remove user from session cookies
+    # Remove user from session cookies
     flash("You have been logged out")
     session.pop("user")
     return redirect(url_for('sign_in'))
@@ -392,7 +392,7 @@ def myrecipes_pagination():
 
     pagination = Pagination(page=page, per_page=per_page, total=total,
                             css_framework='bootstrap4')
-    return render_template('thetests.html',
+    return render_template('myrecipes_pagination.html',
                            tests=paginatedTests,
                            page=page,
                            per_page=per_page,

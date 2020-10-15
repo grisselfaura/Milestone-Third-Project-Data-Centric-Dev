@@ -113,13 +113,13 @@ In this section I will describe the front-end features of my project:
     Error has been fixed and now is targeting the correct elements.
 6. [Search] function was affected by introduction of pagination but caused bug has been repaired.
 7. [Search & filters] : discussion to add more filters when database is expanded.
-8. [Pagination] errors when viewing from category, 
-9. [Pagination] pending to be added for myrecipes.
-10. Check if created_date can be blocked during edit_recipe
+8. [Pagination] errors when viewing from category. Parameters from pagination block code was updated during mentor session to solve an empty search_term generating the errors. 
+9. [Pagination] pending to be added for myrecipes. Implemented for my recipes pagination and later fixed the empty search_term issue.
+10. Check if created_date can be blocked during edit_recipe. To be implemented in the future.
 11. [Translation] google translation bottom to be added. Attempted but it is not possible due to override css by materialize.
-12. responsive size when not right size
-13. Errors 404 : locate potential error of page doesnt Existing
-14. Review href missing linksreview html and css
+12. Cards sizes responsive size is offseting the display panel.
+13. Errors 404 : locate potential error for non-exisitng pages. To be implemented in the future.
+14. Category hrefs deleted if not conected to categories database. To be implemented in the future with a larger database.
 15. change debug to false
 
 

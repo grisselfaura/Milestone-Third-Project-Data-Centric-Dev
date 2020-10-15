@@ -125,18 +125,31 @@ main {
 /*recipes.html*/
 
 /*  pending */
+/* .height-card {
+    height: 400px;
+}  */
 /* @media (min-width: 595px) and (max-width: 650px) {
-.height-card {
+.height-card-img {
     height: 600px;
 } 
 
 .height-img-card {
     margin: auto;
 } 
+*/
+
+.height-img {
+    min-height: 870px;
+}
+
+*/
+.height-card-img {
+   max-height: 800px;
+} 
 
 .card-recipes-content {
-    height: 150px;
-} */
+    min-height: 200px;
+} 
 
 /* Pagination */
 

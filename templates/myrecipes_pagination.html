@@ -56,21 +56,44 @@
     </div>
 
     <!--Pagination-->
-    <ul class="pagination">
-        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-        <li class="active"><a href="#!">1</a></li>
-        <li class="waves-effect"><a href="#!">2</a></li>
-        <li class="waves-effect"><a href="#!">3</a></li>
-        <li class="waves-effect"><a href="#!">4</a></li>
-        <li class="waves-effect"><a href="#!">5</a></li>
-        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-    </ul>
-    {% for rec in tests %}
-    <p>{{ rec.recipe_name }}</p>
-    {% endfor %}
-     {{ pagination.links }}
+    <div class="container">
+      {{ pagination.links }}
+        <ul class="pagination">
+            <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+            <li class="active"><a href="#!">1</a></li>
+            <li class="waves-effect"><a href="#!">2</a></li>
+            <li class="waves-effect"><a href="#!">3</a></li>
+            <li class="waves-effect"><a href="#!">4</a></li>
+            <li class="waves-effect"><a href="#!">5</a></li>
+            <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+        </ul>
+        {{ pagination.links }}
+    </div>
 
-
+    <div class="container">
+        {{ pagination.links }}
+        <div class="table-responsive">
+            <table class="table table-hover">
+            <thead>
+                <tr>
+                <th>#</th>
+                <th>Value</th>
+                <th>Fizz?</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for test in tests %}
+                <tr>
+                <td>{{ test.testname }}</td>
+                <td>{{ test.testfield }}</td>
+                <td>{{ test._id }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+        {{ pagination.links }}
+    </div>
 {% endblock %}
 
     
