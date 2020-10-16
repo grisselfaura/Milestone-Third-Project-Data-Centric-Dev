@@ -32,7 +32,7 @@
             <!--Show recipes when user=ADMIN-->        
             {% if session.user|lower == "admin"|lower %}
                 <div class="col s12 m6 l4">
-                    <div class="card height-card">
+                    <div class="card">
                         <div class="card-image waves-effect waves-block waves-light height-card-img">
                             <img class="activator responsive-img height-img" src="{{ recipe.recipe_images }}">
                         </div>
@@ -56,7 +56,7 @@
             <!--Show recipes when share_recipes toggle is ON-->     
             {% elif recipe.share_recipe =="on"  %}
                 <div class="col s12 m6 l4">
-                    <div class="card height-card">
+                    <div class="card">
                         <div class="card-image waves-effect waves-block waves-light height-card-img">
                             <img class="activator responsive-img height-img" src="{{ recipe.recipe_images }}">
                         </div>

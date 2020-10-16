@@ -15,11 +15,13 @@
     <!--Materialize Carrousel to display categories (linked to each category)-->
     <section>
         <h2 class="tittle center-align light-blue-text">Categories</h3>
-        <div class="carousel">
+        <div class="carousel category-img-height">
         {% for category in categories %}
-            <a class="carousel-item" href="{{ url_for('get_recipes_by_category', category_name=category.category_name) }}"><img src="{{ category.category_image }}"></a>
+            <a class="carousel-item" href="{{ url_for('get_recipes_by_category', category_name=category.category_name) }}"><img class="responsive-img" src="{{ category.category_image }}"></a>
         {% endfor %}
         </div>
+        <br>
+        <br>
     </section>
 
     <!--Why vegan-->

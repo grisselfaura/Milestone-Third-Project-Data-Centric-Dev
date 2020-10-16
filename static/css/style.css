@@ -12,7 +12,10 @@
     margin-bottom: 0px;
 }
 
+/* -------------------------------------------------*/
+
 /* Fonts recipe card*/
+
 .tittle {
     font-family: "Fredericka the Great", cursive;
     font-weight: 300;
@@ -43,17 +46,19 @@
     margin: 5px;
 }
 
+/* -------------------------------------------------*/
+
 /* Nav Bar */
 
 nav {
   font-family: 'Architects Daughter', cursive;
-  
 }
 
 nav ul a {
   font-size: 2rem !important;
 }
 
+/* -------------------------------------------------*/
 
 /*base.html*/
 
@@ -71,6 +76,8 @@ nav ul a {
     color: black;
 }
 
+/* -------------------------------------------------*/
+
 /*sticky footer*/
 
 body {
@@ -83,6 +90,7 @@ main {
     flex: 1 0 auto;
   }
     
+/* -------------------------------------------------*/
 
 /*home.html*/
 
@@ -122,7 +130,15 @@ main {
         filter:sepia(30) hue-rotate(100deg);
 }
 
+.category-img-height{
+    height: 600px;
+    margin-top: -150px;
+}
+
+/* -------------------------------------------------*/
+
 /*recipes.html*/
+/*recipes card */
 
 /*  pending */
 /* .height-card {
@@ -138,18 +154,19 @@ main {
 } 
 */
 
-.height-img {
-    min-height: 870px;
-}
-
-*/
 .height-card-img {
    max-height: 800px;
 } 
 
+.height-img {
+    min-height: 870px;
+}
+
 .card-recipes-content {
     min-height: 200px;
 } 
+
+/* -------------------------------------------------*/
 
 /* Pagination */
 
@@ -169,6 +186,7 @@ main {
     font-size: 150%;
 }
 
+/* -------------------------------------------------*/
 
 /*view_recipes.html*/
 
@@ -212,6 +230,8 @@ main {
   margin-left: 10px;
 }
 
+/* -------------------------------------------------*/
+
 /*myrecipes.html*/
 
 .myrecipes-h4 {
@@ -222,6 +242,12 @@ main {
     font-family: 'Josefin Slab', serif;
     font-weight: bold;
 }
+
+.myrecipe-height-card-img {
+   max-height: 900px;
+} 
+
+/* -------------------------------------------------*/
 
 /*add_recipes.html*/
 
@@ -238,6 +264,8 @@ main {
     margin-left: .4rem;
     padding-bottom: .4rem;
 }
+
+/* -------------------------------------------------*/
 
 /*categories.html*/
 
