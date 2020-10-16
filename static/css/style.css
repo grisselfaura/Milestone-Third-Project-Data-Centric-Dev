@@ -5,9 +5,9 @@
 * Browsers: last 4 version
 */
 
-
+/* check if is in use??*/
 .text-shadow {
-    text-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5); 
 }
 
 /* .same-size {

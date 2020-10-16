@@ -1,4 +1,9 @@
-// Initialize Materialize Elements
+/*
+---------------------------------------
+    Initialize Materialize Elements
+---------------------------------------
+*/
+
 $(document).ready(function(){
     $(".sidenav").sidenav();
     $(".collapsible").collapsible();
@@ -6,14 +11,18 @@ $(document).ready(function(){
     $("select").formSelect();
     $(".tooltipped").tooltip();
     $(".modal").modal();
-    $("input#input_text, textarea#textarea2, textarea#recipe_description, textarea#basic_ingredients, textarea#complementary_ingredients, textarea#category_method"
-).characterCounter();
+    $("input#input_text, textarea#textarea2, textarea#recipe_description, textarea#basic_ingredients, textarea#complementary_ingredients, textarea#category_method").characterCounter();
     $(".cancel-form").click(function() {
         window.history.back();
     });
 
+ /*
+--------------------------------------------------------------
+    Custom validation on <select> if 'required' property.
+    This function is not supported by Materialize natively and provided (from the task flask tutorial - The Flask Framework Lessons)
+--------------------------------------------------------------
+*/
 
-// Code provided from the explanatory videos from the Course 
     validateMaterializeSelect();
     function validateMaterializeSelect() {
         let classValid = { "border-bottom": "1px solid #4caf50", "box-shadow": "0 1px 0 0 #4caf50" };
@@ -44,9 +53,14 @@ $(document).ready(function(){
 });
 
 
-// Code approach with help from former students and improved
-// Add and Remove Ingredients
- var ingredientField = $(".ingredient").length;
+// Code approach from former students and improved
+/*
+---------------------------------------------------------
+    Clone and remove a new 'Ingredient' line on user-click event
+---------------------------------------------------------
+*/
+
+var ingredientField = $(".ingredient").length;
     $("#add_ingredient").on("click", function () {
         $("select").formSelect("destroy");
         $(".ingredient:first").clone().insertBefore("#add_ingredient").val("");
@@ -63,9 +77,13 @@ $(document).ready(function(){
         }
     });   
 
+/*
+---------------------------------------------------------
+    Clone and remove a new 'Extra Ingredient' line on user-click event
+---------------------------------------------------------
+*/
 
-// Add and Remove Extra Ingredients 
- var extraIngredientField = $(".compIngredient").length;
+var extraIngredientField = $(".compIngredient").length;
     $("#add_comp_ingredient").on("click", function () {
         $("select").formSelect("destroy");
         $(".compIngredient:first").clone().insertBefore("#add_comp_ingredient").val("");
@@ -82,14 +100,18 @@ $(document).ready(function(){
         }
     });
 
-    
-// Add and Remove preparation steps
+/*
+---------------------------------------------------------
+    Clone and remove a new 'Preparation Steps' line on user-click event
+---------------------------------------------------------
+*/
+
 var preparationField = $(".new-step").length;
     /* add new cloned item */
     $("#add_step").on("click", function () {
         $(".new-step:first").clone().insertBefore("#add_step").val("");
         /* increase counter so original direction is never removed */
-       preparationField += 1;
+        preparationField += 1;
     });
     /* delete last cloned item */
     $("#remove_step").on("click", function () {
