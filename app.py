@@ -14,21 +14,22 @@ if os.path.exists("env.py"):
     import env 
 
 
-# Declaring app name
+# -----Declaring app name ----- # 
+
 app = Flask(__name__)
 
-# Config environmental variables saved on the env.py
+# -----Config environmental variables saved on the env.py ----- # 
+ 
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 # secret key needed to create session cookies
 app.secret_key = os.environ.get("SECRET_KEY")
 
-# Creating an instance of Mongo
+# -----Creating an instance of Mongo ----- # 
 mongo = PyMongo(app)
 
 
-# Pagination and sorting 
-# params variables
+# -----Pagination and sorting params variables ----- # 
 PAGE_SIZE = 6
 KEY_PAGE_SIZE = 'page_size'
 KEY_PAGE_NUMBER = 'page_number'
@@ -42,18 +43,25 @@ KEY_ORDER_BY = 'order_by'
 KEY_ORDER = 'order'
 
 
-def get_paginated_items(entity, query={}, **params):
+# Funcion to perform paginations. 
+# In the video below I learned how to do paginations using pagination modules
+# https://www.youtube.com/watch?v=PSWf2TjTGNY&feature=youtu.be
+
+# -----Pagination macro from my mentor ----- #
+def get_paginated_items(entity, query={}, **params):  # function
     page_size = int(params.get(KEY_PAGE_SIZE, PAGE_SIZE))
     page_number = int(params.get(KEY_PAGE_NUMBER, 1))
     order_by = params.get(KEY_ORDER_BY, '_id')
     order = params.get(KEY_ORDER, 'asc')
     order = pymongo.ASCENDING if order == 'asc' else pymongo.DESCENDING
     
-    # If statement to avoid issues arising from pagination 
+    # If statement to avoid any pagination issues 
     if page_number < 1:
         page_number = 1
     offset = (page_number - 1) * page_size
     items = []
+    
+    # Updated section allow user to paginate a filtered/sorted "query" 
     search_term = params.get(KEY_SEARCH_TERM, '')
     if bool(query):
         items = entity.find(query).sort(order_by, order).skip(
@@ -103,7 +111,12 @@ def get_paginated_items(entity, query={}, **params):
     }
 
 
-# HOME
+# ---------------- #
+#    APP ROUTES    #
+# ---------------- #
+
+
+# ----- HOME ----- #
 @app.route('/')
 @app.route('/home')
 def home():
@@ -111,7 +124,7 @@ def home():
     return render_template('home.html', categories=categories)
 
 
-# Read all recipes
+# ----- Read all recipes ----- #
 @app.route('/get_recipes', methods=['GET'])
 def get_recipes():
     # Page to view all recipes
@@ -119,7 +132,7 @@ def get_recipes():
     return render_template('recipes.html', recipes=recipes)
 
 
-# Filters for categories in home page
+# ----- Filters for categories in home page ----- #
 @app.route('/get_recipes_by_category/<category_name>', methods=['GET'])
 def get_recipes_by_category(category_name):
     # Page to view all recipes
@@ -134,30 +147,31 @@ def get_recipes_by_category(category_name):
                             category_name=category_name)
 
 
-# Page to view individual card recipes
+# ----- Page to view individual card recipes ----- #
 @app.route('/view_recipe/<recipe_id>')
 def view_recipe(recipe_id):
     recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
     return render_template('view_recipe.html', recipe=recipe)
 
 
-# Search functionality in the Home page
+# ----- Search functionality in the Home page ----- #
 @app.route('/search', methods=['GET'])
 def search():
     query = request.args.get("query")
     
-    # Page to view all recipes from the search
+    # Search result
     recipes = get_paginated_items(mongo.db.recipes, {'$text': {'$search': query}})
     
-    # Message when search yield
+    # Page to view all recipes from the search result
     if recipes['total'] > 0:
         return render_template('recipes.html', recipes=recipes)
-    
+
+    # Messages when search yield cero results
     flash("0 matches for \"{}\"".format(query))
     return render_template('recipes.html', recipes=recipes)
 
 
-# Register a new user
+# ----- Register a new user ----- #
 @app.route('/join_free', methods=['GET', 'POST'])
 def join_free():
     if request.method == 'POST':
@@ -193,7 +207,7 @@ def join_free():
     return render_template('join_free.html')
 
 
-# Sign In
+# ----- Sign In to the app ----- #
 @app.route('/sign_in', methods=['GET', 'POST'])
 def sign_in():
     if request.method == "POST":
@@ -224,7 +238,7 @@ def sign_in():
     return render_template('sign_in.html')
 
 
-# User's account
+# ----- User's account displayin own recipes ----- #
 @app.route('/myrecipes/<username>', methods=['GET', 'POST'])
 def myrecipes(username):
     # Grab the session user's username from db
@@ -250,7 +264,7 @@ def myrecipes(username):
     return redirect(url_for('sign_in'))
 
 
-# Sign Out
+# ----- Sign Out from account ----- #
 @app.route('/sign_out')
 def sign_out():
     # Remove user from session cookies
@@ -259,7 +273,12 @@ def sign_out():
     return redirect(url_for('sign_in'))
 
 
-# Create Recipes
+# ------------------------------------------- #
+#    CRUD: Create | Read | Update | Delete    #
+# ------------------------------------------- #
+
+
+# ----- Create own recipes ----- #
 @app.route('/add_recipe',  methods=['GET', 'POST'])
 def add_recipe():
     if request.method == 'POST':
@@ -289,7 +308,7 @@ def add_recipe():
                             difficulty=difficulty)
 
 
-# Update Recipes
+# ----- Update user's recipes ----- #
 @app.route('/edit_recipe/<recipe_id>', methods=['GET', 'POST'])
 def edit_recipe(recipe_id):
     if request.method == 'POST':
@@ -320,7 +339,7 @@ def edit_recipe(recipe_id):
                             difficulty=difficulty)
 
 
-# Delete Recipes
+# ----- Delete user's recipes ----- #
 @app.route('/delete_recipe/<recipe_id>')
 def delete_recipe(recipe_id):
     mongo.db.recipes.remove({'_id': ObjectId(recipe_id)})
@@ -328,14 +347,19 @@ def delete_recipe(recipe_id):
     return redirect(url_for('myrecipes', username=session["user"]))
 
 
-# Read all Categories
+# ----- Read all Categories ----- #
 @app.route('/get_categories')
 def get_categories():
     categories = list(mongo.db.categories.find().sort("category_name", 1))
     return render_template('categories.html', categories=categories)
 
 
-# Add Categories
+# ------------------------------------------- #
+#    CRUD: Create | Read | Update | Delete    #
+# ------------------------------------------- #
+
+
+# ----- Add Categories ----- #
 @app.route('/add_category', methods=['GET', 'POST'])
 def add_category():
     if request.method == 'POST':
@@ -350,7 +374,7 @@ def add_category():
     return render_template('add_category.html')
 
 
-# Edit Categories
+# ----- Edit Categories [only admin] ----- #
 @app.route('/edit_category/<category_id>', methods=['GET', 'POST'])
 def edit_category(category_id):
     if request.method == "POST":
@@ -366,7 +390,7 @@ def edit_category(category_id):
     return render_template('edit_category.html', category=category)
 
 
-# Delete Categories
+# ----- Delete Categories [only admin] ----- #
 @app.route('/delete_category/<category_id>')
 def delete_category(category_id):
     mongo.db.categories.remove({'_id': ObjectId(category_id)})
@@ -374,33 +398,7 @@ def delete_category(category_id):
     return redirect(url_for('get_categories'))
 
 
-# Stephen method pagianation
-@app.route('/myrecipes_pagination')
-def myrecipes_pagination():
-    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page')
-    # If you are hard coding the number of items per page then uncomment the two lines below
-    per_page = 6
-    offset = page * per_page
-
-    # Gets the total values to be used later
-    total = mongo.db.recipes.find().count()
-
-    # Gets all the values
-    thetests = mongo.db.recipes.find()
-    # Paginates the values
-    paginatedTests = thetests[offset: offset + per_page]
-
-    pagination = Pagination(page=page, per_page=per_page, total=total,
-                            css_framework='bootstrap4')
-    return render_template('myrecipes_pagination.html',
-                           tests=paginatedTests,
-                           page=page,
-                           per_page=per_page,
-                           pagination=pagination,
-                           )
-
-
-# The correct running of you app file & in terms of Environmental Variables in Heroku
+# ----- The correct running of you app file & in terms of Environmental Variables in Heroku ----- #
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
