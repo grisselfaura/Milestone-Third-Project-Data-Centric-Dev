@@ -140,20 +140,6 @@ main {
 /*recipes.html*/
 /*recipes card */
 
-/*  pending */
-/* .height-card {
-    height: 400px;
-}  */
-/* @media (min-width: 595px) and (max-width: 650px) {
-.height-card-img {
-    height: 600px;
-} 
-
-.height-img-card {
-    margin: auto;
-} 
-*/
-
 .height-card-img {
    max-height: 800px;
 } 

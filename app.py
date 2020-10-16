@@ -1,8 +1,8 @@
-#Imported modules
+# -----Imported modules ----- #
 import os
 import math
 from flask import (
-    Flask, flash, render_template, 
+    Flask, flash, render_template,
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo, pymongo, DESCENDING
 from bson.objectid import ObjectId
@@ -11,25 +11,25 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_paginate import Pagination, get_page_args
 
 if os.path.exists("env.py"):
-    import env 
+    import env
 
 
-# -----Declaring app name ----- # 
+# -----Declaring app name ----- #
 
 app = Flask(__name__)
 
-# -----Config environmental variables saved on the env.py ----- # 
- 
+# -----Config environmental variables saved on the env.py ----- #
+
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 # secret key needed to create session cookies
 app.secret_key = os.environ.get("SECRET_KEY")
 
-# -----Creating an instance of Mongo ----- # 
+# -----Creating an instance of Mongo ----- #
 mongo = PyMongo(app)
 
 
-# -----Pagination and sorting params variables ----- # 
+# -----Pagination and sorting params variables ----- #
 PAGE_SIZE = 6
 KEY_PAGE_SIZE = 'page_size'
 KEY_PAGE_NUMBER = 'page_number'
@@ -43,7 +43,7 @@ KEY_ORDER_BY = 'order_by'
 KEY_ORDER = 'order'
 
 
-# Funcion to perform paginations. 
+# Funcion to perform paginations.
 # In the video below I learned how to do paginations using pagination modules
 # https://www.youtube.com/watch?v=PSWf2TjTGNY&feature=youtu.be
 
@@ -54,14 +54,14 @@ def get_paginated_items(entity, query={}, **params):  # function
     order_by = params.get(KEY_ORDER_BY, '_id')
     order = params.get(KEY_ORDER, 'asc')
     order = pymongo.ASCENDING if order == 'asc' else pymongo.DESCENDING
-    
-    # If statement to avoid any pagination issues 
+
+    # If statement to avoid any pagination issues
     if page_number < 1:
         page_number = 1
     offset = (page_number - 1) * page_size
     items = []
-    
-    # Updated section allow user to paginate a filtered/sorted "query" 
+
+    # Updated section allow user to paginate a filtered/sorted "query"
     search_term = params.get(KEY_SEARCH_TERM, '')
     if bool(query):
         items = entity.find(query).sort(order_by, order).skip(
@@ -128,7 +128,9 @@ def home():
 @app.route('/get_recipes', methods=['GET'])
 def get_recipes():
     # Page to view all recipes
-    recipes = get_paginated_items(mongo.db.recipes, **request.args.to_dict())  #dictionary
+    recipes = get_paginated_items(
+        mongo.db.recipes,
+        **request.args.to_dict())  # dictionary
     return render_template('recipes.html', recipes=recipes)
 
 
@@ -136,15 +138,13 @@ def get_recipes():
 @app.route('/get_recipes_by_category/<category_name>', methods=['GET'])
 def get_recipes_by_category(category_name):
     # Page to view all recipes
-    recipes = get_paginated_items(mongo.db.recipes,
-                                    query={'category_name': category_name},
-                                    **request.args.to_dict())
+    recipes = get_paginated_items(mongo.db.recipes, query={
+        'category_name': category_name},
+        **request.args.to_dict())
     categories = list(mongo.db.categories.find())
-    return render_template('recipes.html',
-                            title='category_name', 
-                            recipes=recipes,
-                            categories=categories,
-                            category_name=category_name)
+    return render_template(
+        'recipes.html', title='category_name', recipes=recipes,
+        categories=categories, category_name=category_name)
 
 
 # ----- Page to view individual card recipes ----- #
@@ -158,10 +158,11 @@ def view_recipe(recipe_id):
 @app.route('/search', methods=['GET'])
 def search():
     query = request.args.get("query")
-    
+
     # Search result
-    recipes = get_paginated_items(mongo.db.recipes, {'$text': {'$search': query}})
-    
+    recipes = get_paginated_items(mongo.db.recipes, {
+        '$text': {'$search': query}})
+
     # Page to view all recipes from the search result
     if recipes['total'] > 0:
         return render_template('recipes.html', recipes=recipes)
@@ -178,20 +179,21 @@ def join_free():
         # Checks if username already exists in db
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
-    
+
         if existing_user:
             flash("Username already exists, please choose a different name.")
             return redirect(url_for('join_free'))
 
         # Check passwords and match against each other
         password = request.form.get("password")
-        password2 = request.form.get("password2")        
+        password2 = request.form.get("password2")
 
         if password == password2:
             join_free = {
                 "username": request.form.get("username").lower(),
-                "email": request.form.get("email").lower(), 
-                "password": generate_password_hash(request.form.get("password"))
+                "email": request.form.get("email").lower(),
+                "password": generate_password_hash(
+                    request.form.get("password"))
             }
             mongo.db.users.insert_one(join_free)
 
@@ -200,7 +202,7 @@ def join_free():
             flash("Registration successful!")
             return redirect(url_for('myrecipes', username=session["user"]))
 
-        else: 
+        else:
             flash("Password does not match")
             return redirect(url_for('join_free'))
 
@@ -218,13 +220,13 @@ def sign_in():
         if existing_user:
             # Ensures hashed password matches user input
             if check_password_hash(
-                existing_user["password"], request.form.get("password")):
-                    session["user"] = request.form.get("username").lower()
-                    flash("Welcome, {}".format(
-                        request.form.get("username")))
-                    return redirect(url_for(
-                        'myrecipes', username=session["user"]))
-                    
+                existing_user["password"], request.form.get("password")
+            ):
+                session["user"] = request.form.get("username").lower()
+                flash("Welcome, {}".format(request.form.get("username")))
+                return redirect(url_for(
+                    'myrecipes', username=session["user"]))
+
             else:
                 # Invalid password match
                 flash("Incorrect Username and/or Password")
@@ -234,7 +236,7 @@ def sign_in():
             # Username doesnt exist
             flash("Incorrect Username and/or Password")
             return redirect(url_for('sign_in'))
-    
+
     return render_template('sign_in.html')
 
 
@@ -248,17 +250,18 @@ def myrecipes(username):
     # Use params variables from pagination to sort by "created_date"
     params = request.args.to_dict()
     params[KEY_ORDER_BY] = "created_date"
-    
-    # Page user's recipes sorted by "created_date"
-    user_myrecipe_paginated = get_paginated_items(mongo.db.recipes,
-                                    query={"created_by": username},
-                                    **params) #dictionary
 
-    if session["user"] == username: 
-        return render_template('myrecipes.html', username=username, 
-                                total_user_recipes=user_myrecipe_paginated[KEY_TOTAL],
-                                title='created_by', 
-                                user_myrecipe_paginated=user_myrecipe_paginated)
+    # Page user's recipes sorted by "created_date"
+    user_myrecipe_paginated = get_paginated_items(mongo.db.recipes, query={
+        "created_by": username},
+        **params)  # dictionary
+
+    if session["user"] == username:
+        return render_template(
+            'myrecipes.html', username=username,
+            total_user_recipes=user_myrecipe_paginated[KEY_TOTAL],
+            title='created_by',
+            user_myrecipe_paginated=user_myrecipe_paginated)
 
     flash("You need to sign in!")
     return redirect(url_for('sign_in'))
@@ -290,7 +293,8 @@ def add_recipe():
             "recipe_difficulty": request.form.get("recipe_difficulty"),
             "cooking_time": request.form.get("cooking_time"),
             "basic_ingredients": request.form.getlist("basic_ingredients[]"),
-            "complementary_ingredients": request.form.getlist("complementary_ingredients[]"),
+            "complementary_ingredients": request.form.getlist(
+                "complementary_ingredients[]"),
             "recipe_method": request.form.getlist("recipe_method[]"),
             "recipe_images": request.form.get("recipe_images"),
             "closing_line": request.form.get("closing_line"),
@@ -304,8 +308,8 @@ def add_recipe():
 
     categories = mongo.db.categories.find().sort("category_name", 1)
     difficulty = mongo.db.difficulty.find().sort("sort_difficult", 1)
-    return render_template('add_recipe.html', categories=categories,
-                            difficulty=difficulty)
+    return render_template(
+        'add_recipe.html', categories=categories, difficulty=difficulty)
 
 
 # ----- Update user's recipes ----- #
@@ -320,7 +324,8 @@ def edit_recipe(recipe_id):
             "recipe_difficulty": request.form.get("recipe_difficulty"),
             "cooking_time": request.form.get("cooking_time"),
             "basic_ingredients": request.form.getlist("basic_ingredients[]"),
-            "complementary_ingredients": request.form.getlist("complementary_ingredients[]"),
+            "complementary_ingredients": request.form.getlist(
+                "complementary_ingredients[]"),
             "recipe_method": request.form.getlist("recipe_method[]"),
             "recipe_images": request.form.get("recipe_images"),
             "closing_line": request.form.get("closing_line"),
@@ -335,8 +340,9 @@ def edit_recipe(recipe_id):
     recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
     categories = mongo.db.categories.find().sort("category_name", 1)
     difficulty = mongo.db.difficulty.find().sort("sort_difficult", 1)
-    return render_template('edit_recipe.html', recipe=recipe, categories=categories, 
-                            difficulty=difficulty)
+    return render_template(
+        'edit_recipe.html', recipe=recipe, categories=categories,
+        difficulty=difficulty)
 
 
 # ----- Delete user's recipes ----- #
@@ -370,7 +376,7 @@ def add_category():
         mongo.db.categories.insert_one(category)
         flash("New Category Added")
         return redirect(url_for('get_categories'))
-        
+
     return render_template('add_category.html')
 
 
@@ -385,7 +391,7 @@ def edit_category(category_id):
         mongo.db.categories.update({'_id': ObjectId(category_id)}, submit)
         flash("Category Successfully Updated")
         return redirect(url_for("get_categories"))
-        
+
     category = mongo.db.categories.find_one({'_id': ObjectId(category_id)})
     return render_template('edit_category.html', category=category)
 
@@ -398,10 +404,10 @@ def delete_category(category_id):
     return redirect(url_for('get_categories'))
 
 
-# ----- The correct running of you app file & in terms of Environmental Variables in Heroku ----- #
+# -----Correct running of the app file  ----- #
+# -----In terms of Environmental Variables in Heroku ----- #
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
             debug=True)
 # change debug to FALSE before submit this for assesment
-
