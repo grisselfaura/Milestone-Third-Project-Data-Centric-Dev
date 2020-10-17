@@ -7,17 +7,17 @@
         <div class="blue-grey lighten-5">
             <div class="bg-header">
                 <br>
-                 <h1 class="header center-align grey-text text-lighten-5 flow-text shadow"> FOR FLEXITARIANS & BRAND NEW VEGANS! </h1>     
+                <h1 class="header center-align grey-text text-lighten-5 shadow"> FOR FLEXITARIANS & BRAND NEW VEGANS! </h1>     
             </div>
         </div>
     </section>
 
     <!--Materialize Carrousel to display categories (linked to each category)-->
     <section>
-        <h2 class="tittle center-align light-blue-text">Categories</h3>
+        <h2 class="tittle center-align light-blue-text">Categories</h2>
         <div class="carousel category-img-height">
         {% for category in categories %}
-            <a class="carousel-item" href="{{ url_for('get_recipes_by_category', category_name=category.category_name) }}"><img class="responsive-img" src="{{ category.category_image }}"></a>
+            <a class="carousel-item" href="{{ url_for('get_recipes_by_category', category_name=category.category_name) }}"><img class="responsive-img" src="{{ category.category_image }}" alt="category-image"></a>
         {% endfor %}
         </div>
         <br>
@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col s12 m4">
                     <div class="icon-block">
-                        <img src="static/images/icons/animal_welfare.png" alt="" class="circle responsive-img sepia">
+                        <img src="static/images/icons/animal_welfare.png" alt="why reasons icon" class="circle responsive-img sepia">
                         <h5 class="center">Animal welfare</h5>
                         <p class="light flow-text">In the Netherlands alone 1.8 million animals die every day for the food industry ... 
                         DAILY! Worldwide there are more than 60 billion animals kept for the food industry, on an unprecedented 
@@ -43,7 +43,7 @@
                 </div>
                 <div class="col s12 m4">
                     <div class="icon-block">
-                        <img src="static/images/icons/climate_change.png" alt="" class="circle responsive-img sepia">
+                        <img src="static/images/icons/climate_change.png" alt="why reasons icon" class="circle responsive-img sepia">
                         <h5 class="center">The impact of the animal food industry on the environment</h5>
                         <p class="light flow-text">In the Netherlands 40% of the total climate load is caused by the animal food industry.
                         Worldwide this is about 20% which makes this a greater polluter than the whole transport sector with all
@@ -56,7 +56,7 @@
                 </div>
                 <div class="col s12 m4">
                     <div class="icon-block">
-                        <img src="static/images/icons/health_icon.jpg" alt="" class="responsive-img sepia">
+                        <img src="static/images/icons/health_icon.jpg" alt="why reasons icon" class="responsive-img sepia">
                         <h5 class="center">Your own health</h5>
                         <p class="light flow-text">Everything seems to indicate that one plant-based diet is many times healthier for us than an 
                         animal-based diet with proteins and fats. What a recognized fact is that processed meat like ham, salami, 

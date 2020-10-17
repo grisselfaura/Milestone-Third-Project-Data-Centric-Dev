@@ -41,7 +41,7 @@
             <div class="col s12 m6 l4">
                 <div class="card z-depth-2">
                     <div class="card-image myrecipe-height-card-img">
-                        <img class="responsive-img height-img" src="{{ recipe.recipe_images }}">
+                        <img class="responsive-img height-img" src="{{ recipe.recipe_images }}" alt=" myrecipe image">
                         <a class="btn-floating halfway-fab waves-effect waves-light amber accent-4" href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
                         <i class="material-icons">create</i></a>
                     </div>
